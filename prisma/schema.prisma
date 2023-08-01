@@ -12,7 +12,7 @@ datasource db {
 model User {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
   name            String    @default("Linkey User")
-  username        String    @default("")
+  username        String    @unique @default(uuid()) 
   bio             String    @default("I am a linkey user ✌")
   email           String    @unique
   emailVerified   DateTime?
@@ -22,6 +22,8 @@ model User {
   updatedAt       DateTime  @updatedAt
   prompts          Prompt[]
   accounts        Account[]
+
+  
 }
 
 model Account {

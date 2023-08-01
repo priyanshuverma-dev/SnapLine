@@ -8,7 +8,9 @@ export default function Home() {
     <div>
       <Navbar logo="Prompai" />
       <Header />
-      <FeedView />
+      <div className=" min-[400px]:container ">
+        <FeedView />
+      </div>
       <Footer />
     </div>
   );

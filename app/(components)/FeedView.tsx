@@ -32,12 +32,12 @@ const FeedView = async () => {
   }
 
   return (
-    <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 m-2 space-x-3 space-y-3">
+    <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 bg-gray-50 ">
       {prompts.map((prompt) => {
         return (
-          <Link id={prompt.id} href={`prompt/${prompt.id}`}>
-            <FeedCard prompt={prompt} />;
-          </Link>
+          <FeedCard key={prompt.id} prompt={prompt} />
+          // <Link id={prompt.id} href={`prompt/${prompt.id}`}>
+          // </Link>
         );
       })}
     </div>
