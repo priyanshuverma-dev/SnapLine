@@ -9,7 +9,6 @@ export default function Home() {
       <Navbar logo="Prompai" />
       <Header />
       <FeedView />
-      <h1>Hello World</h1>
       <Footer />
     </div>
   );

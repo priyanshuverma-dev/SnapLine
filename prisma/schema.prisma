@@ -20,7 +20,7 @@ model User {
   hashedPassword  String?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
-  posts           Post[]
+  prompts          Prompt[]
   accounts        Account[]
 }
 
@@ -44,11 +44,14 @@ model Account {
 }
 
 
-model Post {
+model Prompt {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   userId    String    @db.ObjectId
-  text      String  
-  tags      Tag[]
+  text      String
+  service   String?
+  images    String[]
+  likes     String[]  @db.ObjectId  
+  tags      String[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   published Boolean   @default(false)
@@ -71,9 +74,7 @@ model VerificationToken {
 enum Role {
   USER
   ADMIN
+  SUPERADMIN
+  VERIFIED
 }
 
-type Tag {
-  text  String
-
-}
