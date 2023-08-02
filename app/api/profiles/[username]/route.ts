@@ -1,9 +1,10 @@
 import serverAuth from "@/app/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/app/lib/prisma";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: { username: string } }
 ) {
   try {
     const { currentUser } = await serverAuth();
@@ -16,13 +17,22 @@ export async function GET(
         { status: 401 }
       );
     }
-    const userId = params.slug;
+    const username = params.username;
 
-    const user = await prisma?.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
-        id: userId,
+        username: username,
       },
     });
+
+    if (!user) {
+      return NextResponse.json(
+        {
+          message: "No User Found",
+        },
+        { status: 404 }
+      );
+    }
 
     return NextResponse.json(user);
   } catch (error) {

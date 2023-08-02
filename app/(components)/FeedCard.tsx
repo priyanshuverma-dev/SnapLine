@@ -3,6 +3,8 @@
 import { Prompt } from "@/Utils/prompt";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 import React from "react";
 import { toast } from "react-hot-toast";
@@ -15,6 +17,7 @@ const copyToClipboard = (text: string) => {
 };
 
 const FeedCard = ({ prompt }: { prompt: Prompt }) => {
+  const router = useRouter();
   return (
     <div
       key={prompt.id}
@@ -37,7 +40,7 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
             </span>
           </div>
           <div className="bg-gray-100 rounded p-2">
-            <div className="flex flex-1 justify-between ">
+            <div className="flex flex-1 justify-between">
               <p className="font-semibold">{prompt.service} Prompt:</p>
               <button
                 className="p-2"
@@ -52,11 +55,20 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
           </div>
           {prompt.tags.map((tag) => {
             return (
-              <Badge variant={"outline"} className="m-2">
+              <Badge key={tag} variant={"outline"} className="m-2">
                 {tag}
               </Badge>
             );
           })}
+          <div>
+            <Button
+              variant={"outline"}
+              onClick={() => router.push(`/prompt/${prompt.id}`)}
+              className="w-full"
+            >
+              Full View
+            </Button>
+          </div>
         </div>
       </div>
     </div>

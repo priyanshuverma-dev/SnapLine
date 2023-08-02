@@ -6,7 +6,7 @@ import FeedView from "../(components)/FeedView";
 export default function Home() {
   return (
     <div>
-      <Navbar logo="Prompai" />
+      <Navbar logo="PrompAi" />
       <Header />
       <div className=" min-[400px]:container ">
         <FeedView />
