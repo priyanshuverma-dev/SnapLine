@@ -1,10 +1,10 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
 
-const PromptSkeletionModal = () => {
+const PromptSkeletion = () => {
   return (
     <div>
-      <div className="bg-white  p-4 ">
+      <div className="bg-white shadow hover:shadow-xl focus:shadow-xl rounded-lg p-4">
         <div className="flex items-start">
           <div>
             <div className="flex items-center mb-2 space-x-1">
@@ -25,4 +25,4 @@ const PromptSkeletionModal = () => {
   );
 };
 
-export default PromptSkeletionModal;
+export default PromptSkeletion;

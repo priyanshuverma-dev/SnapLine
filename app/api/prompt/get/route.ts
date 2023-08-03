@@ -2,19 +2,19 @@ import prisma from "@/app/lib/prisma";
 import serverAuth from "@/app/lib/serverAuth";
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function GET(request: Request) {
   try {
-    const body = await request.json();
-    const { userId } = body;
+    // const body = await request.json();
+    // const { userId } = body;
 
-    if (!userId) {
-      return NextResponse.json(
-        {
-          message: "Not Authorized id",
-        },
-        { status: 401 }
-      );
-    }
+    // if (!userId) {
+    //   return NextResponse.json(
+    //     {
+    //       message: "Not Authorized id",
+    //     },
+    //     { status: 401 }
+    //   );
+    // }
 
     const prompts = await prisma.prompt.findMany({
       where: {

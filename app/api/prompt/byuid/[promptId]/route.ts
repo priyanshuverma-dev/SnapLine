@@ -1,20 +1,12 @@
 import prisma from "@/app/lib/prisma";
-import serverAuth from "@/app/lib/serverAuth";
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function GET(
+  request: Request,
+  { params }: { params: { promptId: string } }
+) {
   try {
-    const body = await request.json();
-    const { userId, promptId } = body;
-
-    if (!userId) {
-      return NextResponse.json(
-        {
-          message: "Not Authorized id",
-        },
-        { status: 401 }
-      );
-    }
+    const promptId = params.promptId;
     if (!promptId) {
       return NextResponse.json(
         {

@@ -1,39 +1,43 @@
+"use client";
+
 import React, { Suspense } from "react";
 import FeedCard from "./FeedCard";
-import useCurrentUser from "@/hooks/useCurrentUser";
 import { Prompt } from "@/Utils/prompt";
-import serverAuth from "../lib/serverAuth";
-import prisma from "@/app/lib/prisma";
+import usePromptsStore from "@/store/promptsStore";
+import usePrompts from "@/hooks/use-prompt-list";
+import PromptSkeletion from "./PromptSkeletion";
 
-const fetchPrompts = async (userId: string) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/prompt/get`, {
-    method: "POST",
-    body: JSON.stringify({
-      userId,
-    }),
-  });
+const FeedView = () => {
+  // const usePromptStore = usePromptsStore();
 
-  if (res.status == 200) {
-    const rs: Prompt[] = await res.json();
+  const {
+    data,
+    isLoading,
+  }: {
+    data: Prompt[];
+    isLoading: boolean;
+  } = usePrompts();
 
-    return rs;
-  } else {
-    return "No Post";
+  if (isLoading) {
+    return <PromptSkeletion />;
   }
-};
 
-const FeedView = async () => {
-  const { currentUser } = await serverAuth();
+  // usePromptStore.fetchPrompts(currentUser.id);
 
-  const prompts = await fetchPrompts(currentUser.id);
+  // fetchPrompts().then((data) => usePrompts.setState({ prompt: data }));
 
-  if (prompts == "No Post") {
-    return <p>No Post</p>;
-  }
+  // const prompts = usePromptStore.prompt;
+
+  // if (data === undefined) {
+  //   return <p>No Post</p>;
+  // }
+  // if (data === "No Post") {
+  //   return <p>No Post</p>;
+  // }
 
   return (
     <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 bg-gray-50 ">
-      {prompts.map((prompt) => {
+      {data.map((prompt) => {
         return (
           <FeedCard key={prompt.id} prompt={prompt} />
 

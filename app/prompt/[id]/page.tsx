@@ -1,16 +1,11 @@
+"use client";
+
 import React from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import Modal from "@/app/(components)/Modal";
+
 import FeedCard from "@/app/(components)/FeedCard";
-import serverAuth from "@/app/lib/serverAuth";
 import { Prompt } from "@/Utils/prompt";
+import usePrompt from "@/hooks/use-prompt";
+import PromptSkeletionModal from "@/app/(components)/Modal";
 
 const fetchPrompt = async ({
   userId,
@@ -36,28 +31,23 @@ const fetchPrompt = async ({
   }
 };
 
-const PromptPage = async ({
+const PromptPage = ({
   params: { id: promptId },
 }: {
   params: { id: string };
 }) => {
-  const { currentUser } = await serverAuth();
-
-  const prompt = await fetchPrompt({
-    promptId,
-    userId: currentUser.id,
-  });
-
-  if (prompt == "No Post") {
-    return <p>No Post</p>;
-  }
+  const {
+    data: prompt,
+    isLoading,
+  }: {
+    data: Prompt;
+    isLoading: boolean;
+  } = usePrompt(promptId);
 
   return (
-    <Modal>
-      <div>
-        <FeedCard prompt={prompt} />
-      </div>
-    </Modal>
+    <div>
+      {isLoading ? <PromptSkeletionModal /> : <FeedCard prompt={prompt} />}
+    </div>
   );
 };
 

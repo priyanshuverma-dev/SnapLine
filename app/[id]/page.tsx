@@ -1,7 +1,7 @@
 "use client";
+import { User } from "@/Utils/user";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import useUser from "@/hooks/useUser";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 

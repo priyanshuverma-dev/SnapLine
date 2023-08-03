@@ -22,7 +22,10 @@ export default async function RootLayout(props: {
     <html lang="en">
       <body className={inter.className}>
         <Toaster />
-        <AuthContext session={session}>{props.children}</AuthContext>
+        <AuthContext session={session}>
+          {props.children}
+          {props.modal}
+        </AuthContext>
       </body>
     </html>
   );

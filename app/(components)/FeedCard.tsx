@@ -3,13 +3,16 @@
 import { Prompt } from "@/Utils/prompt";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 import React from "react";
 import { toast } from "react-hot-toast";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import { FiCopy } from "react-icons/fi";
+import PromptSkeletion from "./PromptSkeletion";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useStoreModal } from "@/hooks/use-modal-store";
 
 const copyToClipboard = (text: string) => {
   navigator.clipboard.writeText(text);
@@ -18,11 +21,10 @@ const copyToClipboard = (text: string) => {
 
 const FeedCard = ({ prompt }: { prompt: Prompt }) => {
   const router = useRouter();
+  const modalStore = useStoreModal();
+
   return (
-    <div
-      key={prompt.id}
-      className="bg-white shadow hover:shadow-xl focus:shadow-xl rounded-lg p-4"
-    >
+    <div key={prompt.id} className="bg-white rounded p-2">
       <div className="flex items-start">
         <div className="">
           <div className="flex items-center mb-2 space-x-1">
@@ -63,10 +65,15 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
           <div>
             <Button
               variant={"outline"}
-              onClick={() => router.push(`/prompt/${prompt.id}`)}
               className="w-full"
+              size={"sm"}
+              onClick={() => {
+                router.push(`/prompt/${prompt.id}`);
+                modalStore.onOpen();
+              }}
+              key={prompt.id}
             >
-              Full View
+              View
             </Button>
           </div>
         </div>

@@ -1,4 +1,5 @@
-type User = {
+export type User = {
+  id: string;
   name: string;
   image: string;
   username: string;
