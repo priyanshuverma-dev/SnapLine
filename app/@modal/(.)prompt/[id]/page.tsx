@@ -1,21 +1,17 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import usePrompt from "@/hooks/use-prompt";
 import { Prompt } from "@/Utils/prompt";
 import FeedCard from "@/app/(components)/FeedCard";
-import PromptSkeletion from "@/app/(components)/PromptSkeletion";
 import { useStoreModal } from "@/hooks/use-modal-store";
 import { useRouter } from "next/navigation";
-import PromptSkeletionModal from "@/app/(components)/Modal";
+import LoaingModal from "@/app/(components)/Modal";
 
 const ModalPage = ({
   params: { id: promptId },
@@ -46,10 +42,14 @@ const ModalPage = ({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {isLoading ? "Wait for request" : `Service: ${prompt.service}`}
+              {isLoading ? "" : `Service: ${prompt.service}`}
             </DialogTitle>
           </DialogHeader>
-          {isLoading ? <PromptSkeletionModal /> : <FeedCard prompt={prompt} />}
+          {isLoading ? (
+            <LoaingModal isLoading={isLoading} />
+          ) : (
+            <FeedCard prompt={prompt} />
+          )}
         </DialogContent>
       </Dialog>
     </div>
