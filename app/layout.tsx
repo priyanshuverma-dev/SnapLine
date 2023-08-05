@@ -7,7 +7,7 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import AuthContext from "@/Context/AuthContext";
 import Sidebar from "./(components)/Sidebar";
 import Navbar from "./(components)/Navbar";
-
+import { ThemeProvider } from "@/Context/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,11 +25,13 @@ export default async function RootLayout(props: {
       <body className={inter.className}>
         <Toaster />
         <AuthContext session={session}>
-          <Sidebar>
-            <Navbar logo="PrompAi" />
-            <div className="p-4 sm:ml-64 mt-[64px]">{props.children}</div>
-            {props.modal}
-          </Sidebar>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <Sidebar>
+              <Navbar logo="PrompAi" />
+              <div className="p-4 sm:ml-64 mt-[64px]">{props.children}</div>
+              {props.modal}
+            </Sidebar>
+          </ThemeProvider>
         </AuthContext>
       </body>
     </html>

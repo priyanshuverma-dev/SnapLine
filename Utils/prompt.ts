@@ -1,7 +1,8 @@
 export type Prompt = {
   id: string;
   userId: string;
-  text: string;
+  prompt: string;
+  description: string;
   service?: string;
   images: string[];
   tags: string[];

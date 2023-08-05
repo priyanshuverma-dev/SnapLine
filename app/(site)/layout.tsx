@@ -6,12 +6,5 @@ export default function HomeLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div>
-      {/* <Sidebar> */}
-      {/* <Navbar logo="PrompAi" /> */}
-      {children}
-      {/* </Sidebar> */}
-    </div>
-  );
+  return <div>{children}</div>;
 }

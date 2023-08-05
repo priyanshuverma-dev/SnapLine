@@ -35,8 +35,8 @@ const ModalPage = ({
       <Dialog
         open={modalStore.isOpen}
         onOpenChange={() => {
-          router.back();
           modalStore.onClose();
+          router.back();
         }}
       >
         <DialogContent>
@@ -45,11 +45,7 @@ const ModalPage = ({
               {isLoading ? "" : `Service: ${prompt.service}`}
             </DialogTitle>
           </DialogHeader>
-          {isLoading ? (
-            <LoaingModal isLoading={isLoading} />
-          ) : (
-            <FeedCard prompt={prompt} />
-          )}
+          {isLoading ? <LoaingModal /> : <FeedCard prompt={prompt} />}
         </DialogContent>
       </Dialog>
     </div>

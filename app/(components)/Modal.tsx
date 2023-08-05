@@ -1,12 +1,8 @@
 import React from "react";
-import LoadingOverlay from "./LoadingOverlay";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const LoaingModal = ({ isLoading }: { isLoading: boolean }) => {
-  return (
-    <div className="w-12 h-12">
-      <LoadingOverlay isLoading={isLoading} />
-    </div>
-  );
+const LoaingModal = () => {
+  return <Skeleton className="w-full h-40" />;
 };
 
 export default LoaingModal;

@@ -22,8 +22,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
+import { services } from "@/Utils/services";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useState } from "react";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   title: z.string().min(10, {
@@ -37,6 +43,13 @@ const formSchema = z.object({
 });
 
 const CreatePage = () => {
+  const { data: user, isLoading: isUser } = useCurrentUser();
+
+  if (isUser) return <div>Loading...</div>;
+
+  const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,11 +60,28 @@ const CreatePage = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    // .then(() => {})
+    setIsLoading(true);
+    axios
+      .post("/api/prompt/create", {
+        ...data,
+        userId: user.id,
+      })
+      .then((data) => {
+        if (data.status === 200) {
+          toast.success("Prompt created!");
+          router.push("/");
+        } else {
+          toast.error("Error went!");
+        }
+      })
+      .catch(() => toast.error("Something went wrong!"))
+      .finally(() => setIsLoading(false));
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
+    console.log(data);
+  };
 
   return (
     <Form {...form}>
@@ -63,7 +93,11 @@ const CreatePage = () => {
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="Prompt for OpenAI Chat GPT" {...field} />
+                <Input
+                  disabled={isLoading}
+                  placeholder="Prompt for OpenAI Chat GPT"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -75,19 +109,22 @@ const CreatePage = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Service</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                disabled={isLoading}
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a Service" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="ChatGPT">ChatGPT</SelectItem>
-                  <SelectItem value="Midjourney">Midjourney</SelectItem>
-                  <SelectItem value="Dall-E">Dall-E</SelectItem>
-                  <SelectItem value="Bard">Bard</SelectItem>
-                  <SelectItem value="Replica">Replica</SelectItem>
-                  <SelectItem value="Other">Other</SelectItem>
+                  {services.map((service) => (
+                    <SelectItem key={service} value={service}>
+                      {service}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormDescription>Prompt is for which service</FormDescription>
@@ -102,7 +139,11 @@ const CreatePage = () => {
             <FormItem>
               <FormLabel>Prompt</FormLabel>
               <FormControl>
-                <Input placeholder="Write me a letter to boss" {...field} />
+                <Textarea
+                  disabled={isLoading}
+                  placeholder="Write me a letter to boss"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -115,13 +156,19 @@ const CreatePage = () => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea placeholder="This prompt is about" {...field} />
+                <Textarea
+                  disabled={isLoading}
+                  placeholder="This prompt is about"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button disabled={isLoading} type="submit">
+          Submit
+        </Button>
       </form>
     </Form>
   );

@@ -49,9 +49,10 @@ model Account {
 model Prompt {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   userId    String    @db.ObjectId
-  text      String
+  prompt    String
+  description    String?
   service   String?
-  images    String[]
+  medias    String[]
   likes     String[]  @db.ObjectId  
   tags      String[]
   createdAt DateTime  @default(now())
