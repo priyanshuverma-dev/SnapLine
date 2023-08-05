@@ -5,9 +5,8 @@ import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import AuthContext from "@/Context/AuthContext";
-import Sidebar from "./(components)/Sidebar";
-import Navbar from "./(components)/Navbar";
 import { ThemeProvider } from "@/Context/theme-provider";
+import AuthLayout from "@/Context/AuthLayout";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,15 +22,19 @@ export default async function RootLayout(props: {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Toaster />
         <AuthContext session={session}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Sidebar>
+          <AuthLayout>
+            <Toaster />
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              {props.children}
+              {props.modal}
+              {/* <Sidebar>
               <Navbar logo="PrompAi" />
               <div className="p-4 sm:ml-64 mt-[64px]">{props.children}</div>
               {props.modal}
-            </Sidebar>
-          </ThemeProvider>
+            </Sidebar> */}
+            </ThemeProvider>
+          </AuthLayout>
         </AuthContext>
       </body>
     </html>

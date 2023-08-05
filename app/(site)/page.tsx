@@ -1,5 +1,5 @@
-import Header from "../(components)/Header";
-import FeedView from "../(components)/FeedView";
+import FeedView from "@/components/FeedView";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (

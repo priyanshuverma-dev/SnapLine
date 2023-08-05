@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 
-import prisma from "@/app/lib/prisma";
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { nanoid } from "nanoid";
 
@@ -20,14 +20,32 @@ export async function POST(request: Request) {
 
   const username = `${name.replace(/\s/g, "").toLowerCase()}-${nanoid(5)}`;
 
-  const user = await prisma.user.create({
-    data: {
-      email,
-      name,
-      hashedPassword,
-      username,
-    },
-  });
+  try {
+    const user = await prisma.user.create({
+      data: {
+        email,
+        name,
+        hashedPassword,
+        username,
+      },
+    });
 
-  return NextResponse.json(user);
+    return NextResponse.json(user);
+  } catch (err: any) {
+    if (err.meta.target === "User_email_key") {
+      return NextResponse.json(
+        {
+          error: "Email already exists",
+        },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        error: err.message || "Something went wrong",
+      },
+      { status: 500 }
+    );
+  }
 }

@@ -2,34 +2,10 @@
 
 import React from "react";
 
-import FeedCard from "@/app/(components)/FeedCard";
-import { Prompt } from "@/Utils/prompt";
+import { Prompt } from "@/utils/prompt";
 import usePrompt from "@/hooks/use-prompt";
-import PromptSkeletionModal from "@/app/(components)/Modal";
-
-const fetchPrompt = async ({
-  userId,
-  promptId,
-}: {
-  userId: string;
-  promptId: string;
-}) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/prompt/byuid`, {
-    method: "POST",
-    body: JSON.stringify({
-      userId,
-      promptId,
-    }),
-  });
-
-  if (res.status == 200) {
-    const rs: Prompt = await res.json();
-
-    return rs;
-  } else {
-    return "No Post";
-  }
-};
+import LoadingModal from "@/components/LoadingView";
+import FeedCard from "@/components/FeedCard";
 
 const PromptPage = ({
   params: { id: promptId },
@@ -39,15 +15,25 @@ const PromptPage = ({
   const {
     data: prompt,
     isLoading,
+    error,
   }: {
     data: Prompt;
     isLoading: boolean;
+    error: any;
   } = usePrompt(promptId);
 
+  if (error?.response?.status === 404) {
+    // no post found in style
+
+    return (
+      <div>
+        <p className=" ">No Prompt Found</p>
+      </div>
+    );
+  }
+
   return (
-    <div>
-      {isLoading ? <PromptSkeletionModal /> : <FeedCard prompt={prompt} />}
-    </div>
+    <div>{isLoading ? <LoadingModal /> : <FeedCard prompt={prompt} />}</div>
   );
 };
 

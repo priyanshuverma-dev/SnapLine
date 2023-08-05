@@ -1,6 +1,6 @@
-import serverAuth from "@/app/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/app/lib/prisma";
+import prisma from "@/lib/prisma";
+import serverAuth from "@/lib/serverAuth";
 
 export async function GET(
   req: NextRequest,

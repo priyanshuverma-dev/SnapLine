@@ -2,9 +2,8 @@
 
 import React from "react";
 import FeedCard from "./FeedCard";
-import { Prompt } from "@/Utils/prompt";
+import { Prompt } from "@/utils/prompt";
 import usePrompts from "@/hooks/use-prompt-list";
-import LoadingOverlay from "./LoadingOverlay";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -43,12 +42,7 @@ const FeedView = () => {
   return (
     <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 ">
       {data.map((prompt) => {
-        return (
-          <FeedCard key={prompt.id} prompt={prompt} />
-
-          // <Link id={prompt.id} href={`prompt/${prompt.id}`}>
-          // </Link>
-        );
+        return <FeedCard key={prompt.id} prompt={prompt} />;
       })}
     </div>
   );

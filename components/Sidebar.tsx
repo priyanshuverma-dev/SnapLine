@@ -13,7 +13,6 @@ import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import SidebarItem from "./SidebarItem";
 import { ModeToggle } from "./ThemeSwitch";
-import { Separator } from "@/components/ui/separator";
 
 const Sidebar = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();

@@ -1,6 +1,6 @@
 "use client";
 
-import { Prompt } from "@/Utils/prompt";
+import { Prompt } from "@/utils/prompt";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 
@@ -11,6 +11,7 @@ import { FiCopy } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useStoreModal } from "@/hooks/use-modal-store";
+import Link from "next/link";
 
 const copyToClipboard = (text: string) => {
   navigator.clipboard.writeText(text);
@@ -24,20 +25,28 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
   return (
     <div key={prompt.id} className="bg-white rounded p-4 dark:bg-neutral-900">
       <div className="flex items-start">
-        <div className="">
-          <div className="flex items-center mb-2 space-x-1">
-            <Avatar className="w-10 h-10 rounded-full mr-3 max-[321px]:w-6 max-[321px]:h-6 shadow">
-              <AvatarImage src={prompt.user.image} />
-              <AvatarFallback>{prompt.user.name[0]}</AvatarFallback>
-            </Avatar>
-            <span className="hover:underline font-bold text-gray-900 max-[321px]:text-xs text-clip dark:text-[#E7EAE9]">
-              {prompt.user.name}
-            </span>
-            <BsFillPatchCheckFill className="text-blue-500" />
+        <div>
+          <div className="flex items-center mb-2 space-x-1 flex-row">
+            <div>
+              <Avatar className="w-10 h-10 rounded-full mr-3 max-[321px]:w-6 max-[321px]:h-6 shadow">
+                <AvatarImage src={prompt.user.image} />
+                <AvatarFallback>{prompt.user.name[0]}</AvatarFallback>
+              </Avatar>
+            </div>
+            <div className="flex flex-col">
+              <div className="flex flex-row items-center">
+                <span className="font-bold text-gray-900 max-[321px]:text-xs text-clip dark:text-[#E7EAE9]">
+                  {prompt.user.name}
+                </span>
+                <BsFillPatchCheckFill className="ml-1 text-blue-500" />
+              </div>
 
-            <span className="ml-2 text-gray-600 max-[321px]:text-xs dark:text-[#71767C]">
-              @{prompt.user.username}
-            </span>
+              <Link href={`/${prompt.user.username}`}>
+                <span className="cursor-pointer hover:underline text-gray-600 max-[321px]:text-xs dark:text-[#71767C]">
+                  @{prompt.user.username}
+                </span>
+              </Link>
+            </div>
           </div>
           <div className="bg-gray-100 rounded-sm p-2 dark:bg-neutral-800">
             <div className="flex flex-1 justify-between">

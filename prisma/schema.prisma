@@ -50,6 +50,7 @@ model Prompt {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   userId    String    @db.ObjectId
   prompt    String
+  title    String
   description    String?
   service   String?
   medias    String[]

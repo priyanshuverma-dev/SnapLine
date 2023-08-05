@@ -5,7 +5,7 @@ import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
-import prisma from "@/app/lib/prisma";
+import prisma from "@/lib/prisma";
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -59,9 +59,9 @@ export const authOptions: AuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "/auth",
-    signOut: "/auth",
-    error: "/auth/error", // Error code passed in query string as ?error=
+    signIn: "/login",
+    signOut: "/login",
+    newUser: "/onboard",
   },
 };
 

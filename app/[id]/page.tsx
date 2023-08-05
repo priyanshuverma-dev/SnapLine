@@ -1,12 +1,11 @@
 "use client";
-import { User } from "@/Utils/user";
+import { User } from "@/utils/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import useProfiles from "@/hooks/use-profile";
-import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import LoadingOverlay from "../(components)/LoadingOverlay";
+import React, { useState } from "react";
+import LoadingModal from "@/components/LoadingView";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -17,7 +16,7 @@ const ProfilePage = () => {
   const { data, isLoading, error } = useProfiles(params.id as string);
 
   if (isLoading) {
-    return <LoadingOverlay isLoading={isLoading} />;
+    return <LoadingModal />;
   }
 
   if (error) {

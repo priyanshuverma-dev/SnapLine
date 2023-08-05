@@ -7,11 +7,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import usePrompt from "@/hooks/use-prompt";
-import { Prompt } from "@/Utils/prompt";
-import FeedCard from "@/app/(components)/FeedCard";
+import { Prompt } from "@/utils/prompt";
 import { useStoreModal } from "@/hooks/use-modal-store";
 import { useRouter } from "next/navigation";
-import LoaingModal from "@/app/(components)/Modal";
+import LoadingModal from "@/components/LoadingView";
+import FeedCard from "@/components/FeedCard";
 
 const ModalPage = ({
   params: { id: promptId },
@@ -45,7 +45,7 @@ const ModalPage = ({
               {isLoading ? "" : `Service: ${prompt.service}`}
             </DialogTitle>
           </DialogHeader>
-          {isLoading ? <LoaingModal /> : <FeedCard prompt={prompt} />}
+          {isLoading ? <LoadingModal /> : <FeedCard prompt={prompt} />}
         </DialogContent>
       </Dialog>
     </div>

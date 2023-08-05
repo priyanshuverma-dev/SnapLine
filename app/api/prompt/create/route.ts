@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/app/lib/prisma";
-import { services } from "@/Utils/services";
+import prisma from "@/lib/prisma";
+import { services } from "@/utils/services";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
@@ -38,6 +38,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const promptCreated = await prisma.prompt.create({
       data: {
         prompt,
+        title,
         medias: medias || [],
         service,
         userId,
