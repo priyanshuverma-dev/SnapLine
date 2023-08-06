@@ -11,15 +11,17 @@ datasource db {
 }
 model User {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  name            String    @default("Linkey User")
-  username        String    @unique @default(uuid()) 
-  bio             String    @default("I am a linkey user ✌")
+  name            String    @default("Drop User")
+  username        String    @unique @default(cuid()) 
+  bio             String    @default("I am a Drop user ✌")
   email           String    @unique
   emailVerified   DateTime?
   image           String    @default("https://images.unsplash.com/photo-1523251343397-9225e4cb6319?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80")
   hashedPassword  String?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
+  followers       String[]  @db.ObjectId
+  following       String[]  @db.ObjectId
   prompts          Prompt[]
   accounts        Account[]
 

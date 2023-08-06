@@ -56,14 +56,14 @@ const Navbar = ({ logo }: { logo: ReactNode }) => {
               <div>
                 {status === "unauthenticated" ? (
                   <Link
-                    href="/auth"
+                    href="/login"
                     className="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2 mr-2 font-bold text-blue-400"
                   >
                     Login
                   </Link>
                 ) : null}
                 {status === "authenticated" ? (
-                  <Link href={`/${currentUser?.username}`}>
+                  <Link href={`/u/${currentUser?.username}`}>
                     <div>
                       <Avatar>
                         <AvatarImage src={currentUser?.image as string} />

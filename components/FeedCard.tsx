@@ -41,7 +41,7 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
                 <BsFillPatchCheckFill className="ml-1 text-blue-500" />
               </div>
 
-              <Link href={`/${prompt.user.username}`}>
+              <Link href={`/u/${prompt.user.username}`}>
                 <span className="cursor-pointer hover:underline text-gray-600 max-[321px]:text-xs dark:text-[#71767C]">
                   @{prompt.user.username}
                 </span>

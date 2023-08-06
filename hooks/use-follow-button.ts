@@ -2,13 +2,10 @@ import useSWR from "swr";
 
 import fetcher from "@/lib/fetcher";
 
-const useProfiles = (userId: string) => {
+const useFollowButton = (promptId: string) => {
   const { data, error, isLoading, mutate } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}/api/profiles/${userId}`,
-    fetcher,
-    {
-      revalidateOnFocus: true,
-    }
+    `/api/profiles/follow/${promptId}`,
+    fetcher
   );
 
   return {
@@ -19,4 +16,4 @@ const useProfiles = (userId: string) => {
   };
 };
 
-export default useProfiles;
+export default useFollowButton;

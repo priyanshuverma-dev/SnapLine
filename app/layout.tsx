@@ -23,9 +23,9 @@ export default async function RootLayout(props: {
     <html lang="en">
       <body className={inter.className}>
         <AuthContext session={session}>
-          <AuthLayout>
-            <Toaster />
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <AuthLayout>
+              <Toaster />
               {props.children}
               {props.modal}
               {/* <Sidebar>
@@ -33,8 +33,8 @@ export default async function RootLayout(props: {
               <div className="p-4 sm:ml-64 mt-[64px]">{props.children}</div>
               {props.modal}
             </Sidebar> */}
-            </ThemeProvider>
-          </AuthLayout>
+            </AuthLayout>
+          </ThemeProvider>
         </AuthContext>
       </body>
     </html>

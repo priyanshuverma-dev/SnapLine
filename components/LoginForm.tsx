@@ -14,11 +14,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import { signIn, useSession } from "next-auth/react";
+
+import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import AuthSocialButton from "./AuthSocialButton";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -37,7 +37,6 @@ const formSchema = z.object({
     }),
 });
 const LoginForm = () => {
-  const session = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -65,7 +64,6 @@ const LoginForm = () => {
         }
 
         if (callback?.ok) {
-          toast.success("Logged In");
           router.push("/");
         }
       })
@@ -178,7 +176,7 @@ const LoginForm = () => {
         >
           <div>New to Prompt.Ai?</div>
           <div
-            onClick={() => router.push("/register")}
+            onClick={() => router.push(`/register`)}
             className="underline cursor-pointer"
           >
             Create an account

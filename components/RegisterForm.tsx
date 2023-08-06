@@ -15,10 +15,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import AuthSocialButton from "./AuthSocialButton";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -46,7 +46,6 @@ const formSchema = z.object({
 });
 
 export function RegisterForm() {
-  const session = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -71,7 +70,6 @@ export function RegisterForm() {
         signIn("credentials", {
           ...values,
           redirect: false,
-          callbackUrl: "/onboading",
         })
       )
       .then((callback) => {
@@ -213,7 +211,7 @@ export function RegisterForm() {
         >
           <div>Already have an account?</div>
           <div
-            onClick={() => router.push("/login")}
+            onClick={() => router.push(`/login`)}
             className="underline cursor-pointer"
           >
             Login
