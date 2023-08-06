@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export type Prompt = {
   id: string;
   userId: string;
@@ -10,13 +12,5 @@ export type Prompt = {
   updatedAt: Date;
   published: boolean;
   clicks: number;
-  user: {
-    name: string;
-    image: string;
-    username: string;
-    bio: string;
-    email: string;
-    createdAt: Date;
-    updatedAt: Date;
-  };
+  user: User;
 };

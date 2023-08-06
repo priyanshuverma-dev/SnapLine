@@ -7,16 +7,6 @@ export async function GET(
   { params }: { params: { username: string } }
 ) {
   try {
-    const { currentUser } = await serverAuth();
-
-    if (!currentUser) {
-      return NextResponse.json(
-        {
-          message: "Not Authorized",
-        },
-        { status: 401 }
-      );
-    }
     const username = params.username;
 
     const user = await prisma.user.findUnique({

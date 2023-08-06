@@ -25,7 +25,7 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
   return (
     <div key={prompt.id} className="bg-white rounded p-4 dark:bg-neutral-900">
       <div className="flex items-start">
-        <div>
+        <div className="w-full">
           <div className="flex items-center mb-2 space-x-1 flex-row">
             <div>
               <Avatar className="w-10 h-10 rounded-full mr-3 max-[321px]:w-6 max-[321px]:h-6 shadow">
@@ -38,7 +38,9 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
                 <span className="font-bold text-gray-900 max-[321px]:text-xs text-clip dark:text-[#E7EAE9]">
                   {prompt.user.name}
                 </span>
-                <BsFillPatchCheckFill className="ml-1 text-blue-500" />
+                {prompt.user.role === "VERIFIED" && (
+                  <BsFillPatchCheckFill className="ml-1 text-blue-500" />
+                )}
               </div>
 
               <Link href={`/u/${prompt.user.username}`}>
@@ -48,17 +50,17 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
               </Link>
             </div>
           </div>
-          <div className="bg-gray-100 rounded-sm p-2 dark:bg-neutral-800">
+          <div className="bg-gray-100 rounded-sm p-2 dark:bg-neutral-800 ">
             <div className="flex flex-1 justify-between">
               <p className="font-semibold">{prompt.service} Prompt:</p>
               <button
-                className="p-2"
+                className="p-2 rounded-full transition-colors hover:bg-neutral-700"
                 onClick={() => copyToClipboard(prompt.prompt)}
               >
                 <FiCopy />
               </button>
             </div>
-            <p className="text-gray-800 md:text-md sm:text-sm font-mono dark:text-[#E7EAE9]">
+            <p className="text-gray-800 md:text-md sm:text-sm font-mono dark:text-[#E7EAE9] ">
               {prompt.prompt}
             </p>
           </div>

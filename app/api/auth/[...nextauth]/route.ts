@@ -3,6 +3,7 @@ import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 import prisma from "@/lib/prisma";
@@ -10,6 +11,30 @@ import prisma from "@/lib/prisma";
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
+    EmailProvider({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD,
+        },
+      },
+      from: process.env.EMAIL_FROM,
+      sendVerificationRequest({
+        identifier: email,
+        url,
+        provider: { server, from },
+      }) {
+        return server.sendMail({
+          to: email,
+          from,
+          subject: "Sign in",
+          text: "Sign in",
+          html: `<div>Sign in</div>`,
+        });
+      },
+    }),
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,

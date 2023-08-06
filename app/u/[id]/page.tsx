@@ -10,8 +10,11 @@ import LoadingModal from "@/components/LoadingView";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import { Separator } from "@/components/ui/separator";
 import useCurrentUser from "@/hooks/useCurrentUser";
-import useFollowButton from "@/hooks/use-follow-button";
 import { toast } from "react-hot-toast";
+import useUsersPrompts from "@/hooks/use-users-prompts";
+import { Prompt } from "@/utils/prompt";
+import PromptCard from "@/components/PromptCard";
+import ProfileFeeds from "@/components/ProfileFeeds";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -35,6 +38,14 @@ const ProfilePage = () => {
     return <LoadingModal />;
   }
 
+  // const {
+  //   data: prompts,
+  //   isLoading: isPrompts,
+  // }: {
+  //   data: Prompt[];
+  //   isLoading: boolean;
+  // } = useUsersPrompts(profileData.id);
+
   if (error) {
     console.log(error);
     return (
@@ -53,7 +64,9 @@ const ProfilePage = () => {
   const followUser = async () => {
     setFollowLoading(true);
     try {
-      const res = await fetch(`/api/profiles/follow/${profileData.id}`);
+      const res = await fetch(`/api/profiles/follow/${profileData.id}`, {
+        cache: "no-cache",
+      });
 
       const isFollow = await res.json();
 
@@ -95,7 +108,9 @@ const ProfilePage = () => {
                 <span className="max-[321px]:text-xs text-center  font-semibold dark:text-white text-neutral-950">
                   {profileData.name}
                 </span>
-                <BsFillPatchCheckFill className="ml-2 mt-2 max-[321px]:mt-0 max-[321px]:text-[10px] text-xs text-blue-500" />
+                {profileData.role === "VERIFIED" && (
+                  <BsFillPatchCheckFill className="ml-2 mt-2 max-[321px]:mt-0 max-[321px]:text-[10px] text-xs text-blue-500" />
+                )}
               </div>
               <span className="max-[321px]:text-xs text-sm text-gray-500 hover:underline hover:cursor-pointer">
                 @{profileData.username}
@@ -103,7 +118,7 @@ const ProfilePage = () => {
             </div>
           </div>
           <div className="p-1 flex items-center justify-center">
-            {currentUser.id === profileData.id ? (
+            {currentUser?.id === profileData.id ? (
               <Button
                 variant={"outline"}
                 onClick={handleCurrentUser}
@@ -115,12 +130,18 @@ const ProfilePage = () => {
               <Button
                 disabled={followLoading}
                 onClick={followUser}
-                variant={"outline"}
+                size={"sm"}
+                className="max-[321px]:text-xs text-sm "
+                variant={
+                  profileData.followers.includes(currentUser?.id)
+                    ? "destructive"
+                    : "outline"
+                }
               >
-                {profileData.following.includes(currentUser?.id)
+                {profileData.followers.includes(currentUser?.id)
                   ? "Unfollow"
-                  : "Follow"}{" "}
-                ({profileData.following.length})
+                  : "Follow"}
+                {followLoading && "..."}
               </Button>
             )}
           </div>
@@ -146,10 +167,14 @@ const ProfilePage = () => {
         </div>
         <div className="p-2">
           <span className="pr-2 font-semibold">
-            {profileData.follower.length}
+            {profileData.followers.length}
           </span>
-          <span className="text-neutral-200">Follows</span>
+          <span className="text-neutral-200">Followers</span>
         </div>
+      </div>
+
+      <div>
+        <ProfileFeeds isCurrentUser={currentUser?.id === profileData.id} />
       </div>
     </section>
   );

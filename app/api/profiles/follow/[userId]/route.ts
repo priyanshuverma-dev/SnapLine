@@ -50,7 +50,9 @@ export async function GET(
           id: currentUser.id,
         },
         data: {
-          following: currentUser.following.filter((id) => id !== userId),
+          following: {
+            set: currentUser.following.filter((id) => id !== userId),
+          },
         },
       });
 
@@ -59,9 +61,11 @@ export async function GET(
           id: userId,
         },
         data: {
-          followers: userWantTofollow.followers.filter(
-            (id) => id !== currentUser.id
-          ),
+          followers: {
+            set: userWantTofollow.followers.filter(
+              (id) => id !== currentUser.id
+            ),
+          },
         },
       });
       return NextResponse.json(false);
@@ -72,7 +76,9 @@ export async function GET(
         id: currentUser.id,
       },
       data: {
-        following: [...currentUser.following, userId],
+        following: {
+          push: userId,
+        },
       },
     });
 
@@ -81,7 +87,9 @@ export async function GET(
         id: userId,
       },
       data: {
-        followers: [...userWantTofollow.followers, currentUser.id],
+        followers: {
+          push: currentUser.id,
+        },
       },
     });
 

@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { nanoid } from "nanoid";
+import Email from "next-auth/providers/email";
 
 export async function POST(request: Request) {
   const body = await request.json();

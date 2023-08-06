@@ -43,6 +43,7 @@ export async function GET(request: Request) {
               name: prompt.user.name,
               image: prompt.user.image,
               username: prompt.user.username,
+              role: prompt.user.role,
             },
           };
         })

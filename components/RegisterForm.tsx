@@ -15,10 +15,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthSocialButton from "./AuthSocialButton";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -46,8 +46,16 @@ const formSchema = z.object({
 });
 
 export function RegisterForm() {
+  const session = useSession();
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      router.push("/");
+    }
+  }, [session?.status, router]);
 
   // ...
   const form = useForm<z.infer<typeof formSchema>>({

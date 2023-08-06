@@ -3,8 +3,8 @@ import withAuth from "next-auth/middleware";
 export default withAuth({
   pages: {
     signIn: "/login",
-    signOut: "/",
+    signOut: "/login",
   },
 });
 
-export const config = { matcher: ["/", "/create-one", "/:path"] };
+export const config = { matcher: ["/", "/create-one", "/u/:username"] };
