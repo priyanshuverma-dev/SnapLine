@@ -48,10 +48,6 @@ const formSchema = z.object({
 });
 
 const AiServiceCreatePage = () => {
-  const { data: user, isLoading: isUser } = useCurrentUser();
-
-  if (isUser) return <div>Loading...</div>;
-
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -72,7 +68,6 @@ const AiServiceCreatePage = () => {
     axios
       .post("/api/ai/service/create", {
         ...data,
-        userId: user.id,
       })
       .then((data) => {
         if (data.status === 201) {
@@ -102,6 +97,23 @@ const AiServiceCreatePage = () => {
                 <Input
                   disabled={isLoading}
                   placeholder="Name of AI Service"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />{" "}
+        <FormField
+          control={form.control}
+          name="website"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Website (Portal)</FormLabel>
+              <FormControl>
+                <Input
+                  disabled={isLoading}
+                  placeholder="Website of AI Service"
                   {...field}
                 />
               </FormControl>

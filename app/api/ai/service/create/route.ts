@@ -4,6 +4,8 @@ import serverAuth from "@/lib/serverAuth";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
+    const { currentUser } = await serverAuth();
+
     const body = await req.json();
 
     if (!body) {
@@ -15,9 +17,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    const { name, description, price, website, aiType, userId } = body;
+    const { name, description, price, website, aiType } = body;
 
-    if (!name || !description || !price || !website || !aiType || !userId) {
+    if (!name || !description || !website || !aiType) {
       return NextResponse.json(
         {
           message: "Missing fields",
@@ -49,7 +51,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         website,
         aiType,
         status: "PENDING",
-        registeredBy: userId,
+        registeredBy: currentUser.id,
       },
     });
 
