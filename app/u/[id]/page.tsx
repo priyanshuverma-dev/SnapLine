@@ -38,14 +38,6 @@ const ProfilePage = () => {
     return <LoadingModal />;
   }
 
-  // const {
-  //   data: prompts,
-  //   isLoading: isPrompts,
-  // }: {
-  //   data: Prompt[];
-  //   isLoading: boolean;
-  // } = useUsersPrompts(profileData.id);
-
   if (error) {
     console.log(error);
     return (

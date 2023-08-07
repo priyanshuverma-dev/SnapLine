@@ -8,6 +8,7 @@ export type Prompt = {
   service?: string;
   images: string[];
   tags: string[];
+  likes: string[];
   createdAt: Date;
   updatedAt: Date;
   published: boolean;

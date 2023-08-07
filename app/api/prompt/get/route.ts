@@ -38,6 +38,7 @@ export async function GET(request: Request) {
             prompt: prompt.prompt,
             service: prompt.service,
             tags: prompt.tags,
+            likes: prompt.likes,
             user: {
               id: prompt.user.id,
               name: prompt.user.name,

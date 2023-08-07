@@ -7,6 +7,7 @@ export type User = {
   username: string;
   following: string[];
   followers: string[];
+  likedPrompts: string[];
   bio: string;
   role: Role;
   email: string;

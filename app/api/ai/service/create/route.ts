@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { services } from "@/utils/services";
+import serverAuth from "@/lib/serverAuth";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
@@ -15,9 +15,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    const { title, description, userId, service, medias, prompt } = body;
+    const { name, description, price, website, aiType, userId } = body;
 
-    if (!title || !description || !userId || !service || !prompt) {
+    if (!name || !description || !price || !website || !aiType || !userId) {
       return NextResponse.json(
         {
           message: "Missing fields",
@@ -26,42 +26,39 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    if (!services.includes(service)) {
-      return NextResponse.json(
-        {
-          message: "Invalid service",
-        },
-        { status: 400 }
-      );
-    }
-
-    const promptCreated = await prisma.prompt.create({
-      data: {
-        prompt,
-        title,
-        medias: medias || [],
-        userId,
-        clicks: 0,
-        description,
-        service,
+    const serviceExists = await prisma.aIService.findUnique({
+      where: {
+        name,
       },
     });
 
-    if (!promptCreated) {
+    if (serviceExists) {
       return NextResponse.json(
         {
-          message: "Prompt not created",
+          message: "Service already exists",
         },
         { status: 400 }
       );
     }
 
+    const service = await prisma.aIService.create({
+      data: {
+        name,
+        description,
+        price,
+        website,
+        aiType,
+        status: "PENDING",
+        registeredBy: userId,
+      },
+    });
+
     return NextResponse.json(
       {
-        message: "Prompt created",
-        prompt: promptCreated,
+        message: "Service created",
+        service,
       },
-      { status: 200 }
+      { status: 201 }
     );
   } catch (err) {
     console.log(err);

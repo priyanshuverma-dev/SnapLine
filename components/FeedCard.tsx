@@ -1,89 +1,141 @@
 "use client";
 
 import { Prompt } from "@/utils/prompt";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import { BsFillPatchCheckFill } from "react-icons/bs";
-import { FiCopy } from "react-icons/fi";
+import { IoShareSocialOutline } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useStoreModal } from "@/hooks/use-modal-store";
-import Link from "next/link";
-
-const copyToClipboard = (text: string) => {
-  navigator.clipboard.writeText(text);
-  toast.success("Copied to clipboard");
-};
+import PromptHeader from "./prompt-card/Header";
+import PromptBody from "./prompt-card/Body";
+import { AiTwotoneHeart } from "react-icons/ai";
+import { FaRegCommentDots } from "react-icons/fa";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import { User } from "@/utils/user";
+import { nFormatter } from "@/utils/utils";
 
 const FeedCard = ({ prompt }: { prompt: Prompt }) => {
   const router = useRouter();
   const modalStore = useStoreModal();
+  const [likeLoading, setLikeLoading] = useState(false);
+
+  const {
+    data: currentUser,
+    isLoading,
+  }: {
+    data: User;
+    isLoading: boolean;
+  } = useCurrentUser();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  const likePrompt = async () => {
+    setLikeLoading(true);
+    try {
+      const res = await fetch(`/api/prompt/like/${prompt.id}`, {
+        cache: "no-cache",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const isLiked = await res.json();
+
+      if (isLiked) {
+        toast.success("Liked", {
+          icon: "👍",
+        });
+      } else {
+        toast.success("Disliked", {
+          icon: "👎",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLikeLoading(false);
+    }
+  };
 
   return (
     <div key={prompt.id} className="bg-white rounded p-4 dark:bg-neutral-900">
       <div className="flex items-start">
         <div className="w-full">
-          <div className="flex items-center mb-2 space-x-1 flex-row">
-            <div>
-              <Avatar className="w-10 h-10 rounded-full mr-3 max-[321px]:w-6 max-[321px]:h-6 shadow">
-                <AvatarImage src={prompt.user.image} />
-                <AvatarFallback>{prompt.user.name[0]}</AvatarFallback>
-              </Avatar>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex flex-row items-center">
-                <span className="font-bold text-gray-900 max-[321px]:text-xs text-clip dark:text-[#E7EAE9]">
-                  {prompt.user.name}
-                </span>
-                {prompt.user.role === "VERIFIED" && (
-                  <BsFillPatchCheckFill className="ml-1 text-blue-500" />
-                )}
-              </div>
+          <PromptHeader
+            image={prompt.user.image}
+            name={prompt.user.name}
+            username={prompt.user.username}
+            role={prompt.user.role}
+          />
 
-              <Link href={`/u/${prompt.user.username}`}>
-                <span className="cursor-pointer hover:underline text-gray-600 max-[321px]:text-xs dark:text-[#71767C]">
-                  @{prompt.user.username}
-                </span>
-              </Link>
-            </div>
-          </div>
-          <div className="bg-gray-100 rounded-sm p-2 dark:bg-neutral-800 ">
-            <div className="flex flex-1 justify-between">
-              <p className="font-semibold">{prompt.service} Prompt:</p>
-              <button
-                className="p-2 rounded-full transition-colors hover:bg-neutral-700"
-                onClick={() => copyToClipboard(prompt.prompt)}
-              >
-                <FiCopy />
-              </button>
-            </div>
-            <p className="text-gray-800 md:text-md sm:text-sm font-mono dark:text-[#E7EAE9] ">
-              {prompt.prompt}
-            </p>
-          </div>
-          {prompt.tags.map((tag) => {
-            return (
-              <Badge key={tag} variant={"outline"} className="m-2">
-                {tag}
-              </Badge>
-            );
-          })}
+          <PromptBody service={prompt.service} prompt={prompt.prompt} />
+
           <div>
-            <Button
-              variant={"outline"}
-              className="w-full mt-2"
-              size={"sm"}
-              onClick={() => {
-                router.push(`/prompt/${prompt.id}`);
-                modalStore.onOpen();
-              }}
-              key={prompt.id}
-            >
-              View
-            </Button>
+            <div className="flex items-center justify-between mt-2">
+              <div className="flex items-center space-x-2">
+                <Button
+                  disabled={likeLoading}
+                  variant={"ghost"}
+                  className="w-full mt-2"
+                  size={"default"}
+                  onClick={likePrompt}
+                >
+                  <AiTwotoneHeart
+                    className={
+                      currentUser.likedPrompts.includes(prompt.id)
+                        ? "text-red-500"
+                        : ""
+                    }
+                  />
+                  {likeLoading ? ".." : " "}
+                  <span className="ml-1">
+                    {nFormatter({ num: prompt.likes.length ,digits:1})}
+                  </span>
+                </Button>
+                <Button
+                  disabled={likeLoading}
+                  variant={"ghost"}
+                  className="w-full mt-2"
+                  size={"default"}
+                  onClick={() => {
+                    toast.success("Commented");
+                  }}
+                >
+                  <FaRegCommentDots className="" />
+                </Button>
+                <Button
+                  disabled={likeLoading}
+                  variant={"ghost"}
+                  className="w-full mt-2"
+                  size={"default"}
+                  onClick={() => {
+                    toast.success("Shared");
+                  }}
+                >
+                  <IoShareSocialOutline />
+                </Button>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Button
+                  disabled={likeLoading}
+                  variant={"secondary"}
+                  className="w-full mt-2"
+                  size={"default"}
+                  onClick={() => {
+                    router.push(`/prompt/${prompt.id}`);
+                    modalStore.onOpen();
+                  }}
+                  key={prompt.id}
+                >
+                  View
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
