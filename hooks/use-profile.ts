@@ -11,7 +11,7 @@ const url = process.env.NEXT_PUBLIC_URL || "https://prompt.ai.antrikshdev.tech";
 
 const useProfiles = (userId: string) => {
   const { data, error, isLoading, mutate } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}/api/profiles/${userId}`,
+    `${url}/api/profiles/${userId}`,
     noCacheFetcher,
     {
       refreshInterval: 1000,
