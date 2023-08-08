@@ -5,7 +5,7 @@ export async function GET(request: Request) {
   try {
     const ais = await prisma.aIService.findMany({
       where: {
-        status: "APPROVED" || "VERIFIED",
+        status: "APPROVED",
       },
       orderBy: {
         updatedAt: "desc",
