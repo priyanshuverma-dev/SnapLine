@@ -1,7 +1,7 @@
-import prisma from "@/lib/prisma";
 import serverAuth from "@/lib/serverAuth";
 import { NextResponse } from "next/server";
-import { z } from "zod";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(
   request: Request,
