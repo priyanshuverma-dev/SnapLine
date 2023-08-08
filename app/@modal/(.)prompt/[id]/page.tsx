@@ -42,7 +42,7 @@ const ModalPage = ({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {isLoading ? "" : `Service: ${prompt.service}`}
+              {isLoading ? "" : `Service: ${prompt.aiService.name}`}
             </DialogTitle>
           </DialogHeader>
           {isLoading ? <LoadingModal /> : <FeedCard prompt={prompt} />}
