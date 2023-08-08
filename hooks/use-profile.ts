@@ -7,6 +7,8 @@ const noCacheFetcher = (url: string) =>
     cache: "no-cache",
   }).then((res) => res.json());
 
+const url = process.env.NEXT_PUBLIC_URL || "https://prompt.ai.antrikshdev.tech";
+
 const useProfiles = (userId: string) => {
   const { data, error, isLoading, mutate } = useSWR(
     `${process.env.NEXT_PUBLIC_URL}/api/profiles/${userId}`,
