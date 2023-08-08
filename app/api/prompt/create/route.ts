@@ -1,9 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { services } from "@/utils/services";
+import serverAuth from "@/lib/serverAuth";
+
+export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
+    const { currentUser } = await serverAuth();
+
+    if (!currentUser) {
+      return NextResponse.json(
+        {
+          message: "User not found",
+        },
+        { status: 400 }
+      );
+    }
+
     const body = await req.json();
 
     if (!body) {
@@ -15,9 +28,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    const { title, description, userId, service, medias, prompt } = body;
+    const { title, description, service, medias, prompt } = body;
 
-    if (!title || !description || !userId || !service || !prompt) {
+    if (!title || !description || !service || !prompt) {
       return NextResponse.json(
         {
           message: "Missing fields",
@@ -26,10 +39,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    if (!services.includes(service)) {
+    const services = await prisma.aIService.findUnique({
+      where: {
+        id: service,
+        status: "APPROVED",
+      },
+    });
+
+    if (!services) {
       return NextResponse.json(
         {
-          message: "Invalid service",
+          message: "Service not found",
         },
         { status: 400 }
       );
@@ -40,7 +60,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         prompt,
         title,
         medias: medias || [],
-        userId,
+        userId: currentUser.id,
         clicks: 0,
         description,
         service,
@@ -61,7 +81,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         message: "Prompt created",
         prompt: promptCreated,
       },
-      { status: 200 }
+      { status: 201 }
     );
   } catch (err) {
     console.log(err);

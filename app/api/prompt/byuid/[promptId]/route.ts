@@ -21,8 +21,27 @@ export async function GET(
         status: "PUBLISHED",
         id: promptId,
       },
-      include: {
-        user: true,
+      select: {
+        id: true,
+        title: true,
+        prompt: true,
+        clicks: true,
+        likes: true,
+        user: {
+          select: {
+            username: true,
+            image: true,
+            name: true,
+            role: true,
+          },
+        },
+        aiService: {
+          select: {
+            id: true,
+            name: true,
+            status: true,
+          },
+        },
       },
     });
 

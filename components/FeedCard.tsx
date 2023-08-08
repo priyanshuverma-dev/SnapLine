@@ -15,6 +15,7 @@ import { FaRegCommentDots } from "react-icons/fa";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { User } from "@/utils/user";
 import { nFormatter } from "@/utils/utils";
+import ShareButton from "./ShareButton";
 
 const FeedCard = ({ prompt }: { prompt: Prompt }) => {
   const router = useRouter();
@@ -71,9 +72,15 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
             name={prompt.user.name}
             username={prompt.user.username}
             role={prompt.user.role}
+            title={prompt.title}
           />
 
-          <PromptBody service={prompt.service} prompt={prompt.prompt} />
+          <PromptBody
+            service={prompt.aiService.name}
+            prompt={prompt.prompt}
+            id={prompt.id}
+            clicks={prompt.clicks}
+          />
 
           <div>
             <div className="flex items-center justify-between mt-2">
@@ -86,15 +93,15 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
                   onClick={likePrompt}
                 >
                   <AiTwotoneHeart
-                    className={
+                    className={`${
                       currentUser.likedPrompts.includes(prompt.id)
                         ? "text-red-500"
                         : ""
-                    }
+                    } text-xl`}
                   />
                   {likeLoading ? ".." : " "}
                   <span className="ml-1">
-                    {nFormatter({ num: prompt.likes.length ,digits:1})}
+                    {nFormatter({ num: prompt.likes.length, digits: 1 })}
                   </span>
                 </Button>
                 <Button
@@ -106,19 +113,13 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
                     toast.success("Commented");
                   }}
                 >
-                  <FaRegCommentDots className="" />
+                  <FaRegCommentDots className="text-xl" />
                 </Button>
-                <Button
-                  disabled={likeLoading}
-                  variant={"ghost"}
-                  className="w-full mt-2"
-                  size={"default"}
-                  onClick={() => {
-                    toast.success("Shared");
-                  }}
-                >
-                  <IoShareSocialOutline />
-                </Button>
+                <ShareButton
+                  title={`${prompt.title} - ${prompt.prompt}`}
+                  url={`${process.env.NEXT_PUBLIC_URL}/prompt/${prompt.id}`}
+                  likeLoading={likeLoading}
+                />
               </div>
               <div className="flex items-center space-x-2">
                 <Button
