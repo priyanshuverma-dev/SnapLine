@@ -18,7 +18,7 @@ export async function GET(
 
     const prompts = await prisma.prompt.findUnique({
       where: {
-        published: true,
+        status: "PUBLISHED",
         id: promptId,
       },
       include: {
