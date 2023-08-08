@@ -23,12 +23,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
-import { services } from "@/utils/services";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { useRouter } from "next/navigation";
+import AiServicesSelect from "@/components/AiServicesSelect";
 
 const formSchema = z.object({
   title: z.string().min(10, {
@@ -119,11 +119,7 @@ const CreatePage = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {services.map((service) => (
-                    <SelectItem key={service} value={service}>
-                      {service}
-                    </SelectItem>
-                  ))}
+                  <AiServicesSelect />
                 </SelectContent>
               </Select>
               <FormDescription>Prompt is for which service</FormDescription>

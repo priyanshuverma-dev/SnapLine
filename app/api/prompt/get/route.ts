@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   try {
     const prompts = await prisma.prompt.findMany({
       where: {
-        published: true,
+        status: "PUBLISHED",
       },
       orderBy: {
         updatedAt: "desc",
