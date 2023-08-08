@@ -13,6 +13,7 @@ enum PromptStatus {
 export type Prompt = {
   id: string;
   userId: string;
+  title: string;
   prompt: string;
   description: string;
   service: string;
@@ -25,5 +26,5 @@ export type Prompt = {
   published: boolean;
   clicks: number;
   user: User;
-  serviceData: AIService;
+  aiService: AIService;
 };

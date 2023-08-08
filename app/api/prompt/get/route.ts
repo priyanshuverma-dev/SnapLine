@@ -13,8 +13,27 @@ export async function GET(request: Request) {
       orderBy: {
         updatedAt: "desc",
       },
-      include: {
-        user: true,
+      select: {
+        id: true,
+        title: true,
+        prompt: true,
+        clicks: true,
+        likes: true,
+        user: {
+          select: {
+            username: true,
+            image: true,
+            name: true,
+            role: true,
+          },
+        },
+        aiService: {
+          select: {
+            id: true,
+            name: true,
+            status: true,
+          },
+        },
       },
     });
 
@@ -30,25 +49,7 @@ export async function GET(request: Request) {
     if (type === "full") {
       return NextResponse.json(prompts);
     } else {
-      return NextResponse.json(
-        prompts.map((prompt) => {
-          return {
-            id: prompt.id,
-            title: prompt.title,
-            prompt: prompt.prompt,
-            service: prompt.service,
-            tags: prompt.tags,
-            likes: prompt.likes,
-            user: {
-              id: prompt.user.id,
-              name: prompt.user.name,
-              image: prompt.user.image,
-              username: prompt.user.username,
-              role: prompt.user.role,
-            },
-          };
-        })
-      );
+      return NextResponse.json(prompts);
     }
   } catch (error) {
     console.log(error);

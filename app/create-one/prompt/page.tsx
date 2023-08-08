@@ -26,9 +26,7 @@ import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
-import useCurrentUser from "@/hooks/useCurrentUser";
 import { useRouter } from "next/navigation";
-import AiServicesSelect from "@/components/AiServicesSelect";
 
 const formSchema = z.object({
   title: z.string().min(10, {
@@ -41,10 +39,33 @@ const formSchema = z.object({
   service: z.string(),
 });
 
-const CreatePage = () => {
-  const { data: user, isLoading: isUser } = useCurrentUser();
+type ListProp = {
+  id: string;
+  name: string;
+};
 
-  if (isUser) return <div>Loading...</div>;
+const fetchAIList = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/ai/service/list`);
+  const data: ListProp[] = await res.json();
+  if (!data) {
+    console.log("No data found");
+    return [];
+  }
+
+  if (res.status === 200) {
+    return data;
+  } else {
+    console.log("Error fetching data");
+    return [];
+  }
+};
+
+const CreatePage = () => {
+  const [services, setServices] = useState<ListProp[]>([]);
+  if (services.length === 0) {
+    console.log(services);
+    fetchAIList().then((data) => setServices(data));
+  }
 
   const router = useRouter();
 
@@ -53,7 +74,7 @@ const CreatePage = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      service: "ChatGPT",
+      service: "NONE",
       title: "",
     },
   });
@@ -65,7 +86,6 @@ const CreatePage = () => {
     axios
       .post("/api/prompt/create", {
         ...data,
-        userId: user.id,
       })
       .then((data) => {
         if (data.status === 201) {
@@ -119,7 +139,11 @@ const CreatePage = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <AiServicesSelect />
+                  {services.map((service) => (
+                    <SelectItem key={service.id} value={service.id}>
+                      {service.name}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormDescription>Prompt is for which service</FormDescription>
