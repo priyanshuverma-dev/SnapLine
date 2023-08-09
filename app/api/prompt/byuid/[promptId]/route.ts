@@ -27,6 +27,12 @@ export async function GET(
         prompt: true,
         clicks: true,
         likes: true,
+        createdAt: true,
+        description: true,
+        medias: true,
+        status: true,
+        tags: true,
+        updatedAt: true,
         user: {
           select: {
             username: true,

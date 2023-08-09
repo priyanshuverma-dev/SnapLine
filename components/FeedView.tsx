@@ -6,6 +6,8 @@ import { Prompt } from "@/utils/prompt";
 import usePrompts from "@/hooks/use-prompt-list";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
+import { User } from "@/utils/user";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 const FeedView = () => {
   const {
@@ -18,7 +20,15 @@ const FeedView = () => {
     error: any;
   } = usePrompts();
 
-  if (isLoading) {
+  const {
+    data: currentUser,
+    isLoading: isUserLoading,
+  }: {
+    data: User;
+    isLoading: boolean;
+  } = useCurrentUser();
+
+  if (isLoading || isUserLoading) {
     return (
       <div className="bg-gray-100 rounded p-2 space-y-2 dark:bg-neutral-900">
         <Skeleton className="w-full h-40" />
@@ -42,7 +52,9 @@ const FeedView = () => {
   return (
     <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 ">
       {data.map((prompt) => {
-        return <FeedCard key={prompt.id} prompt={prompt} />;
+        return (
+          <FeedCard currentUser={currentUser} key={prompt.id} prompt={prompt} />
+        );
       })}
     </div>
   );

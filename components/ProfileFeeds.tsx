@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import PromptCard from "./PromptCard";
+import ProfilePromptCard from "./ProfilePromptCard";
 import useUsersPrompts from "@/hooks/use-users-prompts";
 import { Prompt } from "@/utils/prompt";
 import { useParams } from "next/navigation";
@@ -53,7 +53,7 @@ const ProfileFeeds = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
     <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 ">
       {data.map((prompt) => {
         return (
-          <PromptCard
+          <ProfilePromptCard
             key={prompt.id}
             prompt={prompt}
             isCurrentUser={isCurrentUser}

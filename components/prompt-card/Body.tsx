@@ -17,6 +17,8 @@ interface PromptBodyProps {
   clicks: number;
 }
 const copyToClipboard = async ({ text, id }: { text: string; id: string }) => {
+  navigator.clipboard.writeText(text);
+  toast.success("Copied to clipboard");
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/api/prompt/copy/${id}`
   );
@@ -25,9 +27,6 @@ const copyToClipboard = async ({ text, id }: { text: string; id: string }) => {
     toast.error("Error copying to clipboard");
     return;
   }
-
-  navigator.clipboard.writeText(text);
-  toast.success("Copied to clipboard");
 };
 
 const PromptBody: FC<PromptBodyProps> = ({ prompt, service, id, clicks }) => {

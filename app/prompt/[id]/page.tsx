@@ -6,6 +6,8 @@ import { Prompt } from "@/utils/prompt";
 import usePrompt from "@/hooks/use-prompt";
 import LoadingModal from "@/components/LoadingView";
 import FeedCard from "@/components/FeedCard";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import { User } from "@/utils/user";
 
 const PromptPage = ({
   params: { id: promptId },
@@ -22,6 +24,14 @@ const PromptPage = ({
     error: any;
   } = usePrompt(promptId);
 
+  const {
+    data: currentUser,
+    isLoading: isUserLoading,
+  }: {
+    data: User;
+    isLoading: boolean;
+  } = useCurrentUser();
+
   if (error?.response?.status === 404) {
     // no post found in style
 
@@ -32,8 +42,14 @@ const PromptPage = ({
     );
   }
 
+  if (isLoading || isUserLoading) {
+    return <LoadingModal />;
+  }
+
   return (
-    <div>{isLoading ? <LoadingModal /> : <FeedCard prompt={prompt} />}</div>
+    <div>
+      <FeedCard currentUser={currentUser} prompt={prompt} />
+    </div>
   );
 };
 

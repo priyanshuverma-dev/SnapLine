@@ -13,7 +13,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import { toast } from "react-hot-toast";
 import useUsersPrompts from "@/hooks/use-users-prompts";
 import { Prompt } from "@/utils/prompt";
-import PromptCard from "@/components/PromptCard";
+import PromptCard from "@/components/ProfilePromptCard";
 import ProfileFeeds from "@/components/ProfileFeeds";
 
 const ProfilePage = () => {

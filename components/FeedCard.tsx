@@ -4,35 +4,23 @@ import { Prompt } from "@/utils/prompt";
 
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import { IoShareSocialOutline } from "react-icons/io5";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useStoreModal } from "@/hooks/use-modal-store";
 import PromptHeader from "./prompt-card/Header";
 import PromptBody from "./prompt-card/Body";
-import { AiTwotoneHeart } from "react-icons/ai";
-import { FaRegCommentDots } from "react-icons/fa";
-import useCurrentUser from "@/hooks/useCurrentUser";
 import { User } from "@/utils/user";
-import { nFormatter } from "@/utils/utils";
-import ShareButton from "./ShareButton";
+import PromptInteraction from "./prompt-card/Interaction";
 
-const FeedCard = ({ prompt }: { prompt: Prompt }) => {
+const FeedCard = ({
+  prompt,
+  currentUser,
+}: {
+  prompt: Prompt;
+  currentUser: User;
+}) => {
   const router = useRouter();
   const modalStore = useStoreModal();
   const [likeLoading, setLikeLoading] = useState(false);
-
-  const {
-    data: currentUser,
-    isLoading,
-  }: {
-    data: User;
-    isLoading: boolean;
-  } = useCurrentUser();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   const likePrompt = async () => {
     setLikeLoading(true);
@@ -83,7 +71,8 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
           />
 
           <div>
-            <div className="flex items-center justify-between mt-2">
+            <PromptInteraction prompt={prompt} currentUser={currentUser} />
+            {/* <div className="flex items-center justify-between mt-2">
               <div className="flex items-center space-x-2">
                 <Button
                   disabled={likeLoading}
@@ -136,7 +125,7 @@ const FeedCard = ({ prompt }: { prompt: Prompt }) => {
                   View
                 </Button>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
