@@ -51,7 +51,13 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
   const nav = useNavbarStore();
 
   return (
-    <div>
+    <div
+      onClick={() => {
+        if (nav.isOpen) {
+          nav.onClose();
+        }
+      }}
+    >
       <aside
         id="logo-sidebar"
         className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${
@@ -62,16 +68,6 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-neutral-800 flex flex-col sm:justify-between">
           <div className="">
             <ul className="space-y-2 font-medium ">
-              <li>
-                <button
-                  onClick={nav.onClose}
-                  className="sm:hidden w-full flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-neutral-700 group"
-                >
-                  <AiOutlineClose className={iconStyle} />
-                  <span className="ml-3">Close</span>
-                </button>
-              </li>
-
               {routes.map((item) => (
                 <li key={item.label}>
                   <SidebarItem key={item.label} {...item} />

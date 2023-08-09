@@ -17,7 +17,22 @@ const copyToClipboard = (text: string) => {
   toast.success("Copied to clipboard");
 };
 
-const PromptCard = ({
+const deletePrompt = async (id: string) => {
+  try {
+    const res = await fetch(`/api/prompt/delete`, {
+      method: "POST",
+      cache: "no-cache",
+      body: JSON.stringify({ id }),
+    });
+    if (res.ok) {
+      toast.success("Prompt deleted");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const ProfilePromptCard = ({
   prompt,
   isCurrentUser,
 }: {
@@ -45,7 +60,10 @@ const PromptCard = ({
                 <span className="text-gray-400">{prompt.service}</span>
               </div>
               {isCurrentUser && (
-                <div className="rounded-full transition-colors hover:bg-neutral-700 p-2">
+                <div
+                  onClick={() => deletePrompt(prompt.id)}
+                  className="rounded-full transition-colors hover:bg-neutral-700 p-2"
+                >
                   <MdOutlineDeleteOutline className=" text-red-500 hover:cursor-pointer " />
                 </div>
               )}
@@ -86,4 +104,4 @@ const PromptCard = ({
   );
 };
 
-export default PromptCard;
+export default ProfilePromptCard;
