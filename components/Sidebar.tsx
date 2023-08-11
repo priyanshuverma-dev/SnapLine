@@ -13,6 +13,8 @@ import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import SidebarItem from "./SidebarItem";
 import { ModeToggle } from "./ThemeSwitch";
+import { Separator } from "./ui/separator";
+import UserButton from "./UserButton";
 
 const Sidebar = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -60,14 +62,18 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
     >
       <aside
         id="logo-sidebar"
-        className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${
+        className={`fixed top-0 left-0 z-40 w-64 h-screen pt-4 transition-transform ${
           nav.isOpen ? "translate-x-0" : "-translate-x-full"
         } bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-neutral-800 dark:border-neutral-700`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-neutral-800 flex flex-col sm:justify-between">
+        <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-neutral-800 flex flex-col justify-between">
           <div className="">
             <ul className="space-y-2 font-medium ">
+              <span className="pl-2 pb-4 text-center self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                SnapLine
+              </span>
+              <Separator />
               {routes.map((item) => (
                 <li key={item.label}>
                   <SidebarItem key={item.label} {...item} />
@@ -75,9 +81,9 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
               ))}
             </ul>
           </div>
-          <div>
+          <div className="">
             <div className="p-2">
-              <ModeToggle />
+              <UserButton />
             </div>
             <Button
               onClick={() => signOut()}
@@ -86,6 +92,9 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
             >
               Logout
             </Button>
+            <div className="p-1">
+              <ModeToggle />
+            </div>
           </div>
         </div>
       </aside>
