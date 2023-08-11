@@ -1,9 +1,9 @@
 ````markdown
 # Pharasify - AI-Powered Creativity and Prompts Platform
 
-![Pharasify Logo](/screenshorts/1.png)
+![SnapLine Logo](/screenshorts/1.png)
 
-Welcome to **Pharasify**, an innovative platform that leverages AI to ignite creativity through thought-provoking prompts. Whether you're a writer, artist, or enthusiast looking for inspiration, Pharasify is designed to spark your imagination and fuel your creative journey.
+Welcome to **SnapLine**, an innovative platform that leverages AI to ignite creativity through thought-provoking prompts. Whether you're a writer, artist, or enthusiast looking for inspiration, SnapLiney is designed to spark your imagination and fuel your creative journey.
 
 ## Table of Contents
 
@@ -27,7 +27,7 @@ Welcome to **Pharasify**, an innovative platform that leverages AI to ignite cre
 
 ## Getting Started
 
-These instructions will guide you through setting up and running the Pharasify project locally for development and testing purposes.
+These instructions will guide you through setting up and running the SnapLine project locally for development and testing purposes.
 
 ### Prerequisites
 
@@ -39,14 +39,14 @@ These instructions will guide you through setting up and running the Pharasify p
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/codebyps/Pharasify.git
+   git clone https://github.com/codebyps/SnapLine.git
    ```
 ````
 
 2. Navigate to the project directory:
 
    ```bash
-   cd Pharasify
+   cd SnapLine
    ```
 
 3. Install dependencies:
