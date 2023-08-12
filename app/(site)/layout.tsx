@@ -3,5 +3,5 @@ export default function HomeLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div>{children}</div>;
+  return <div className="bg-gray-50 dark:bg-black">{children}</div>;
 }

@@ -40,7 +40,7 @@ const FeedView = () => {
   if (error) {
     console.log(error?.response);
     return (
-      <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 bg-gray-50 dark:bg-gray-950">
+      <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 bg-gray-50 dark:bg-black">
         <p>No Post Yet</p>
         <Link className="text-black underline" href={"/create-one"}>
           <p>Create One</p>
