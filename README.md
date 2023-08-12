@@ -1,5 +1,5 @@
 ````markdown
-# Pharasify - AI-Powered Creativity and Prompts Platform
+# SnapLine - AI-Powered Creativity and Prompts Platform
 
 ![SnapLine Logo](/screenshorts/1.png)
 

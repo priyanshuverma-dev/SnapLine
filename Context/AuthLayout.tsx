@@ -1,5 +1,6 @@
 "use client";
 
+import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import { usePathname } from "next/navigation";
@@ -17,8 +18,11 @@ export default function AuthLayout({ children }: AuthContextProps) {
 
   return (
     <Sidebar>
-      <Navbar logo="PrompAi" />
-      <div className="p-4 sm:ml-64 mt-[64px]">{children}</div>
+      {/* <Navbar logo="PrompAi" /> */}
+      <div className="p-4 sm:ml-64 ">
+        <Header />
+        {children}
+      </div>
     </Sidebar>
   );
 }

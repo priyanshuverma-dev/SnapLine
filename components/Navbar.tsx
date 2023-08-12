@@ -48,7 +48,7 @@ const Navbar = ({ logo }: { logo: ReactNode }) => {
             </button>
 
             <span className="pl-2 text-center self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-              Prompt.Ai
+              SnapLine
             </span>
           </div>
           <div className="flex items-center">
