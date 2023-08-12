@@ -19,8 +19,8 @@ export default function AuthLayout({ children }: AuthContextProps) {
   return (
     <Sidebar>
       {/* <Navbar logo="PrompAi" /> */}
-      <div className="p-4 sm:ml-64 ">
-        <Header />
+      <div className="p-4 ">
+        {/* <Header /> */}
         {children}
       </div>
     </Sidebar>

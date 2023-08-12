@@ -47,9 +47,6 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
     [pathname]
   );
 
-  const iconStyle: string =
-    "w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white";
-
   const nav = useNavbarStore();
 
   return (
@@ -64,10 +61,10 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         id="logo-sidebar"
         className={`fixed top-0 left-0 z-40 w-64 h-screen pt-4 transition-transform ${
           nav.isOpen ? "translate-x-0" : "-translate-x-full"
-        } bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-neutral-800 dark:border-neutral-700`}
+        } bg-white  border-gray-200 sm:translate-x-0 dark:bg-black dark:border-neutral-700`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-neutral-800 flex flex-col justify-between">
+        <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-black flex flex-col justify-between">
           <div className="">
             <ul className="space-y-2 font-medium ">
               <span className="pl-2 pb-4 text-center self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
@@ -82,13 +79,13 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
             </ul>
           </div>
           <div className="">
-            <div className="p-2">
+            <div>
               <UserButton />
             </div>
             <Button
               onClick={() => signOut()}
               className="w-full"
-              variant={"outline"}
+              variant={"secondary"}
             >
               Logout
             </Button>
@@ -98,7 +95,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
           </div>
         </div>
       </aside>
-      <div>{children}</div>
+      <div className="sm:ml-64 bg-gray-50 dark:bg-black">{children}</div>
     </div>
   );
 };

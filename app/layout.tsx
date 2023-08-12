@@ -27,7 +27,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className + " bg-gray-50 dark:bg-black"}>
         <LoaderContext>
           <AuthContext session={session}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
