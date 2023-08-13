@@ -4,12 +4,18 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { twMerge } from "tailwind-merge";
 
-const UserButton = () => {
+const UserButton = ({ islabel }: { islabel?: boolean }) => {
   const { status } = useSession();
   const { data: currentUser } = useCurrentUser();
   return (
-    <div className="flex items-center justify-between p-2 hover:bg-gray-100 bg-slate-50 dark:bg-neutral-900 dark:hover:bg-neutral-950  rounded-md mb-2">
+    <div
+      className={twMerge(
+        "flex items-center justify-between p-2 hover:bg-gray-100   dark:hover:bg-neutral-950  rounded-md mb-0",
+        islabel && "bg-slate-50 dark:bg-neutral-900 mb-2"
+      )}
+    >
       {status === "unauthenticated" ? (
         <Link
           href="/login"
@@ -25,9 +31,11 @@ const UserButton = () => {
               <AvatarImage src={currentUser?.image as string} />
               <AvatarFallback>{currentUser?.name.at(0)}</AvatarFallback>
             </Avatar>
-            <span className="font-medium overflow-clip">
-              {currentUser?.name}
-            </span>
+            {islabel ? (
+              <span className="font-medium overflow-clip">
+                {currentUser?.name}
+              </span>
+            ) : null}
           </div>
         </Link>
       ) : null}

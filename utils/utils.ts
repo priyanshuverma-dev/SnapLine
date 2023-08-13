@@ -1,3 +1,5 @@
+import { Borel, Caveat } from "next/font/google";
+
 export function nFormatter({ num, digits }: { num: number; digits: number }) {
   const lookup = [
     { value: 1, symbol: "" },
@@ -19,3 +21,5 @@ export function nFormatter({ num, digits }: { num: number; digits: number }) {
     ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol
     : "0";
 }
+
+export const borel = Caveat({ subsets: ["latin"], weight: "700" });
