@@ -17,6 +17,8 @@ const description =
 export const metadata: Metadata = {
   title: "SnapLine",
   description: description,
+  manifest: "/manifest.json",
+  themeColor: "#ffffff",
   icons: {
     icon: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
@@ -28,16 +30,16 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className + " bg-gray-50 dark:bg-black"}>
-        <LoaderContext>
-          <AuthContext session={session}>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <AuthContext session={session}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <LoaderContext>
               <AuthLayout>
                 <Toaster />
                 {props.children}
               </AuthLayout>
-            </ThemeProvider>
-          </AuthContext>
-        </LoaderContext>
+            </LoaderContext>
+          </ThemeProvider>
+        </AuthContext>
       </body>
     </html>
   );
