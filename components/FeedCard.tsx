@@ -12,11 +12,9 @@ import { KeyedMutator } from "swr";
 const FeedCard = ({
   prompt,
   currentUser,
-  mutate,
 }: {
   prompt: Prompt;
   currentUser: User;
-  mutate: KeyedMutator<Prompt>;
 }) => {
   return (
     <div key={prompt.id} className="bg-white rounded p-4 dark:bg-neutral-900">
@@ -38,11 +36,7 @@ const FeedCard = ({
           />
 
           <div>
-            <PromptInteraction
-              prompt={prompt}
-              mutate={mutate}
-              currentUser={currentUser}
-            />
+            <PromptInteraction prompt={prompt} currentUser={currentUser} />
           </div>
         </div>
       </div>

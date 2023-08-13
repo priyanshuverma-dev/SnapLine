@@ -14,13 +14,11 @@ import { KeyedMutator } from "swr";
 interface PromptInteractionProps {
   prompt: Prompt;
   currentUser: User;
-  mutate: KeyedMutator<Prompt>;
 }
 
 const PromptInteraction: FC<PromptInteractionProps> = ({
   prompt,
   currentUser,
-  mutate,
 }) => {
   const [likeLoading, setLikeLoading] = useState(false);
   const router = useRouter();

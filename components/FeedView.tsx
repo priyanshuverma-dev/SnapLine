@@ -15,12 +15,10 @@ const FeedView = () => {
     data,
     isLoading,
     error,
-    mutate,
   }: {
     data: Prompt[];
     isLoading: boolean;
     error: any;
-    mutate: KeyedMutator<Prompt>;
   } = usePrompts();
 
   const {
@@ -59,12 +57,7 @@ const FeedView = () => {
     <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 ">
       {data.map((prompt) => {
         return (
-          <FeedCard
-            mutate={mutate}
-            currentUser={currentUser}
-            key={prompt.id}
-            prompt={prompt}
-          />
+          <FeedCard currentUser={currentUser} key={prompt.id} prompt={prompt} />
         );
       })}
     </div>
