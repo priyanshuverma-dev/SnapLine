@@ -1,7 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import React from "react";
-import MenuButton from "./MenuButton";
 const Header = () => {
   return (
     <div className="flex justify-around items-center w-full  p-4">
@@ -12,7 +11,6 @@ const Header = () => {
         placeholder="Search Prompai"
         onChange={(e) => {}}
       />
-      <MenuButton />
     </div>
   );
 };
