@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   description: description,
   manifest: "/manifest.json",
   themeColor: "#ffffff",
+  viewport: "width=device-width, initial-scale=1.0",
   icons: {
     icon: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",

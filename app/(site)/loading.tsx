@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-const loading = () => {
+const Loading = () => {
   return (
     <div>
       <div className=" min-[400px]:container ">
@@ -87,4 +87,4 @@ const loading = () => {
   );
 };
 
-export default loading;
+export default Loading;
