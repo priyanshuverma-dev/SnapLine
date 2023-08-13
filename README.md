@@ -1,5 +1,4 @@
-````markdown
-# Pharasify - AI-Powered Creativity and Prompts Platform
+# SnapLine - AI-Powered Creativity and Prompts Platform
 
 ![SnapLine Logo](/screenshorts/1.png)
 
@@ -41,7 +40,6 @@ These instructions will guide you through setting up and running the SnapLine pr
    ```bash
    git clone https://github.com/codebyps/SnapLine.git
    ```
-````
 
 2. Navigate to the project directory:
 

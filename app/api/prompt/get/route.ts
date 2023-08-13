@@ -11,7 +11,7 @@ export async function GET(request: Request) {
         status: "PUBLISHED",
       },
       orderBy: {
-        updatedAt: "desc",
+        likes: "desc",
       },
       select: {
         id: true,

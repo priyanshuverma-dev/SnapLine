@@ -1,0 +1,32 @@
+{
+  "theme_color": "#4a4a4a",
+  "background_color": "#0000",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "SnapLine",
+  "short_name": "SnapLine",
+  "description": "Welcome to SnapLine \u2013 the vibrant hub for prompt enthusiasts and creative minds! Immerse yourself in a world of inspiration and connection as you share and explore captivating prompts. Whether you're a wordsmith, poet, or simply a lover of ideas, SnapLine offers a dynamic platform to post prompts, spark discussions, and gather a following of like-minded thinkers. Unleash your creativity, watch ideas come to life, and connect with a diverse community passionate about turning prompts into masterpieces. Join us on SnapLine and let your imagination flow!\"",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
