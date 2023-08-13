@@ -15,6 +15,7 @@ import useUsersPrompts from "@/hooks/use-users-prompts";
 import { Prompt } from "@/utils/prompt";
 import PromptCard from "@/components/ProfilePromptCard";
 import ProfileFeeds from "@/components/ProfileFeeds";
+import { KeyedMutator } from "swr";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -28,10 +29,12 @@ const ProfilePage = () => {
     data: profileData,
     isLoading,
     error,
+    mutate,
   }: {
     data: User;
     isLoading: boolean;
     error: any;
+    mutate: KeyedMutator<User>;
   } = useProfiles(params.id as string);
 
   if (isLoading || isUser) {
@@ -57,7 +60,7 @@ const ProfilePage = () => {
     setFollowLoading(true);
     try {
       const res = await fetch(`/api/profiles/follow/${profileData.id}`, {
-        cache: "no-cache",
+        // cache: "no-cache",
       });
 
       const isFollow = await res.json();
@@ -69,11 +72,21 @@ const ProfilePage = () => {
       }
 
       if (isFollow === true) {
+        mutate({
+          ...profileData,
+          followers: [...profileData.followers, currentUser?.id],
+        });
         toast.success("Followed");
         console.log(isFollow);
         setFollowLoading(false);
       } else {
         toast.success("Unfollowed");
+        mutate({
+          ...profileData,
+          followers: profileData.followers.filter(
+            (id) => id !== currentUser?.id
+          ),
+        });
         console.log(isFollow);
         setFollowLoading(false);
       }

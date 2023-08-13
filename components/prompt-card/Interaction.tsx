@@ -8,26 +8,29 @@ import { nFormatter } from "@/utils/utils";
 import { Prompt } from "@/utils/prompt";
 import { User } from "@/utils/user";
 import { useRouter } from "next/navigation";
+import { API_URL } from "@/utils/base";
+import { KeyedMutator } from "swr";
 
 interface PromptInteractionProps {
   prompt: Prompt;
   currentUser: User;
-  isModal?: boolean;
 }
 
 const PromptInteraction: FC<PromptInteractionProps> = ({
   prompt,
   currentUser,
-  isModal,
 }) => {
   const [likeLoading, setLikeLoading] = useState(false);
   const router = useRouter();
+  const [likesCount, setLikesCount] = useState(prompt.likes.length);
+  const [isLiked, setIsLiked] = useState(
+    currentUser.likedPrompts.includes(prompt.id)
+  );
 
   const likePrompt = async () => {
     setLikeLoading(true);
     try {
       const res = await fetch(`/api/prompt/like/${prompt.id}`, {
-        cache: "no-cache",
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -37,10 +40,14 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
       const isLiked = await res.json();
 
       if (isLiked) {
+        setLikesCount((prevCount) => prevCount + 1);
+        setIsLiked(true);
         toast.success("Liked", {
           icon: "👍",
         });
       } else {
+        setLikesCount((prevCount) => prevCount - 1);
+        setIsLiked(false);
         toast.success("Disliked", {
           icon: "👎",
         });
@@ -64,15 +71,11 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
             onClick={likePrompt}
           >
             <AiTwotoneHeart
-              className={`${
-                currentUser.likedPrompts.includes(prompt.id)
-                  ? "text-red-500"
-                  : ""
-              } text-xl`}
+              className={`${isLiked ? "text-red-500" : ""} text-xl`}
             />
             {likeLoading ? ".." : " "}
             <span className="ml-1">
-              {nFormatter({ num: prompt.likes.length, digits: 1 })}
+              {nFormatter({ num: likesCount, digits: 1 })}
             </span>
           </Button>
           <Button
@@ -88,7 +91,7 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
           </Button>
           <ShareButton
             title={`${prompt.title} - ${prompt.prompt}`}
-            url={`${process.env.NEXT_PUBLIC_URL}/prompt/${prompt.id}`}
+            url={`${API_URL}/prompt/${prompt.id}`}
             likeLoading={likeLoading}
           />
         </div>

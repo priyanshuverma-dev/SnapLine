@@ -20,7 +20,6 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   themeColor: "#ffffff",
   viewport: "width=device-width, initial-scale=1.0",
-
   icons: {
     icon: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
@@ -32,16 +31,16 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className + " bg-gray-50 dark:bg-black"}>
-        <LoaderContext>
-          <AuthContext session={session}>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <AuthContext session={session}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <LoaderContext>
               <AuthLayout>
                 <Toaster />
                 {props.children}
               </AuthLayout>
-            </ThemeProvider>
-          </AuthContext>
-        </LoaderContext>
+            </LoaderContext>
+          </ThemeProvider>
+        </AuthContext>
       </body>
     </html>
   );
