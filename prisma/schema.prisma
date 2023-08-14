@@ -27,6 +27,7 @@ model User {
   prompts          Prompt[]
   accounts        Account[]
   aiServices      AIService[]
+  comments      Comment[]
   @@unique([username, email])
   
 }
@@ -66,6 +67,7 @@ model Prompt {
   updatedAt     DateTime  @updatedAt
   status        PromptStatus @default(PUBLISHED)
   clicks        Int
+  comments      Comment[]
   aiService     AIService @relation(fields: [service], references: [id], onDelete: Cascade)
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -87,6 +89,17 @@ model AIService {
   user          User      @relation(fields: [registeredBy], references: [id], onDelete: Cascade)
 }
 
+model Comment {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String    @db.ObjectId
+  promptId    String    @db.ObjectId
+  comment     String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  prompt      Prompt    @relation(fields: [promptId], references: [id], onDelete: Cascade)
+
+}
 
 
 
