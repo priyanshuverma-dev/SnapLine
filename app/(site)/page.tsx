@@ -1,10 +1,10 @@
 import FeedView from "@/components/FeedView";
-import Header from "@/components/Header";
+import SearchInput from "@/components/SearchInput";
 
 export default function Home() {
   return (
     <div>
-      <Header />
+      <SearchInput />
       <FeedView />
     </div>
   );

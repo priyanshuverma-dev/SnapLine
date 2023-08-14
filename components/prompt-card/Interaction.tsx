@@ -9,7 +9,7 @@ import { Prompt } from "@/utils/prompt";
 import { User } from "@/utils/user";
 import { useRouter } from "next/navigation";
 import { API_URL } from "@/utils/base";
-import { KeyedMutator } from "swr";
+
 
 interface PromptInteractionProps {
   prompt: Prompt;
