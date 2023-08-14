@@ -10,6 +10,7 @@ import { User } from "@/utils/user";
 import { useRouter } from "next/navigation";
 import { API_URL } from "@/utils/base";
 
+
 interface PromptInteractionProps {
   prompt: Prompt;
   currentUser: User;
