@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { IconType } from "react-icons";
 import { twMerge } from "tailwind-merge";
-import { Separator } from "./ui/separator";
 
 interface SidebarItemProps {
   icon: IconType;

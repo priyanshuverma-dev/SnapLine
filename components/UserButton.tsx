@@ -3,7 +3,6 @@ import { useSession } from "next-auth/react";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
-import { Button } from "./ui/button";
 import { twMerge } from "tailwind-merge";
 
 const UserButton = ({ islabel }: { islabel?: boolean }) => {

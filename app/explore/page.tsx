@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingModal from "@/components/LoadingView";
 import SearchInput from "@/components/SearchInput";
 import { SearchResults } from "@/utils/search-results";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -9,6 +10,9 @@ import useSWR from "swr";
 const fetchPosts = async (url: string) => {
   const response = await fetch(url);
 
+  if (response.status == 400) {
+    throw new Error("No Query Provided");
+  }
   if (!response.ok) {
     throw new Error("Failed to fetch posts");
   }
@@ -18,7 +22,6 @@ const fetchPosts = async (url: string) => {
 const page = () => {
   const search = useSearchParams();
   const searchQuery = search ? search.get("q") : null;
-  const router = useRouter();
 
   const encodedSearchQuery = encodeURI(searchQuery || "");
 
@@ -35,10 +38,21 @@ const page = () => {
   });
 
   if (isLoading) {
-    return <p>loading</p>;
+    return <LoadingModal />;
   }
 
   if (error) {
+    if (error.message == "No Query Provided") {
+      return (
+        <div className="flex items-center flex-col">
+          <SearchInput onPage />
+          <span className="text-xl dark:text-white text-black text-center">
+            Please enter a search query
+          </span>
+        </div>
+      );
+    }
+    console.log(error);
     return <p>error</p>;
   }
 
