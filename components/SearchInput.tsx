@@ -16,8 +16,10 @@ const SearchInput = ({ onPage }: { onPage?: boolean }) => {
       return;
     }
 
-    const encodedSearchQuery = encodeURI(searchQuery);
-    router.push(`/explore?q=${encodedSearchQuery}`);
+    const encodedSearchQuery = encodeURI(
+      searchQuery.replace(/[;':{}[\]/?<>|_+!@$%&*().^&#%,""'']/g, "")
+    );
+    router.push(`/search?q=${encodedSearchQuery}`);
   };
 
   return (

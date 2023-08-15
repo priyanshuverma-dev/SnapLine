@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { use } from "react";
 
 export async function GET(request: Request) {
   try {
@@ -20,6 +21,18 @@ export async function GET(request: Request) {
     const prompts = await prisma.prompt.findMany({
       where: {
         OR: [
+          {
+            user: {
+              name: {
+                contains: query,
+                mode: "insensitive",
+              },
+              username: {
+                contains: query,
+                mode: "insensitive",
+              },
+            },
+          },
           {
             title: {
               contains: query,
@@ -42,6 +55,14 @@ export async function GET(request: Request) {
             name: true,
             username: true,
             image: true,
+          },
+        },
+
+        aiService: {
+          select: {
+            id: true,
+            name: true,
+            status: true,
           },
         },
       },

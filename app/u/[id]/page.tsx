@@ -11,9 +11,6 @@ import { BsFillPatchCheckFill } from "react-icons/bs";
 import { Separator } from "@/components/ui/separator";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { toast } from "react-hot-toast";
-import useUsersPrompts from "@/hooks/use-users-prompts";
-import { Prompt } from "@/utils/prompt";
-import PromptCard from "@/components/ProfilePromptCard";
 import ProfileFeeds from "@/components/ProfileFeeds";
 import { KeyedMutator } from "swr";
 

@@ -29,9 +29,9 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
       },
       {
         icon: AiOutlineSearch,
-        label: "Explore",
-        href: "/explore",
-        active: pathname === "/explore",
+        label: "Find Out",
+        href: "/search",
+        active: pathname === "/search",
       },
       {
         icon: AiOutlinePlus,
@@ -94,7 +94,9 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
           </div>
         </header>
       </div>
-      <div className="sm:ml-64 bg-gray-50 dark:bg-black">{children}</div>
+      <div className="sm:ml-64 bg-gray-50 dark:bg-black sm:mb-0 pb-[75px]">
+        {children}
+      </div>
       <div className="sm:hidden block">
         <nav className="fixed bottom-0 left-0 w-full bg-neutral-700 border-t dark:bg-black border-neutral-700 shadow-md flex justify-between px-1 py-2">
           {routes.map((item) => (
