@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { use } from "react";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
   try {
@@ -84,6 +85,13 @@ export async function GET(request: Request) {
             },
           },
         ],
+      },
+      select: {
+        id: true,
+        role: true,
+        name: true,
+        username: true,
+        image: true,
       },
     });
 

@@ -145,5 +145,7 @@ enum Role {
   ADMIN
   SUPERADMIN
   VERIFIED
+  BANNED
+  DELETED
 }
 
