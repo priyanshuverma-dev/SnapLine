@@ -46,6 +46,7 @@ export async function GET(
             id: true,
             name: true,
             status: true,
+            website: true,
           },
         },
       },

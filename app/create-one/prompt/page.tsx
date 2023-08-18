@@ -27,7 +27,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
+import { CldUploadButton } from "next-cloudinary";
 const formSchema = z.object({
   title: z.string().min(10, {
     message: "title must be at least 10 characters.",
@@ -151,6 +151,9 @@ const CreatePage = () => {
             </FormItem>
           )}
         />
+        <div>
+          <CldUploadButton uploadPreset="<Upload Preset>" />
+        </div>
         <FormField
           control={form.control}
           name="prompt"

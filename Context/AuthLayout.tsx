@@ -10,7 +10,11 @@ export interface AuthContextProps {
 export default function AuthLayout({ children }: AuthContextProps) {
   const pathname = usePathname();
 
-  if (pathname === "/login" || pathname === "/register") {
+  if (
+    pathname === "/login" ||
+    pathname === "/register" ||
+    pathname === "/redirect/link"
+  ) {
     return <div>{children}</div>;
   }
 
