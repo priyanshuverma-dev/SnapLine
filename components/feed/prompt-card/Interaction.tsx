@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import ShareButton from "../ShareButton";
 import { FaRegCommentDots } from "react-icons/fa";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { AiTwotoneHeart } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { nFormatter } from "@/utils/utils";
@@ -9,7 +9,6 @@ import { Prompt } from "@/utils/prompt";
 import { User } from "@/utils/user";
 import { useRouter } from "next/navigation";
 import { API_URL } from "@/utils/base";
-
 
 interface PromptInteractionProps {
   prompt: Prompt;

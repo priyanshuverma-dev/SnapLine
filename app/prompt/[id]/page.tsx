@@ -4,8 +4,8 @@ import React from "react";
 
 import { Prompt } from "@/utils/prompt";
 import usePrompt from "@/hooks/use-prompt";
-import LoadingModal from "@/components/LoadingView";
-import FeedCard from "@/components/FeedCard";
+import LoadingModal from "@/components/core/LoadingView";
+import FeedCard from "@/components/feed/FeedCard";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { User } from "@/utils/user";
 

@@ -1,10 +1,10 @@
 import { User } from "@/utils/user";
 import React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import Link from "next/link";
-import { Separator } from "./ui/separator";
-import FollowButton from "./FollowButton";
+import { Separator } from "../ui/separator";
+import FollowButton from "../profile/FollowButton";
 
 const RUserCard = ({
   user,

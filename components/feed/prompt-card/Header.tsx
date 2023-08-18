@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import Link from "next/link";
 

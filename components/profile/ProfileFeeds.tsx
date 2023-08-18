@@ -5,7 +5,7 @@ import ProfilePromptCard from "./ProfilePromptCard";
 import useUsersPrompts from "@/hooks/use-users-prompts";
 import { Prompt } from "@/utils/prompt";
 import { useParams } from "next/navigation";
-import LoadingModal from "./LoadingView";
+import LoadingModal from "../core/LoadingView";
 import useProfiles from "@/hooks/use-profile";
 import { User } from "@/utils/user";
 

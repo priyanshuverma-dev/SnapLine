@@ -8,8 +8,8 @@ import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import SidebarItem from "./SidebarItem";
 import { ModeToggle } from "./ThemeSwitch";
-import { Separator } from "./ui/separator";
-import UserButton from "./UserButton";
+import { Separator } from "../ui/separator";
+import UserButton from "../profile/UserButton";
 import { borel } from "@/utils/utils";
 
 const Sidebar = ({ children }: { children: React.ReactNode }) => {

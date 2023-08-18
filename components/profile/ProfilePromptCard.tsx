@@ -1,14 +1,14 @@
 import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { useStoreModal } from "@/hooks/use-modal-store";
 import { Prompt } from "@/utils/prompt";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import Link from "next/link";
 import { FiCopy } from "react-icons/fi";
-import { Badge } from "./ui/badge";
+import { Badge } from "../ui/badge";
 import { toast } from "react-hot-toast";
 import moment from "moment";
 

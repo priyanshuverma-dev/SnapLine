@@ -1,5 +1,5 @@
-import FeedView from "@/components/FeedView";
-import SearchInput from "@/components/SearchInput";
+import FeedView from "@/components/feed/FeedView";
+import SearchInput from "@/components/core/SearchInput";
 
 export default function Home() {
   return (

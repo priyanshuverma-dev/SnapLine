@@ -1,6 +1,6 @@
 import { User } from "@/utils/user";
 import FeedCard from "./FeedCard";
-import RUserCard from "./RUserCard";
+import RUserCard from "../search/RUserCard";
 import { Prompt } from "@/utils/prompt";
 
 interface CombinedListComponentProps {

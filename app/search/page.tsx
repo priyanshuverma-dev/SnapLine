@@ -1,19 +1,17 @@
 "use client";
 
-import CombinedListComponent from "@/components/CombinedListComponent";
-import FeedCard from "@/components/FeedCard";
-import LoadingModal from "@/components/LoadingView";
-import RUserCard from "@/components/RUserCard";
-import SearchData from "@/components/SearchData";
-import SearchInput from "@/components/SearchInput";
+import CombinedListComponent from "@/components/feed/CombinedListComponent";
+import FeedCard from "@/components/feed/FeedCard";
+import LoadingModal from "@/components/core/LoadingView";
+import RUserCard from "@/components/search/RUserCard";
+import SearchData from "@/components/search/SearchData";
+import SearchInput from "@/components/core/SearchInput";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { Prompt } from "@/utils/prompt";
 import { SearchResults } from "@/utils/search-results";
-import { User } from "@/utils/user";
-import { useRouter, useSearchParams } from "next/navigation";
-import React, { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import React from "react";
 import useSWR from "swr";
 
 const fetchPosts = async (url: string) => {

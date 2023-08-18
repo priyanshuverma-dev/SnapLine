@@ -5,8 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "./ui/button";
-import { toast } from "react-hot-toast";
+import { Button } from "../ui/button";
 import { IoShareSocialOutline } from "react-icons/io5";
 
 import {

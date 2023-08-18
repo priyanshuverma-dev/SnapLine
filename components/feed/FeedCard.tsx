@@ -7,7 +7,6 @@ import PromptHeader from "./prompt-card/Header";
 import PromptBody from "./prompt-card/Body";
 import { User } from "@/utils/user";
 import PromptInteraction from "./prompt-card/Interaction";
-import { KeyedMutator } from "swr";
 
 const FeedCard = ({
   prompt,

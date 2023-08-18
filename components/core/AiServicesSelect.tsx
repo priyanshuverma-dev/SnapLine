@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import { SelectItem } from "./ui/select";
+import { SelectItem } from "../ui/select";
 
 type ListProp = {
   id: string;

@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
+} from "../ui/dialog";
 import { useConfirmationModal } from "@/hooks/use-cm-store";
 
 const ConfirmationModal = () => {

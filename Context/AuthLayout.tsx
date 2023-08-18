@@ -1,6 +1,6 @@
 "use client";
 
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/core/Sidebar";
 import { usePathname } from "next/navigation";
 
 export interface AuthContextProps {

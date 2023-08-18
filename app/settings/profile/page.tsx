@@ -1,4 +1,4 @@
-import { ProfileForm } from "@/components/profile-form";
+import { ProfileForm } from "@/components/profile/profile-form";
 import React from "react";
 
 const ProfileSettings = () => {
