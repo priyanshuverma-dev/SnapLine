@@ -6,12 +6,12 @@ import { BiEditAlt } from "react-icons/bi";
 import useProfiles from "@/hooks/use-profile";
 import { useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
-import LoadingModal from "@/components/LoadingView";
+import LoadingModal from "@/components/core/LoadingView";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import { Separator } from "@/components/ui/separator";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { toast } from "react-hot-toast";
-import ProfileFeeds from "@/components/ProfileFeeds";
+import ProfileFeeds from "@/components/profile/ProfileFeeds";
 import { KeyedMutator } from "swr";
 
 const ProfilePage = () => {
