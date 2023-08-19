@@ -27,7 +27,8 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { CldUploadButton } from "next-cloudinary";
+import { CldUploadButton, CldUploadWidget } from "next-cloudinary";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 const formSchema = z.object({
   title: z.string().min(10, {
     message: "title must be at least 10 characters.",
@@ -37,6 +38,8 @@ const formSchema = z.object({
     message: "Username must be at least 5 characters.",
   }),
   service: z.string(),
+
+  medias: z.array(z.string()),
 });
 
 type ListProp = {
@@ -76,6 +79,7 @@ const CreatePage = () => {
       prompt: "",
       service: "NONE",
       title: "",
+      medias: [],
     },
   });
 
@@ -151,9 +155,57 @@ const CreatePage = () => {
             </FormItem>
           )}
         />
-        {/* <div>
-          <CldUploadButton uploadPreset="" />
-        </div> */}
+        <FormField
+          control={form.control}
+          name="medias"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <div>
+                  <span>Add Images: </span>
+                  <CldUploadButton
+                    className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground"
+                    uploadPreset="snapline-dev"
+                    onSuccess={(res) => {
+                      console.log(res); // Output the Cloudinary response
+
+                      const res1: {
+                        public_id: string;
+                        secure_url: string;
+                      } = res.info as any;
+
+                      console.log(res1.secure_url);
+
+                      form.setValue(
+                        "medias",
+                        [...field.value, res1.secure_url],
+                        {
+                          shouldDirty: true,
+                          shouldValidate: true,
+                          shouldTouch: true,
+                        }
+                      );
+                    }}
+                  >
+                    <span className="p-2">Select Images</span>
+                  </CldUploadButton>
+                  <div>
+                    {field.value.map((url) => (
+                      <div key={url} className="inline-flex items-center">
+                        <Avatar>
+                          <AvatarImage src={url} />
+                          <AvatarFallback>{url.length}</AvatarFallback>
+                        </Avatar>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="prompt"
@@ -189,10 +241,44 @@ const CreatePage = () => {
           )}
         />
         <Button disabled={isLoading} type="submit">
-          Submit
+          Create
         </Button>
       </form>
     </Form>
   );
 };
 export default CreatePage;
+
+/*
+{
+    "event": "success",
+    "info": {
+        "id": "uw-file3",
+        "batchId": "uw-batch2",
+        "asset_id": "58955f58c81486330e3c869ce5428de2",
+        "public_id": "snapline-dev/fi5ph3a7t40u7t574kur",
+        "version": 1692447468,
+        "version_id": "4ddfbf56bbd1c6cc0f9b7814aae9197d",
+        "signature": "19943e5a84fa8954233bb7301dbc2ada9c1f433a",
+        "width": 832,
+        "height": 832,
+        "format": "jpg",
+        "resource_type": "image",
+        "created_at": "2023-08-19T12:17:48Z",
+        "tags": [],
+        "bytes": 250231,
+        "type": "upload",
+        "etag": "38a397596f297d5e2d0e356a20200210",
+        "placeholder": false,
+        "url": "http://res.cloudinary.com/pvserver/image/upload/v1692447468/snapline-dev/fi5ph3a7t40u7t574kur.jpg",
+        "secure_url": "https://res.cloudinary.com/pvserver/image/upload/v1692447468/snapline-dev/fi5ph3a7t40u7t574kur.jpg",
+        "folder": "snapline-dev",
+        "access_mode": "public",
+        "original_filename": "IMG_20230817_185233_415",
+        "path": "v1692447468/snapline-dev/fi5ph3a7t40u7t574kur.jpg",
+        "thumbnail_url": "https://res.cloudinary.com/pvserver/image/upload/c_limit,h_60,w_90/v1692447468/snapline-dev/fi5ph3a7t40u7t574kur.jpg"
+    }
+}
+
+
+*/

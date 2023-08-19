@@ -1,5 +1,6 @@
 "use client";
 
+import ConfirmationModal from "@/components/modals/DeleteConfirmationModal";
 import ExternalLinkModal from "@/components/modals/ExternalLinkModal";
 import React, { useEffect, useState } from "react";
 
@@ -16,6 +17,7 @@ const ModalContext = () => {
   return (
     <>
       <ExternalLinkModal />
+      <ConfirmationModal />
     </>
   );
 };

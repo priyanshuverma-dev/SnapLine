@@ -18,18 +18,20 @@ import {
 } from "@/components/ui/tooltip";
 import { FiExternalLink } from "react-icons/fi";
 import { useExternalLinkModal } from "@/hooks/modals/use-external-modal";
+import Link from "next/link";
 
 interface PromptInteractionProps {
   prompt: Prompt;
   currentUser: User;
+  isPage?: boolean;
 }
 
 const PromptInteraction: FC<PromptInteractionProps> = ({
   prompt,
   currentUser,
+  isPage,
 }) => {
   const [likeLoading, setLikeLoading] = useState(false);
-  const router = useRouter();
   const [likesCount, setLikesCount] = useState(prompt.likes.length);
   const [isLiked, setIsLiked] = useState(
     currentUser.likedPrompts.includes(prompt.id)
@@ -128,27 +130,31 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <Button
-                  disabled={likeLoading}
-                  variant={"outline"}
-                  className="w-full mt-2"
-                  size={"default"}
-                  onClick={() => {
-                    router.push(`/prompt/${prompt.id}`);
-                  }}
-                  key={prompt.id}
-                >
-                  <SiClickup />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Full view</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          {!isPage && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button
+                    disabled={likeLoading}
+                    variant={"outline"}
+                    className="w-full mt-2"
+                    size={"default"}
+                    // onClick={() => {
+                    //   router.push(`/prompt/${prompt.id}`);
+                    // }}
+                    key={prompt.id}
+                  >
+                    <Link href={`/prompt/${prompt.id}`}>
+                      <SiClickup />
+                    </Link>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Full view</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ export type Prompt = {
   prompt: string;
   description: string;
   service: string;
-  images: string[];
+  medias: string[];
   tags: string[];
   likes: string[];
   status: PromptStatus;

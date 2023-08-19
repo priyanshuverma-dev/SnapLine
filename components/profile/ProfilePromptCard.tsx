@@ -11,6 +11,7 @@ import { FiCopy } from "react-icons/fi";
 import { Badge } from "../ui/badge";
 import { toast } from "react-hot-toast";
 import moment from "moment";
+import { useConfirmationModal } from "@/hooks/use-cm-store";
 
 const copyToClipboard = (text: string) => {
   navigator.clipboard.writeText(text);
@@ -40,7 +41,7 @@ const ProfilePromptCard = ({
   isCurrentUser: boolean;
 }) => {
   const router = useRouter();
-  const modalStore = useStoreModal();
+  const deleteModal = useConfirmationModal();
 
   return (
     <div>
@@ -61,7 +62,7 @@ const ProfilePromptCard = ({
               </div>
               {isCurrentUser && (
                 <div
-                  onClick={() => deletePrompt(prompt.id)}
+                  onClick={() => deleteModal.onOpen(prompt.id)}
                   className="rounded-full transition-colors hover:bg-neutral-700 p-2"
                 >
                   <MdOutlineDeleteOutline className=" text-red-500 hover:cursor-pointer " />
@@ -90,7 +91,7 @@ const ProfilePromptCard = ({
                 size={"sm"}
                 onClick={() => {
                   router.push(`/prompt/${prompt.id}`);
-                  modalStore.onOpen();
+                  // modalStore.onOpen();
                 }}
                 key={prompt.id}
               >

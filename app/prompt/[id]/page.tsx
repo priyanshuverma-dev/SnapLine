@@ -1,17 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 
 import { Prompt } from "@/utils/prompt";
 import usePrompt from "@/hooks/use-prompt";
-import LoadingModal from "@/components/core/LoadingView";
-import FeedCard from "@/components/feed/FeedCard";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { User } from "@/utils/user";
 import PromptHeader from "@/components/feed/prompt-card/Header";
 import PromptBody from "@/components/feed/prompt-card/Body";
 import PromptInteraction from "@/components/feed/prompt-card/Interaction";
 import Image from "next/image";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const PromptPage = ({
   params: { id: promptId },
@@ -47,12 +46,12 @@ const PromptPage = ({
   }
 
   if (isLoading || isUserLoading) {
-    return <LoadingModal />;
+    return <LoadingSkeleton />;
   }
 
   return (
     <div>
-      <div key={prompt.id} className="p-4 ">
+      <div className="p-4 ">
         <div className="flex items-start">
           <div className="w-full">
             <PromptHeader
@@ -79,9 +78,12 @@ const PromptPage = ({
                   {prompt?.description}
                 </span>
                 <div>
-                  {prompt.images?.map((image) => {
+                  {prompt.medias?.map((image) => {
                     return (
                       <Image
+                        loading="lazy"
+                        lazyBoundary="200px"
+                        className="rounded-lg shadow-lg py-3"
                         alt={prompt.title}
                         src={image}
                         width={256}
@@ -94,7 +96,11 @@ const PromptPage = ({
             </div>
 
             <div>
-              <PromptInteraction prompt={prompt} currentUser={currentUser} />
+              <PromptInteraction
+                isPage={true}
+                prompt={prompt}
+                currentUser={currentUser}
+              />
             </div>
           </div>
         </div>
@@ -104,3 +110,27 @@ const PromptPage = ({
 };
 
 export default PromptPage;
+
+const LoadingSkeleton = () => {
+  return (
+    <div className="p-4 m-2">
+      <div className="flex items-center space-x-4">
+        <Skeleton className="h-12 w-12 rounded-full" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-[250px]" />
+          <Skeleton className="h-4 w-[200px]" />
+        </div>
+      </div>
+
+      <div className="p-2">
+        <Skeleton className="h-10 w-[250px]" />
+      </div>
+      <Skeleton className="w-[512px] h-[512px] rounded-lg" />
+      <div className="p-2 flex flex-row space-x-2">
+        <Skeleton className="h-8 w-[40px]" />
+        <Skeleton className="h-8 w-[40px]" />
+        <Skeleton className="h-8 w-[40px]" />
+      </div>
+    </div>
+  );
+};
