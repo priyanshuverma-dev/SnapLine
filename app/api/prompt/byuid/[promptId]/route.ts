@@ -29,6 +29,7 @@ export async function GET(
         likes: true,
         createdAt: true,
         description: true,
+
         medias: true,
         status: true,
         tags: true,

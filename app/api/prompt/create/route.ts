@@ -30,7 +30,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const { title, description, service, medias, prompt } = body;
 
-    if (!title || !description || !service || !prompt) {
+    if (!title || !service || !prompt) {
       return NextResponse.json(
         {
           message: "Missing fields",

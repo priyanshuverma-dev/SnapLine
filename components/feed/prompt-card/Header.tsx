@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface PromptHeaderProps {
   image: string;
