@@ -16,7 +16,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({
 }) => {
   const [followLoading, setFollowLoading] = useState(false);
   const [isShowing, setIsShowing] = useState(
-    userData.followers.includes(currentUser.id) ? true : false
+    userData.followers?.includes(currentUser.id) ? true : false
   );
 
   const followUser = async () => {

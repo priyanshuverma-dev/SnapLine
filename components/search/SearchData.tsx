@@ -1,7 +1,7 @@
 "use client";
-import LoadingModal from "@/components/LoadingView";
-import RUserCard from "@/components/RUserCard";
-import SearchInput from "@/components/SearchInput";
+import LoadingModal from "../core/LoadingView";
+import RUserCard from "./RUserCard";
+import SearchInput from "../core/SearchInput";
 import fetcher from "@/lib/fetcher";
 import { User } from "@/utils/user";
 import React from "react";

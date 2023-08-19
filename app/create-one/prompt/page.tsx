@@ -152,7 +152,7 @@ const CreatePage = () => {
           )}
         />
         <div>
-          <CldUploadButton uploadPreset="<Upload Preset>" />
+          <CldUploadButton uploadPreset="" />
         </div>
         <FormField
           control={form.control}
