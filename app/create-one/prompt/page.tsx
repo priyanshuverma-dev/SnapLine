@@ -37,6 +37,8 @@ const formSchema = z.object({
     message: "Username must be at least 5 characters.",
   }),
   service: z.string(),
+
+  medias: z.array(z.string()).optional(),
 });
 
 type ListProp = {
@@ -151,9 +153,32 @@ const CreatePage = () => {
             </FormItem>
           )}
         />
-        {/* <div>
-          <CldUploadButton uploadPreset="" />
-        </div> */}
+        <FormField
+          control={form.control}
+          name="medias"
+          render={({ field }) => (
+            <FormItem>
+              {/* <FormLabel>Prompt</FormLabel> */}
+              <FormControl>
+                <div>
+                  <span>Add Images: </span>
+                  <Button disabled={isLoading} variant={"outline"} size={"sm"}>
+                    <CldUploadButton
+                      onSuccess={(res) => {
+                        console.log(res);
+                      }}
+                      uploadPreset="snapline-dev"
+                    >
+                      Select Images
+                    </CldUploadButton>
+                  </Button>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="prompt"
