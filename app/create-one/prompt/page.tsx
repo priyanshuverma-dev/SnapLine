@@ -151,9 +151,9 @@ const CreatePage = () => {
             </FormItem>
           )}
         />
-        <div>
+        {/* <div>
           <CldUploadButton uploadPreset="" />
-        </div>
+        </div> */}
         <FormField
           control={form.control}
           name="prompt"
