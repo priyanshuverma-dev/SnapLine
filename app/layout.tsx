@@ -8,6 +8,7 @@ import AuthContext from "@/Context/AuthContext";
 import { ThemeProvider } from "@/Context/theme-provider";
 import AuthLayout from "@/Context/AuthLayout";
 import LoaderContext from "@/Context/LoaderContext";
+import ModalContext from "@/Context/ModalContext";
 
 const inter = Inter({ subsets: ["greek"] });
 
@@ -36,6 +37,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             <LoaderContext>
               <AuthLayout>
                 <Toaster />
+                <ModalContext />
                 {props.children}
               </AuthLayout>
             </LoaderContext>

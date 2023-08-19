@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import ShareButton from "../ShareButton";
 import { FaRegCommentDots } from "react-icons/fa";
+import { SiClickup } from "react-icons/si";
 import { Button } from "../../ui/button";
 import { AiTwotoneHeart } from "react-icons/ai";
 import { toast } from "react-hot-toast";
@@ -9,6 +10,14 @@ import { Prompt } from "@/utils/prompt";
 import { User } from "@/utils/user";
 import { useRouter } from "next/navigation";
 import { API_URL } from "@/utils/base";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { FiExternalLink } from "react-icons/fi";
+import { useExternalLinkModal } from "@/hooks/modals/use-external-modal";
 
 interface PromptInteractionProps {
   prompt: Prompt;
@@ -25,6 +34,8 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
   const [isLiked, setIsLiked] = useState(
     currentUser.likedPrompts.includes(prompt.id)
   );
+
+  const modal = useExternalLinkModal();
 
   const likePrompt = async () => {
     setLikeLoading(true);
@@ -95,18 +106,49 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
           />
         </div>
         <div className="flex items-center space-x-2">
-          <Button
-            disabled={likeLoading}
-            variant={"secondary"}
-            className="w-full mt-2"
-            size={"default"}
-            onClick={() => {
-              router.push(`/prompt/${prompt.id}`);
-            }}
-            key={prompt.id}
-          >
-            View
-          </Button>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button
+                  disabled={likeLoading}
+                  variant={"link"}
+                  className="w-full mt-2"
+                  size={"default"}
+                  onClick={() => {
+                    modal.setLink(prompt.aiService.website);
+                    modal.onOpen();
+                  }}
+                  key={prompt.id}
+                >
+                  <FiExternalLink />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Vist Website</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button
+                  disabled={likeLoading}
+                  variant={"outline"}
+                  className="w-full mt-2"
+                  size={"default"}
+                  onClick={() => {
+                    router.push(`/prompt/${prompt.id}`);
+                  }}
+                  key={prompt.id}
+                >
+                  <SiClickup />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Full view</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </div>
     </div>
