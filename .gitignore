@@ -12,7 +12,6 @@
 /node_modules
 /.pnp
 .pnp.js
-
 # testing
 /coverage
 
@@ -42,6 +41,7 @@ yarn-error.log*
 .vercel
 
 docker-compose.yml
+.env
 
 # typescript
 *.tsbuildinfo

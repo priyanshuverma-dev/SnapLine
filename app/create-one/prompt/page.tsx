@@ -25,11 +25,12 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CldUploadButton, CldUploadWidget } from "next-cloudinary";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Icons } from "@/components/core/icons";
+import { saveMediaToDB } from "@/lib/functions";
 const formSchema = z.object({
   title: z.string().min(10, {
     message: "title must be at least 10 characters.",
@@ -39,8 +40,12 @@ const formSchema = z.object({
     message: "Username must be at least 5 characters.",
   }),
   service: z.string(),
-
   medias: z.array(z.string()),
+  media_ids: z.array(
+    z.string({
+      required_error: "Media is required",
+    })
+  ),
 });
 
 type ListProp = {
@@ -81,12 +86,13 @@ const CreatePage = () => {
       service: "NONE",
       title: "",
       medias: [],
+      media_ids: [],
     },
   });
 
   // 2. Define a submit handler.
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // .then(() => {})
+  const onSubmit: SubmitHandler<FieldValues> = (data, e) => {
+    e?.preventDefault();
     setIsLoading(true);
     axios
       .post("/api/prompt/create", {
@@ -171,9 +177,30 @@ const CreatePage = () => {
                       console.log(res); // Output the Cloudinary response
 
                       const res1: {
-                        public_id: string;
+                        url: string;
                         secure_url: string;
+                        public_id: string;
+                        format: string;
+                        signature: string;
+                        width: number;
+                        height: number;
+                        resource_type: string;
                       } = res.info as any;
+
+                      saveMediaToDB(res1)
+                        .then((data: any) => {
+                          const preList = form.getValues("media_ids");
+
+                          form.setValue("media_ids", [
+                            ...preList,
+                            data.media.id,
+                          ]);
+
+                          console.log(data);
+                        })
+                        .catch((err: any) => {
+                          console.log(err);
+                        });
 
                       console.log(res1.secure_url);
 

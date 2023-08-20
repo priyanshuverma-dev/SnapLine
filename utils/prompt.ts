@@ -11,16 +11,16 @@ enum PromptStatus {
 }
 
 export type Media = {
-  id: String;
-  promptId: String;
-  url: String;
-  secure_url: String;
-  public_id: String;
-  format: String;
-  signature: String;
-  width: Number;
-  height: Number;
-  resource_type: String;
+  id: string;
+  promptId: string;
+  url: string;
+  secure_url: string;
+  public_id: string;
+  format: string;
+  signature: string;
+  width: number;
+  height: number;
+  resource_type: string;
   createdAt: Date;
   updatedAt: Date;
 };

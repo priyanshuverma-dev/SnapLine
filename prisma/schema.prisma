@@ -63,7 +63,7 @@ model Prompt {
   title         String
   description   String?
   service       String    @db.ObjectId
-  medias        Media[]
+  medias        Media[]  
   likes         String[]  @db.ObjectId  
   tags          String[]
   createdAt     DateTime  @default(now())
@@ -73,6 +73,7 @@ model Prompt {
   comments      Comment[]
   aiService     AIService @relation(fields: [service], references: [id], onDelete: Cascade)
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
 }
 
 
@@ -107,9 +108,9 @@ model Comment {
 
 model Media {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  promptId    String    @db.ObjectId  
   url         String
-  secure_url   String
+  secure_url  String
+  promptId    String?    @db.ObjectId
   public_id   String
   format      String
   signature   String
@@ -118,8 +119,8 @@ model Media {
   resource_type String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  prompt      Prompt?   @relation(fields: [promptId], references: [id], onDelete: Cascade)
 
-  prompt      Prompt    @relation(fields: [promptId], references: [id], onDelete: Cascade)
 }
 
 

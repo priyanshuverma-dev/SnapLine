@@ -85,9 +85,9 @@ const PromptPage = ({
                         lazyBoundary="200px"
                         className="rounded-lg shadow-lg py-3"
                         alt={prompt.title}
-                        src={image}
-                        width={256}
-                        height={256}
+                        src={image.secure_url}
+                        width={image.width}
+                        height={image.height}
                       />
                     );
                   })}
