@@ -42,7 +42,11 @@ const SearchData: React.FC<SearchDataProps> = ({ currentUser }) => {
       ) : (
         <div className="flex flex-col space-y-3 p-4">
           {data?.users.map((user) => (
-            <RUserCard user={user} currentUser={currentUser} />
+            <RUserCard
+              key={Math.random()}
+              user={user}
+              currentUser={currentUser}
+            />
           ))}
         </div>
       )}

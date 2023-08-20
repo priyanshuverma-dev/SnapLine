@@ -1,11 +1,16 @@
 import React from "react";
+
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { useConfirmationModal } from "@/hooks/use-cm-store";
 import { Button } from "../ui/button";
 import { toast } from "react-hot-toast";
@@ -37,39 +42,28 @@ const ConfirmationModal = () => {
   };
 
   return (
-    <div>
-      <Dialog
-        open={modal.isOpen}
-        onOpenChange={() => {
-          modal.onClose();
-        }}
-      >
-        <DialogContent className=" dark:border-gray-800">
-          <DialogHeader>
-            <DialogTitle>
-              <h2>Are you sure?</h2>
-            </DialogTitle>
-          </DialogHeader>
-
-          <p className="text-gray-600 dark:text-gray-400">
-            Do you really want to delete these prompt? This process cannot be
-            undone.
-          </p>
-
-          <div className="flex justify-end space-x-2">
-            <Button onClick={() => modal.onClose()} variant={"outline"}>
-              Cancel
-            </Button>
-            <Button
-              onClick={() => deletePrompt(modal.promptId)}
-              variant={"destructive"}
-            >
-              Delete
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </div>
+    <AlertDialog
+      open={modal.isOpen}
+      onOpenChange={() => {
+        modal.onClose();
+      }}
+    >
+      <AlertDialogContent className=" dark:border-gray-800">
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will delete your pormpt and
+            remove data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={() => deletePrompt(modal.promptId)}>
+            Delete
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 

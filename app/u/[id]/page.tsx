@@ -13,6 +13,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import { toast } from "react-hot-toast";
 import ProfileFeeds from "@/components/profile/ProfileFeeds";
 import { KeyedMutator } from "swr";
+import Link from "next/link";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -121,13 +122,14 @@ const ProfilePage = () => {
           </div>
           <div className="p-1 flex items-center justify-center">
             {currentUser?.id === profileData.id ? (
-              <Button
-                variant={"outline"}
-                onClick={handleCurrentUser}
-                className="max-[321px]:text-xs text-sm"
-              >
-                Edit
-              </Button>
+              <Link href="/settings/profile">
+                <Button
+                  variant={"outline"}
+                  className="max-[321px]:text-xs text-sm"
+                >
+                  <BiEditAlt className="mr-2" /> Edit
+                </Button>
+              </Link>
             ) : (
               <Button
                 disabled={followLoading}
@@ -150,7 +152,7 @@ const ProfilePage = () => {
         </div>
       </div>
       <div className="pt-4 pb-4 ">
-        <span className="text-center max-[321px]:text-xs text-gray-200">
+        <span className="text-center max-[321px]:text-xs dark:text-gray-200 text-gray-900">
           {profileData.bio}
         </span>
       </div>
@@ -159,19 +161,19 @@ const ProfilePage = () => {
 
       <div className="flex flex-row">
         <div className="p-2">
-          <span className="pr-2 font-semibold">
+          <span className="pr-2 font-semibold dark:text-gray-200 text-gray-900">
             {profileData.following.length}
           </span>
-          <span className="text-neutral-200">Following</span>
+          <span className="dark:text-gray-200 text-gray-900">Following</span>
         </div>
         <div className="py-1">
           <Separator orientation="vertical" />
         </div>
         <div className="p-2">
-          <span className="pr-2 font-semibold">
+          <span className="pr-2 font-semibold dark:text-gray-200 text-gray-900">
             {profileData.followers.length}
           </span>
-          <span className="text-neutral-200">Followers</span>
+          <span className="dark:text-gray-200 text-gray-900">Followers</span>
         </div>
       </div>
 

@@ -20,7 +20,7 @@ const RUserCard = ({
   return (
     <div
       id={user.id}
-      className="p-2 hover:bg-neutral-900 transition-colors rounded-lg"
+      className="p-2 hover:dark:bg-neutral-900 hover:bg-gray-100 transition-colors rounded-lg"
     >
       <div className="flex items-center space-x-1 flex-row">
         <div>

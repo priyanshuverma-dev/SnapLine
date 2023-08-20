@@ -28,8 +28,18 @@ export async function GET(
         id: true,
         title: true,
         prompt: true,
-        service: true,
         createdAt: true,
+        likes: true,
+        medias: true,
+        status: true,
+        clicks: true,
+        comments: true,
+        aiService: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
         user: {
           select: {
             name: true,

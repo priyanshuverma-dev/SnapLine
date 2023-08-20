@@ -176,15 +176,9 @@ const CreatePage = () => {
 
                       console.log(res1.secure_url);
 
-                      form.setValue(
-                        "medias",
-                        [...field.value, res1.secure_url],
-                        {
-                          shouldDirty: true,
-                          shouldValidate: true,
-                          shouldTouch: true,
-                        }
-                      );
+                      const prev = form.getValues("medias");
+
+                      form.setValue("medias", [...prev, res1.secure_url]);
                     }}
                   >
                     <span className="p-2">Select Images</span>

@@ -56,7 +56,7 @@ const ProfileFeeds = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
           <ProfilePromptCard
             key={prompt.id}
             prompt={prompt}
-            isCurrentUser={isCurrentUser}
+            currentUser={profileData}
           />
         );
       })}

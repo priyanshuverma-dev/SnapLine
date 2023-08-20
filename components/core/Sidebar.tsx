@@ -84,7 +84,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         </div>
       </aside>
       <div className="sm:hidden block">
-        <header className="bg-white border-b border-gray-300 flex items-center justify-center shadow-md dark:bg-black dark:border-neutral-700">
+        <header className="bg-white border-b border-gray-300 flex items-center justify-between shadow-md dark:bg-black dark:border-neutral-700">
           <div className="flex justify-between items-center px-4 py-2">
             <span
               className={`${borel.className} text-3xl text-black dark:text-white text-center`}
@@ -92,13 +92,14 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
               SnapLine
             </span>
           </div>
+          <ModeToggle onHeader={true} />
         </header>
       </div>
       <div className="sm:ml-64 bg-gray-50 dark:bg-black sm:mb-0 pb-[75px]">
         {children}
       </div>
       <div className="sm:hidden block">
-        <nav className="fixed bottom-0 left-0 w-full bg-neutral-700 border-t dark:bg-black border-neutral-700 shadow-md flex justify-between px-1 py-2">
+        <nav className="fixed bottom-0 left-0 w-full bg-gray-200 border-t dark:bg-black dark:border-neutral-700 shadow-md flex justify-between px-1 py-2">
           {routes.map((item) => (
             <SidebarItem islabel={false} key={item.label} {...item} />
           ))}

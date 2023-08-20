@@ -6,8 +6,8 @@ import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
 const UserButton = ({ islabel }: { islabel?: boolean }) => {
-  const { status } = useSession();
   const { data: currentUser } = useCurrentUser();
+  const { status } = useSession();
   return (
     <div
       className={twMerge(
@@ -38,8 +38,6 @@ const UserButton = ({ islabel }: { islabel?: boolean }) => {
           </div>
         </Link>
       ) : null}
-
-      {status === "loading" ? <p>Loading</p> : null}
     </div>
   );
 };

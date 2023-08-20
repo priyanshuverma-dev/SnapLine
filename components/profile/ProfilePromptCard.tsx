@@ -12,6 +12,9 @@ import { Badge } from "../ui/badge";
 import { toast } from "react-hot-toast";
 import moment from "moment";
 import { useConfirmationModal } from "@/hooks/use-cm-store";
+import PromptInteraction from "../feed/prompt-card/Interaction";
+import { User } from "@/utils/user";
+import PromptBody from "../feed/prompt-card/Body";
 
 const copyToClipboard = (text: string) => {
   navigator.clipboard.writeText(text);
@@ -35,10 +38,10 @@ const deletePrompt = async (id: string) => {
 
 const ProfilePromptCard = ({
   prompt,
-  isCurrentUser,
+  currentUser,
 }: {
   prompt: Prompt;
-  isCurrentUser: boolean;
+  currentUser: User;
 }) => {
   const router = useRouter();
   const deleteModal = useConfirmationModal();
@@ -58,9 +61,9 @@ const ProfilePromptCard = ({
                     .fromNow()}
                 </span>
                 <span className="text-gray-400">•</span>
-                <span className="text-gray-400">{prompt.service}</span>
+                <span className="text-gray-400">{prompt.id}</span>
               </div>
-              {isCurrentUser && (
+              {!!currentUser && (
                 <div
                   onClick={() => deleteModal.onOpen(prompt.id)}
                   className="rounded-full transition-colors hover:bg-neutral-700 p-2"
@@ -70,33 +73,32 @@ const ProfilePromptCard = ({
               )}
             </div>
             <div className="bg-gray-100 rounded-sm p-2 dark:bg-neutral-800 ">
-              <div className="flex flex-1 justify-between">
+              <PromptBody
+                clicks={prompt.clicks}
+                prompt={prompt.prompt}
+                service={prompt.aiService.name}
+                id={prompt.id}
+              />
+              {/* <div className="flex flex-1 justify-between">
                 <p className="font-semibold">Prompt:</p>
                 <button
                   className="p-2 rounded-full transition-colors hover:bg-neutral-700"
                   onClick={() => copyToClipboard(prompt.prompt)}
                 >
                   <FiCopy />
-                </button>
-              </div>
-              <p className="text-gray-800 md:text-md sm:text-sm font-mono dark:text-[#E7EAE9] ">
+                </button> */}
+              {/* </div> */}
+              {/* <p className="text-gray-800 md:text-md sm:text-sm font-mono dark:text-[#E7EAE9] ">
                 {prompt.prompt}
-              </p>
+              </p> */}
             </div>
 
             <div>
-              <Button
-                variant={"outline"}
-                className="w-full mt-2"
-                size={"sm"}
-                onClick={() => {
-                  router.push(`/prompt/${prompt.id}`);
-                  // modalStore.onOpen();
-                }}
-                key={prompt.id}
-              >
-                View
-              </Button>
+              <PromptInteraction
+                prompt={prompt}
+                currentUser={currentUser}
+                isPage={false}
+              />
             </div>
           </div>
         </div>

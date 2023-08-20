@@ -1,5 +1,5 @@
 "use client";
-import Lottie from "react-lottie";
+import Lottie from "lottie-react";
 import { redirect, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import animationData from "@/utils/lotties/redircting.json";
@@ -28,7 +28,12 @@ const ExternalRedirect = () => {
   return (
     <div className="flex justify-center items-center flex-col">
       <div>
-        <Lottie options={defaultOptions} height={400} width={400} />
+        <Lottie
+          animationData={animationData}
+          loop={true}
+          height={400}
+          width={400}
+        />
       </div>
       <span className="text-xl text-center">Redirecting...</span>
     </div>
