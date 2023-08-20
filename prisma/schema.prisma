@@ -21,6 +21,8 @@ model User {
   hashedPassword  String?
   createdAt       DateTime  @default(now())
   likedPrompts    String[]  @db.ObjectId
+  preferences     String[]
+  social          String[]
   updatedAt       DateTime  @updatedAt
   followers       String[]  @db.ObjectId
   following       String[]  @db.ObjectId

@@ -40,9 +40,11 @@ const profileFormSchema = z.object({
     .string({
       required_error: "Please select an email to display.",
     })
-    .email(),
+    .email()
+    .optional(),
   bio: z.string().max(160).min(4),
-  urls: z
+
+  social: z
     .array(
       z.object({
         value: z.string().url({ message: "Please enter a valid URL." }),
@@ -56,9 +58,9 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {
   bio: "I own a computer.",
-  urls: [
-    { value: "https://shadcn.com" },
-    { value: "http://twitter.com/shadcn" },
+  social: [
+    { value: "https://antrikshdev.tech" },
+    { value: "http://twitter.com/pvdev" },
   ],
 };
 
@@ -70,7 +72,7 @@ export function ProfileForm() {
   });
 
   const { fields, append } = useFieldArray({
-    name: "urls",
+    name: "social",
     control: form.control,
   });
 
@@ -88,7 +90,7 @@ export function ProfileForm() {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Pv" {...field} />
               </FormControl>
               <FormDescription>
                 This is your public display name. It can be your real name or a
@@ -104,18 +106,10 @@ export function ProfileForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="m@example.com">m@example.com</SelectItem>
-                  <SelectItem value="m@google.com">m@google.com</SelectItem>
-                  <SelectItem value="m@support.com">m@support.com</SelectItem>
-                </SelectContent>
-              </Select>
+
+              <FormControl>
+                <Input placeholder="Your Email" readOnly {...field} />
+              </FormControl>
               <FormDescription>
                 You can manage verified email addresses in your{" "}
                 <Link href="/examples/forms">email settings</Link>.
@@ -150,7 +144,7 @@ export function ProfileForm() {
             <FormField
               control={form.control}
               key={field.id}
-              name={`urls.${index}.value`}
+              name={`social.${index}.value`}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className={cn(index !== 0 && "sr-only")}>
