@@ -27,6 +27,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Icons } from "@/components/core/icons";
 
 const formSchema = z.object({
   name: z.string().min(3, {
@@ -184,6 +185,7 @@ const AiServiceCreatePage = () => {
           )}
         />
         <Button disabled={isLoading} type="submit">
+          {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
           Submit
         </Button>
       </form>

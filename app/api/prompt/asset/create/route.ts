@@ -28,9 +28,28 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    const { title, description, service, prompt, media_ids } = body;
+    const {
+      promptId,
+      url,
+      secure_url,
+      public_id,
+      format,
+      width,
+      height,
+      resource_type,
+      signature,
+    } = body;
 
-    if (!title || !service || !prompt) {
+    if (
+      !url ||
+      !secure_url ||
+      !public_id ||
+      !format ||
+      !width ||
+      !height ||
+      !resource_type ||
+      !signature
+    ) {
       return NextResponse.json(
         {
           message: "Missing fields",
@@ -39,51 +58,24 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    if (service == "NONE") {
-      return NextResponse.json(
-        {
-          message: "recheck service",
-        },
-        { status: 400 }
-      );
-    }
-
-    const services = await prisma.aIService.findUnique({
-      where: {
-        id: service,
-        status: "APPROVED",
-      },
-    });
-
-    if (!services) {
-      return NextResponse.json(
-        {
-          message: "Service not found",
-        },
-        { status: 400 }
-      );
-    }
-
-    const promptCreated = await prisma.prompt.create({
+    const media = await prisma.media.create({
       data: {
-        prompt,
-        title,
-        medias: {
-          connect: media_ids.map((id: any) => ({
-            id,
-          })),
-        },
-        userId: currentUser.id,
-        clicks: 0,
-        description,
-        service,
+        promptId,
+        url,
+        secure_url,
+        public_id,
+        format,
+        width,
+        height,
+        resource_type,
+        signature,
       },
     });
 
-    if (!promptCreated) {
+    if (!media) {
       return NextResponse.json(
         {
-          message: "Prompt not created",
+          message: "Media not created",
         },
         { status: 400 }
       );
@@ -91,8 +83,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     return NextResponse.json(
       {
-        message: "Prompt created",
-        prompt: promptCreated,
+        message: "Media created",
+        media,
       },
       { status: 201 }
     );

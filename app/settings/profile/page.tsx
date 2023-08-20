@@ -3,7 +3,7 @@ import React from "react";
 
 const ProfileSettings = () => {
   return (
-    <div className="h-screen">
+    <div className="">
       <ProfileForm />
     </div>
   );
