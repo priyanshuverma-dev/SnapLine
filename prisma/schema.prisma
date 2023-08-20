@@ -11,9 +11,9 @@ datasource db {
 }
 model User {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  name            String    @default("Drop User")
+  name            String    @default("Snapline User")
   username        String    @unique @default(cuid()) 
-  bio             String    @default("I am a Drop user ✌")
+  bio             String    @default("I am a Snapline ✌")
   email           String    @unique
   role            Role      @default(USER)
   emailVerified   DateTime?
@@ -24,6 +24,7 @@ model User {
   preferences     String[]
   social          String[]
   updatedAt       DateTime  @updatedAt
+  lastUsernameUpdate DateTime?
   followers       String[]  @db.ObjectId
   following       String[]  @db.ObjectId
   prompts          Prompt[]
@@ -62,7 +63,7 @@ model Prompt {
   title         String
   description   String?
   service       String    @db.ObjectId
-  medias        String[]
+  medias        Media[]
   likes         String[]  @db.ObjectId  
   tags          String[]
   createdAt     DateTime  @default(now())
@@ -104,6 +105,22 @@ model Comment {
 }
 
 
+model Media {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  promptId    String    @db.ObjectId  
+  url         String
+  secure_url   String
+  public_id   String
+  format      String
+  signature   String
+  width       Int
+  height      Int
+  resource_type String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  prompt      Prompt    @relation(fields: [promptId], references: [id], onDelete: Cascade)
+}
 
 
 model VerificationToken {

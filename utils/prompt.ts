@@ -10,6 +10,21 @@ enum PromptStatus {
   PENDING = "PENDING",
 }
 
+export type Media = {
+  id: String;
+  promptId: String;
+  url: String;
+  secure_url: String;
+  public_id: String;
+  format: String;
+  signature: String;
+  width: Number;
+  height: Number;
+  resource_type: String;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export type Prompt = {
   id: string;
   userId: string;
@@ -17,7 +32,7 @@ export type Prompt = {
   prompt: string;
   description: string;
   service: string;
-  medias: string[];
+  medias: Media[];
   tags: string[];
   likes: string[];
   status: PromptStatus;
@@ -26,5 +41,6 @@ export type Prompt = {
   published: boolean;
   clicks: number;
   user: User;
+
   aiService: AIService;
 };

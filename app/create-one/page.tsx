@@ -11,7 +11,7 @@ const CreatePage = () => {
           <div className="flex flex-col p-2">
             <span className="p-2">Create AI Service</span>
             <Button variant={"outline"}>
-              <Link href={"/create-one/ai-service"}>Create Service</Link>
+              <Link href={"/create-one/ai-service"}>Register Service</Link>
             </Button>
           </div>
           <div className="flex flex-col p-2">

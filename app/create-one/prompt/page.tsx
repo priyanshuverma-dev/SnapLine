@@ -29,6 +29,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CldUploadButton, CldUploadWidget } from "next-cloudinary";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Icons } from "@/components/core/icons";
 const formSchema = z.object({
   title: z.string().min(10, {
     message: "title must be at least 10 characters.",
@@ -235,6 +236,7 @@ const CreatePage = () => {
           )}
         />
         <Button disabled={isLoading} type="submit">
+          {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
           Create
         </Button>
       </form>
@@ -242,37 +244,3 @@ const CreatePage = () => {
   );
 };
 export default CreatePage;
-
-/*
-{
-    "event": "success",
-    "info": {
-        "id": "uw-file3",
-        "batchId": "uw-batch2",
-        "asset_id": "58955f58c81486330e3c869ce5428de2",
-        "public_id": "snapline-dev/fi5ph3a7t40u7t574kur",
-        "version": 1692447468,
-        "version_id": "4ddfbf56bbd1c6cc0f9b7814aae9197d",
-        "signature": "19943e5a84fa8954233bb7301dbc2ada9c1f433a",
-        "width": 832,
-        "height": 832,
-        "format": "jpg",
-        "resource_type": "image",
-        "created_at": "2023-08-19T12:17:48Z",
-        "tags": [],
-        "bytes": 250231,
-        "type": "upload",
-        "etag": "38a397596f297d5e2d0e356a20200210",
-        "placeholder": false,
-        "url": "http://res.cloudinary.com/pvserver/image/upload/v1692447468/snapline-dev/fi5ph3a7t40u7t574kur.jpg",
-        "secure_url": "https://res.cloudinary.com/pvserver/image/upload/v1692447468/snapline-dev/fi5ph3a7t40u7t574kur.jpg",
-        "folder": "snapline-dev",
-        "access_mode": "public",
-        "original_filename": "IMG_20230817_185233_415",
-        "path": "v1692447468/snapline-dev/fi5ph3a7t40u7t574kur.jpg",
-        "thumbnail_url": "https://res.cloudinary.com/pvserver/image/upload/c_limit,h_60,w_90/v1692447468/snapline-dev/fi5ph3a7t40u7t574kur.jpg"
-    }
-}
-
-
-*/

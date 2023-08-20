@@ -19,6 +19,9 @@ export type User = {
   following: string[];
   followers: string[];
   likedPrompts: string[];
+  social: string[];
+  preferences: [];
+  lastUsernameUpdate: Date;
   createdAt: Date;
   updatedAt: Date;
   prompt: Prompt[];

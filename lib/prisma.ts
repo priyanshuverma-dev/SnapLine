@@ -1,10 +1,18 @@
 import { PrismaClient } from "@prisma/client";
 
-declare global {
-  var prisma: PrismaClient | undefined;
-}
+const prismaClientSingleton = () => {
+  return new PrismaClient();
+};
 
-const client = globalThis.prisma || new PrismaClient();
+type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClientSingleton | undefined;
+};
+
+const prisma = globalForPrisma.prisma ?? prismaClientSingleton();
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
 async function generateUsername(name: string) {
   // Convert the user's name to lowercase and remove spaces
@@ -15,7 +23,7 @@ async function generateUsername(name: string) {
   let counter = 1;
 
   while (usernameExists) {
-    const existingUser = await client.user.findUnique({ where: { username } });
+    const existingUser = await prisma.user.findUnique({ where: { username } });
 
     if (existingUser) {
       // If the username already exists, append a counter to it
@@ -29,7 +37,7 @@ async function generateUsername(name: string) {
   return username;
 }
 
-const xclient = client.$use(async (params, next) => {
+const xclient = prisma.$use(async (params, next) => {
   if (params.model === "User" && params.action === "create") {
     const { data } = params.args;
     data.username = await generateUsername(data.name);
@@ -37,4 +45,5 @@ const xclient = client.$use(async (params, next) => {
   return next(params);
 });
 
-export default client;
+export default prisma;
+export { xclient };
