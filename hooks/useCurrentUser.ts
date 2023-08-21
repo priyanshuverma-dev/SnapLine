@@ -22,16 +22,6 @@ const useCurrentUser = () => {
   );
   // console.log(error?.response?.data);
 
-  if (error?.response?.data?.error === "Unauthorized") {
-    userState.setLogged(false);
-
-    return {
-      data: null,
-      error: "Unauthorized",
-      isLoading: false,
-      mutate,
-    };
-  }
 
   // Update userState if data is available
   if (data && !userState.user) {
