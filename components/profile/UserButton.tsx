@@ -15,15 +15,15 @@ const UserButton = ({ islabel }: { islabel?: boolean }) => {
         islabel && "bg-slate-50 dark:bg-neutral-900 mb-2"
       )}
     >
-      {status === "unauthenticated" ? (
+      {status === "unauthenticated" && (
         <Link
           href="/login"
           className="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2 mr-2 font-bold text-blue-400"
         >
           Login
         </Link>
-      ) : null}
-      {status === "authenticated" ? (
+      )}
+      {status === "authenticated" && (
         <Link href={`/u/${currentUser?.username}`}>
           <div className="flex flex-row items-center  justify-between space-x-3">
             <Avatar>
@@ -37,7 +37,7 @@ const UserButton = ({ islabel }: { islabel?: boolean }) => {
             ) : null}
           </div>
         </Link>
-      ) : null}
+      )}
     </div>
   );
 };

@@ -34,12 +34,16 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
   const [likeLoading, setLikeLoading] = useState(false);
   const [likesCount, setLikesCount] = useState(prompt.likes.length);
   const [isLiked, setIsLiked] = useState(
-    currentUser.likedPrompts.includes(prompt.id)
+    currentUser?.likedPrompts.includes(prompt.id)
   );
 
   const modal = useExternalLinkModal();
 
   const likePrompt = async () => {
+    if (!currentUser) {
+      return toast.error("Please login to like a prompt");
+    }
+
     setLikeLoading(true);
     try {
       const res = await fetch(`/api/prompt/like/${prompt.id}`, {
@@ -139,9 +143,6 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
                     variant={"outline"}
                     className="w-full mt-2"
                     size={"default"}
-                    // onClick={() => {
-                    //   router.push(`/prompt/${prompt.id}`);
-                    // }}
                     key={prompt.id}
                   >
                     <Link href={`/prompt/${prompt.id}`}>

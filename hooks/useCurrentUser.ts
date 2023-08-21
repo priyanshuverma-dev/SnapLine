@@ -12,14 +12,31 @@ const useCurrentUser = () => {
     shouldFetch ? "/api/current" : null,
     fetcher,
     {
+      errorRetryInterval: 1000,
+      shouldRetryOnError(err) {
+        return err?.response?.data?.error === "Unauthorized";
+      },
       // revalidateOnFocus: true,
       // refreshInterval: 1000,
     }
   );
+  // console.log(error?.response?.data);
+
+  if (error?.response?.data?.error === "Unauthorized") {
+    userState.setLogged(false);
+
+    return {
+      data: null,
+      error: "Unauthorized",
+      isLoading: false,
+      mutate,
+    };
+  }
 
   // Update userState if data is available
   if (data && !userState.user) {
     userState.setUser(data);
+    userState.setLogged(true);
   }
 
   return {

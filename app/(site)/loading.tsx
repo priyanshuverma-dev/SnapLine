@@ -5,7 +5,7 @@ const Loading = () => {
     <div>
       <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 ">
         <div>
-          <div className="bg-white  dark:bg-neutral-900 shadow hover:shadow-xl focus:shadow-xl rounded-lg p-4">
+          <div>
             <div className="flex items-start">
               <div>
                 <div className="flex items-center mb-2 space-x-1">
@@ -24,7 +24,7 @@ const Loading = () => {
           </div>
         </div>
         <div>
-          <div className="bg-white dark:bg-neutral-900 shadow hover:shadow-xl focus:shadow-xl rounded-lg p-4">
+          <div>
             <div className="flex items-start">
               <div>
                 <div className="flex items-center mb-2 space-x-1">
@@ -43,7 +43,7 @@ const Loading = () => {
           </div>
         </div>
         <div>
-          <div className="bg-white dark:bg-neutral-900 shadow hover:shadow-xl focus:shadow-xl rounded-lg p-4">
+          <div>
             <div className="flex items-start">
               <div>
                 <div className="flex items-center mb-2 space-x-1">
@@ -62,7 +62,7 @@ const Loading = () => {
           </div>
         </div>
         <div>
-          <div className="bg-white shadow dark:bg-neutral-900 hover:shadow-xl focus:shadow-xl rounded-lg p-4">
+          <div>
             <div className="flex items-start">
               <div>
                 <div className="flex items-center mb-2 space-x-1">

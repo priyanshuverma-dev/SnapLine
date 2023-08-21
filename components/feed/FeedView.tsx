@@ -26,11 +26,13 @@ const FeedView = () => {
   }: {
     data: User;
     isLoading: boolean;
+    error: any;
   } = useCurrentUser();
 
   if (isLoading || isUserLoading) {
     return <Loading />;
   }
+
   if (error) {
     console.log(error?.response);
     return (
