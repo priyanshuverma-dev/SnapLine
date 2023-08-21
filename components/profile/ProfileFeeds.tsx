@@ -9,7 +9,13 @@ import LoadingModal from "../core/LoadingView";
 import useProfiles from "@/hooks/use-profile";
 import { User } from "@/utils/user";
 
-const ProfileFeeds = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
+const ProfileFeeds = ({
+  isCurrentUser,
+  currentUser,
+}: {
+  isCurrentUser: boolean;
+  currentUser: User;
+}) => {
   const params = useParams();
 
   const {
@@ -56,7 +62,7 @@ const ProfileFeeds = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
           <ProfilePromptCard
             key={prompt.id}
             prompt={prompt}
-            currentUser={profileData}
+            currentUser={currentUser}
           />
         );
       })}

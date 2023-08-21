@@ -103,7 +103,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     return NextResponse.json(
       {
-        error: "Account updated",
+        message: "Account updated",
         user,
       },
       { status: 200 }

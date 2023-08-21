@@ -19,7 +19,13 @@ const ProfilePage = () => {
   const router = useRouter();
   const params = useParams();
 
-  const { data: currentUser, isLoading: isUser } = useCurrentUser();
+  const {
+    data: currentUser,
+    isLoading: isUser,
+  }: {
+    data: User;
+    isLoading: boolean;
+  } = useCurrentUser();
 
   const [followLoading, setFollowLoading] = useState(false);
 
@@ -43,18 +49,15 @@ const ProfilePage = () => {
     console.log(error);
     return (
       <div>
-        <span>User Not Found</span>
+        <span>Error in finding user. reload page</span>
       </div>
     );
   }
 
-  const handleCurrentUser = () => {
-    if (currentUser?.id === profileData.id) {
-      router.push("/settings/profile");
-    }
-  };
-
   const followUser = async () => {
+    if (currentUser.username === "guest") {
+      return toast.error("Please login to do this action");
+    }
     setFollowLoading(true);
     try {
       const res = await fetch(`/api/profiles/follow/${profileData.id}`, {
@@ -82,7 +85,7 @@ const ProfilePage = () => {
         mutate({
           ...profileData,
           followers: profileData.followers.filter(
-            (id) => id !== currentUser?.id
+            (id: any) => id !== currentUser?.id
           ),
         });
         console.log(isFollow);
@@ -95,6 +98,14 @@ const ProfilePage = () => {
     }
   };
 
+  if (!profileData) {
+    return (
+      <div className="flex items-center justify-center">
+        <span className="text-lg">User not found. try to check username</span>
+      </div>
+    );
+  }
+
   return (
     <section>
       <div>
@@ -103,7 +114,7 @@ const ProfilePage = () => {
             <div className="flex flex-col">
               <Avatar className="w-14 h-14 rounded-full mr-3 max-[321px]:w-8 max-[321px]:h-8 shadow">
                 <AvatarImage src={profileData.image} />
-                <AvatarFallback>{profileData.name[0]}</AvatarFallback>
+                <AvatarFallback>{profileData?.name?.at(0)}</AvatarFallback>
               </Avatar>
             </div>
             <div className="pt-2 flex flex-col">
@@ -121,7 +132,8 @@ const ProfilePage = () => {
             </div>
           </div>
           <div className="p-1 flex items-center justify-center">
-            {currentUser?.id === profileData.id ? (
+            {currentUser?.id === profileData.id &&
+            currentUser.username === "guest" ? (
               <Link href="/settings/profile">
                 <Button
                   variant={"outline"}
@@ -178,7 +190,10 @@ const ProfilePage = () => {
       </div>
 
       <div>
-        <ProfileFeeds isCurrentUser={currentUser?.id === profileData.id} />
+        <ProfileFeeds
+          currentUser={currentUser}
+          isCurrentUser={currentUser?.id === profileData.id}
+        />
       </div>
     </section>
   );

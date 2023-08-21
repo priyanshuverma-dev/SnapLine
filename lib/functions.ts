@@ -1,5 +1,14 @@
+import { Media } from "@/utils/prompt";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+
+export const imageUrlCloudinary = (image: Media) => {
+  const imageBucket =
+    process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "pvserver";
+  // https://res.cloudinary.com/demo/image/upload/c_scale,h_300,w_300/dpr_auto/cld-sample-5.jpg
+  const url = `https://res.cloudinary.com/${imageBucket}/${image.resource_type}/upload/c_scale,h_300,w_300/dpr_auto,f_auto,q_auto/v1/${image.public_id}`;
+  return url;
+};
 
 export const saveMediaToDB = async ({
   format,

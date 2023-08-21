@@ -2,14 +2,14 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 import { getServerSession } from "next-auth";
 import prisma from "./prisma";
-import { signOut } from "next-auth/react";
 
 const serverAuth = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.email) {
-    signOut({ callbackUrl: "/" });
-    throw new Error("Not signed in");
+    throw new Error("Not signed in", {
+      cause: "No session",
+    });
   }
 
   const currentUser = await prisma.user.findUnique({
@@ -19,9 +19,9 @@ const serverAuth = async () => {
   });
 
   if (!currentUser) {
-    signOut({ callbackUrl: "/" });
-
-    throw new Error("Not signed in");
+    throw new Error("Not signed in", {
+      cause: "No user",
+    });
   }
 
   return { currentUser };

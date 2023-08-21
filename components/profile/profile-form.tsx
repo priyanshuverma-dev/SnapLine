@@ -113,7 +113,7 @@ export function ProfileForm() {
 
       toast.success("Profile updated!");
 
-      userStore.removeUser();
+      userStore.setUser(res.data.user);
       router.push(`/u/${data.username}`);
     } catch (error) {
       console.log(error);

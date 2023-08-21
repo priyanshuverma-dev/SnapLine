@@ -24,7 +24,7 @@ const copyToClipboard = async ({ text, id }: { text: string; id: string }) => {
   );
 
   if (res.status !== 200) {
-    toast.error("Error copying to clipboard");
+    toast.error("Error in count update");
     return;
   }
 };
