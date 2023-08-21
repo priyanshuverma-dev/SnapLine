@@ -3,7 +3,7 @@
 import { imageUrlCloudinary } from "@/lib/functions";
 import Image from "next/image";
 import { Media } from "@/utils/prompt";
-import React, { MutableRefObject, useState } from "react";
+import React from "react";
 import { TrackDetails, useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 
