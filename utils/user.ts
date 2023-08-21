@@ -1,11 +1,12 @@
 import { AIService } from "./ai-service";
 import { Prompt } from "./prompt";
 
-enum Role {
+export enum Role {
   USER = "USER",
   ADMIN = "ADMIN",
   SUPERADMIN = "SUPERADMIN",
   VERIFIED = "VERIFIED",
+  GUEST = "GUEST",
 }
 
 export type User = {

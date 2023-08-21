@@ -19,7 +19,13 @@ const ProfilePage = () => {
   const router = useRouter();
   const params = useParams();
 
-  const { data: currentUser, isLoading: isUser } = useCurrentUser();
+  const {
+    data: currentUser,
+    isLoading: isUser,
+  }: {
+    data: User;
+    isLoading: boolean;
+  } = useCurrentUser();
 
   const [followLoading, setFollowLoading] = useState(false);
 
@@ -39,14 +45,6 @@ const ProfilePage = () => {
     return <LoadingModal />;
   }
 
-  if (!isLoading || !isUser || !profileData) {
-    return (
-      <div className="flex items-center justify-center">
-        <span className="text-lg">User not found. try to check username</span>
-      </div>
-    );
-  }
-
   if (error) {
     console.log(error);
     return (
@@ -57,6 +55,9 @@ const ProfilePage = () => {
   }
 
   const followUser = async () => {
+    if (currentUser.username === "guest") {
+      return toast.error("Please login to do this action");
+    }
     setFollowLoading(true);
     try {
       const res = await fetch(`/api/profiles/follow/${profileData.id}`, {
@@ -97,6 +98,14 @@ const ProfilePage = () => {
     }
   };
 
+  if (!profileData) {
+    return (
+      <div className="flex items-center justify-center">
+        <span className="text-lg">User not found. try to check username</span>
+      </div>
+    );
+  }
+
   return (
     <section>
       <div>
@@ -123,7 +132,8 @@ const ProfilePage = () => {
             </div>
           </div>
           <div className="p-1 flex items-center justify-center">
-            {currentUser?.id === profileData.id ? (
+            {currentUser?.id === profileData.id &&
+            currentUser.username === "guest" ? (
               <Link href="/settings/profile">
                 <Button
                   variant={"outline"}
@@ -180,7 +190,10 @@ const ProfilePage = () => {
       </div>
 
       <div>
-        <ProfileFeeds isCurrentUser={currentUser?.id === profileData.id} />
+        <ProfileFeeds
+          currentUser={currentUser}
+          isCurrentUser={currentUser?.id === profileData.id}
+        />
       </div>
     </section>
   );

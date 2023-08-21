@@ -40,8 +40,8 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
   const modal = useExternalLinkModal();
 
   const likePrompt = async () => {
-    if (!currentUser) {
-      return toast.error("Please login to like a prompt");
+    if (currentUser.username === "guest" || currentUser.id === "guest") {
+      return toast.error("Please login to do this action");
     }
 
     setLikeLoading(true);
@@ -94,17 +94,7 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
               {nFormatter({ num: likesCount, digits: 1 })}
             </span>
           </Button>
-          <Button
-            disabled={likeLoading}
-            variant={"ghost"}
-            className="w-full mt-2"
-            size={"default"}
-            onClick={() => {
-              toast.success("Commented");
-            }}
-          >
-            <FaRegCommentDots className="text-xl" />
-          </Button>
+
           <ShareButton
             title={`${prompt.title} - ${prompt.prompt}`}
             url={`${API_URL}/prompt/${prompt.id}`}
@@ -138,17 +128,17 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <Button
-                    disabled={likeLoading}
-                    variant={"outline"}
-                    className="w-full mt-2"
-                    size={"default"}
-                    key={prompt.id}
-                  >
-                    <Link href={`/prompt/${prompt.id}`}>
+                  <Link href={`/prompt/${prompt.id}`}>
+                    <Button
+                      disabled={likeLoading}
+                      variant={"outline"}
+                      className="w-full mt-2"
+                      size={"default"}
+                      key={prompt.id}
+                    >
                       <SiClickup />
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Full view</p>

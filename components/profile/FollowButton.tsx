@@ -20,6 +20,9 @@ const FollowButton: React.FC<FollowButtonProps> = ({
   );
 
   const followUser = async () => {
+    if (currentUser.username === "guest") {
+      return toast.error("Please login to do this action");
+    }
     setFollowLoading(true);
     try {
       const res = await fetch(`/api/profiles/follow/${userData.id}`);

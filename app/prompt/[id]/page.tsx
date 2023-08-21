@@ -11,6 +11,9 @@ import PromptBody from "@/components/feed/prompt-card/Body";
 import PromptInteraction from "@/components/feed/prompt-card/Interaction";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
+import { imageUrlCloudinary } from "@/lib/functions";
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
 
 const PromptPage = ({
   params: { id: promptId },
@@ -48,7 +51,12 @@ const PromptPage = ({
   if (isLoading || isUserLoading) {
     return <LoadingSkeleton />;
   }
-
+  const [ref] = useKeenSlider<HTMLDivElement>({
+    slides: {
+      perView: 2,
+      spacing: 2,
+    },
+  });
   return (
     <div>
       <div className="p-4 ">
@@ -77,18 +85,21 @@ const PromptPage = ({
                 <span className="text-base font-sans text-gray-50 ">
                   {prompt?.description}
                 </span>
-                <div>
-                  {prompt.medias?.map((image) => {
+                <div ref={ref} className="keen-slider">
+                  {prompt.medias?.map((image, idx) => {
                     return (
-                      <Image
-                        loading="lazy"
-                        lazyBoundary="200px"
-                        className="rounded-lg shadow-lg py-3"
-                        alt={prompt.title}
-                        src={image.secure_url}
-                        width={image.width}
-                        height={image.height}
-                      />
+                      <div className={`keen-slider__slide number-slide${idx}`}>
+                        <Image
+                          key={idx}
+                          src={imageUrlCloudinary(image)}
+                          alt={`${prompt.title} preview ${idx}`}
+                          priority={idx === 0}
+                          className="rounded-lg shadow-lg p-2 object-cover"
+                          placeholder="empty"
+                          height={300}
+                          width={350}
+                        />
+                      </div>
                     );
                   })}
                 </div>
@@ -125,7 +136,7 @@ const LoadingSkeleton = () => {
       <div className="p-2">
         <Skeleton className="h-10 w-[250px]" />
       </div>
-      <Skeleton className="w-[512px] h-[512px] rounded-lg" />
+      <Skeleton className="h-60 w-60 rounded-lg" />
       <div className="p-2 flex flex-row space-x-2">
         <Skeleton className="h-8 w-[40px]" />
         <Skeleton className="h-8 w-[40px]" />

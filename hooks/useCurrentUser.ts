@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import { useCurrentUserStore } from "./use-current-use-store";
+import { Role, User } from "@/utils/user";
 
 const useCurrentUser = () => {
   const userState = useCurrentUserStore();
@@ -12,9 +13,10 @@ const useCurrentUser = () => {
     shouldFetch ? "/api/current" : null,
     fetcher,
     {
-      errorRetryInterval: 1000,
-      shouldRetryOnError(err) {
-        return err?.response?.data?.error === "Unauthorized";
+      onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
+        if (error.status === 401) return;
+
+        if (error?.response?.data === "Unauthorized") return;
       },
       // revalidateOnFocus: true,
       // refreshInterval: 1000,
@@ -22,13 +24,14 @@ const useCurrentUser = () => {
   );
   // console.log(error?.response?.data);
 
-
   // Update userState if data is available
   if (data && !userState.user) {
     userState.setUser(data);
-    userState.setLogged(true);
   }
 
+  if (!data && !userState.user && error?.response?.data) {
+    userState.setUser(error?.response?.data?.guest);
+  }
   return {
     data: userState.user || data,
     error,
