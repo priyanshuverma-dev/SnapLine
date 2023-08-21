@@ -8,5 +8,5 @@ export default withAuth({
 });
 
 export const config = {
-  matcher: ["/create-one", "/settings/account", "/settings/profile"],
+  matcher: ["/create-one/:path*", "/settings/:path*"],
 };

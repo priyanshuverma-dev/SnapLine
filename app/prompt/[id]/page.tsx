@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React from "react";
 
 import { Prompt } from "@/utils/prompt";
 import usePrompt from "@/hooks/use-prompt";
@@ -9,11 +9,9 @@ import { User } from "@/utils/user";
 import PromptHeader from "@/components/feed/prompt-card/Header";
 import PromptBody from "@/components/feed/prompt-card/Body";
 import PromptInteraction from "@/components/feed/prompt-card/Interaction";
-import Image from "next/image";
+
 import { Skeleton } from "@/components/ui/skeleton";
-import { imageUrlCloudinary } from "@/lib/functions";
-import "keen-slider/keen-slider.min.css";
-import { useKeenSlider } from "keen-slider/react";
+import FeedMedia from "@/components/feed/FeedMedia";
 
 const PromptPage = ({
   params: { id: promptId },
@@ -51,12 +49,6 @@ const PromptPage = ({
   if (isLoading || isUserLoading) {
     return <LoadingSkeleton />;
   }
-  const [ref] = useKeenSlider<HTMLDivElement>({
-    slides: {
-      perView: 2,
-      spacing: 2,
-    },
-  });
   return (
     <div>
       <div className="p-4 ">
@@ -78,30 +70,15 @@ const PromptPage = ({
             />
 
             <div>
-              <div className="py-4 flex-col">
+              <div className="py-4 flex-col ">
                 <span className="font-semibold text-neutral-600 text-lg">
                   Description:{" "}
                 </span>
                 <span className="text-base font-sans text-gray-50 ">
                   {prompt?.description}
                 </span>
-                <div ref={ref} className="keen-slider">
-                  {prompt.medias?.map((image, idx) => {
-                    return (
-                      <div className={`keen-slider__slide number-slide${idx}`}>
-                        <Image
-                          key={idx}
-                          src={imageUrlCloudinary(image)}
-                          alt={`${prompt.title} preview ${idx}`}
-                          priority={idx === 0}
-                          className="rounded-lg shadow-lg p-2 object-cover"
-                          placeholder="empty"
-                          height={300}
-                          width={350}
-                        />
-                      </div>
-                    );
-                  })}
+                <div className="flex justify-center items-center">
+                  <FeedMedia medias={prompt.medias} />
                 </div>
               </div>
             </div>
