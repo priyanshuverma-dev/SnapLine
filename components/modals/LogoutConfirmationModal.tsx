@@ -9,36 +9,13 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useConfirmationModal } from "@/hooks/use-cm-store";
 import { toast } from "react-hot-toast";
+import { useLogoutModal } from "@/hooks/modals/use-logout-modal";
+import { signOut } from "next-auth/react";
 
-const ConfirmationModal = () => {
-  const modal = useConfirmationModal();
-
-  const deletePrompt = async (id?: string) => {
-    if (!id) {
-      modal.onClose();
-
-      toast.error("Invalid request");
-      return;
-    }
-
-    try {
-      const res = await fetch(`/api/prompt/delete`, {
-        method: "POST",
-        cache: "no-cache",
-        body: JSON.stringify({ id }),
-      });
-      if (res.ok) {
-        toast.success("Prompt deleted");
-        modal.onClose();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const LogoutConfirmationModal = () => {
+  const modal = useLogoutModal();
 
   return (
     <AlertDialog
@@ -51,14 +28,20 @@ const ConfirmationModal = () => {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will delete your pormpt and
-            remove data from our servers.
+            This action will logout you. But you can log in again
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => deletePrompt(modal.promptId)}>
-            Delete
+          <AlertDialogAction
+            onClick={() => {
+              signOut({
+                callbackUrl: "/",
+              });
+              toast.success("Logged out");
+            }}
+          >
+            Logout
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -66,4 +49,4 @@ const ConfirmationModal = () => {
   );
 };
 
-export default ConfirmationModal;
+export default LogoutConfirmationModal;

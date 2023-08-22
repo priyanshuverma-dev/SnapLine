@@ -2,6 +2,7 @@
 
 import ConfirmationModal from "@/components/modals/DeleteConfirmationModal";
 import ExternalLinkModal from "@/components/modals/ExternalLinkModal";
+import LogoutConfirmationModal from "@/components/modals/LogoutConfirmationModal";
 import React, { useEffect, useState } from "react";
 
 const ModalContext = () => {
@@ -18,6 +19,7 @@ const ModalContext = () => {
     <>
       <ExternalLinkModal />
       <ConfirmationModal />
+      <LogoutConfirmationModal />
     </>
   );
 };

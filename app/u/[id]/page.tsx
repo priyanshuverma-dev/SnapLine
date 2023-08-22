@@ -14,10 +14,8 @@ import { toast } from "react-hot-toast";
 import ProfileFeeds from "@/components/profile/ProfileFeeds";
 import { KeyedMutator } from "swr";
 import Link from "next/link";
-import { AiOutlineLogout } from "react-icons/ai";
-
+import { useLogoutModal } from "@/hooks/modals/use-logout-modal";
 const ProfilePage = () => {
-  const router = useRouter();
   const params = useParams();
 
   const {
@@ -41,6 +39,8 @@ const ProfilePage = () => {
     error: any;
     mutate: KeyedMutator<User>;
   } = useProfiles(params.id as string);
+
+  const logoutModal = useLogoutModal();
 
   if (isLoading || isUser) {
     return <LoadingModal />;
@@ -146,8 +146,9 @@ const ProfilePage = () => {
                 <Button
                   variant={"destructive"}
                   className="ml-1 sm:hidden block "
+                  onClick={() => logoutModal.onOpen()}
                 >
-                  <BiLogOut className="" />
+                  <BiLogOut />
                 </Button>
               </>
             )}

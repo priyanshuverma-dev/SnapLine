@@ -2,18 +2,20 @@
 
 import React, { useMemo } from "react";
 import { AiOutlineHome, AiOutlineSearch, AiOutlinePlus } from "react-icons/ai";
-import { useNavbarStore } from "@/hooks/use-nav-store";
 import { Button } from "@/components/ui/button";
-import { signOut } from "next-auth/react";
+
 import { usePathname } from "next/navigation";
 import SidebarItem from "./SidebarItem";
 import { ModeToggle } from "./ThemeSwitch";
 import { Separator } from "../ui/separator";
 import UserButton from "../profile/UserButton";
 import { borel } from "@/utils/utils";
+import { useLogoutModal } from "@/hooks/modals/use-logout-modal";
+import { BiLogOut } from "react-icons/bi";
 
 const Sidebar = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
+  const logoutModal = useLogoutModal();
 
   if (pathname === "/auth") {
     return <div>{children}</div>;
@@ -53,11 +55,14 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-black flex flex-col justify-between">
           <div className="">
             <ul className="space-y-2 font-medium ">
-              <span
-                className={`${borel.className} pl-2 pb-4 text-center self-center text-3xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white`}
-              >
-                SnapLine
-              </span>
+              <div className="p-1 flex justify-between">
+                <span
+                  className={`${borel.className} pl-2 pb-4 text-center self-center text-3xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white`}
+                >
+                  SnapLine
+                </span>
+                <ModeToggle onHeader={true} />
+              </div>
               <Separator />
               {routes.map((item) => (
                 <li key={item.label}>
@@ -66,20 +71,17 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
               ))}
             </ul>
           </div>
-          <div className="">
+          <div>
             <div>
               <UserButton islabel={true} />
             </div>
             <Button
-              onClick={() => signOut()}
+              onClick={() => logoutModal.onOpen()}
               className="w-full"
               variant={"secondary"}
             >
-              Logout
+              <BiLogOut size={25} className="pr-1" /> Logout
             </Button>
-            <div className="p-1">
-              <ModeToggle />
-            </div>
           </div>
         </div>
       </aside>
@@ -99,11 +101,11 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         {children}
       </div>
       <div className="sm:hidden block">
-        <nav className="fixed bottom-0 left-0 w-full  backdrop-filter backdrop-blur-lg bg-opacity-30 border-t  dark:border-neutral-700 shadow-md flex justify-between px-1 py-2">
+        <nav className="flex justify-between fixed bottom-0 left-0 right-0 m-4 w-[94vw] rounded-2xl px-1 py-1 backdrop-filter backdrop-blur-lg bg-opacity-40 border dark:border-neutral-700 shadow-md">
           {routes.map((item) => (
             <SidebarItem islabel={false} key={item.label} {...item} />
           ))}
-          <UserButton islabel={false} />
+          <UserButton islabel={false} isNav={true} />
         </nav>
       </div>
     </div>
