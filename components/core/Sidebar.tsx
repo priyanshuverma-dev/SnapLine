@@ -12,6 +12,7 @@ import UserButton from "../profile/UserButton";
 import { borel } from "@/utils/utils";
 import { useLogoutModal } from "@/hooks/modals/use-logout-modal";
 import { BiLogOut } from "react-icons/bi";
+import { useSession } from "next-auth/react";
 
 const Sidebar = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -45,14 +46,17 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
     [pathname]
   );
 
+  // bg-white  border-gray-200  dark:bg-black dark:border-neutral-700
+  //bg-white dark:bg-black
+  const { status } = useSession();
   return (
     <div>
       <aside
         id="logo-sidebar"
-        className={`fixed top-0 left-0 z-40 w-64 h-screen pt-4 transition-transform  -translate-x-full bg-white  border-gray-200 sm:translate-x-0 dark:bg-black dark:border-neutral-700`}
+        className={`fixed top-0 left-0 z-40 w-64 h-screen pt-4 transition-transform  -translate-x-full sm:translate-x-0`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-black flex flex-col justify-between">
+        <div className="h-full px-3 pb-4 overflow-y-auto  flex flex-col justify-between">
           <div className="">
             <ul className="space-y-2 font-medium ">
               <div className="p-1 flex justify-between">
@@ -75,18 +79,20 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
             <div>
               <UserButton islabel={true} />
             </div>
-            <Button
-              onClick={() => logoutModal.onOpen()}
-              className="w-full"
-              variant={"secondary"}
-            >
-              <BiLogOut size={25} className="pr-1" /> Logout
-            </Button>
+            {status === "authenticated" && (
+              <Button
+                onClick={() => logoutModal.onOpen()}
+                className="w-full"
+                variant={"secondary"}
+              >
+                <BiLogOut size={25} className="pr-1" /> Logout
+              </Button>
+            )}
           </div>
         </div>
       </aside>
       <div className="sm:hidden block">
-        <header className="bg-white border-b border-gray-300 flex items-center justify-between shadow-md dark:bg-black dark:border-neutral-700">
+        <header className=" border-b border-gray-300 dark:border-neutral-700 flex items-center justify-between shadow-md">
           <div className="flex justify-between items-center px-4 py-2">
             <span
               className={`${borel.className} text-3xl text-black dark:text-white text-center`}
@@ -97,9 +103,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
           <ModeToggle onHeader={true} />
         </header>
       </div>
-      <div className="sm:ml-64 bg-gray-50 dark:bg-black sm:mb-0 pb-[75px]">
-        {children}
-      </div>
+      <div className="sm:ml-64 sm:mb-0 pb-[75px]">{children}</div>
       <div className="sm:hidden block">
         <nav className="flex justify-between fixed bottom-0 left-0 right-0 m-4  rounded-2xl px-1 py-1 backdrop-filter backdrop-blur-lg bg-opacity-40 border dark:border-neutral-700 shadow-md">
           {routes.map((item) => (

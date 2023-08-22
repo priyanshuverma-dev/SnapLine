@@ -56,7 +56,7 @@ const ExternalLinkModal = () => {
             </div>
           </AlertDialogTitle>
           <AlertDialogDescription>
-            <span>Your Are Going to redirect:</span>
+            <span>Your Are Going To Redirect:</span>
             <span className="px-1 text-blue-400 hover:underline cursor-pointer">
               {link}
             </span>

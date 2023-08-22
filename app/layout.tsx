@@ -9,6 +9,7 @@ import AuthLayout from "@/Context/AuthLayout";
 import LoaderContext from "@/Context/LoaderContext";
 import ModalContext from "@/Context/ModalContext";
 import { inter } from "@/utils/utils";
+import { cn } from "@/lib/utils";
 
 const description =
   "Welcome to SnapLine – the vibrant hub for prompt enthusiasts and creative minds! Immerse yourself in a world of inspiration and connection as you share and explore captivating prompts. Whether you're a wordsmith, poet, or simply a lover of ideas, SnapLine offers a dynamic platform to post prompts, spark discussions, and gather a following of like-minded thinkers. Unleash your creativity, watch ideas come to life, and connect with a diverse community passionate about turning prompts into masterpieces. Join us on SnapLine and let your imagination flow!";
@@ -29,7 +30,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
   return (
     <html lang="en">
-      <body className={inter.className + " bg-gray-50 dark:bg-black"}>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          inter.className
+        )}
+      >
         <AuthContext session={session}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <LoaderContext>

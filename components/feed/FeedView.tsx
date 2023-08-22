@@ -1,13 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import FeedCard from "./FeedCard";
 import { Prompt } from "@/utils/prompt";
 import usePrompts from "@/hooks/use-prompt-list";
 import Link from "next/link";
 import { User } from "@/utils/user";
 import useCurrentUser from "@/hooks/useCurrentUser";
-import Loading from "@/app/(site)/loading";
+// import Loading from "@/app/(site)/loading";
+import { Skeleton } from "../ui/skeleton";
+import { Card, CardContent } from "../ui/card";
 
 const FeedView = () => {
   const {
@@ -30,7 +32,7 @@ const FeedView = () => {
   } = useCurrentUser();
 
   if (isLoading || isUserLoading) {
-    return <Loading />;
+    return <FeedViewLoading />;
   }
 
   if (error) {
@@ -49,7 +51,7 @@ const FeedView = () => {
   }
 
   return (
-    <div className="grid grid-flow-row grid-cols-1 sm:m-2 sm:p-3 space-y-3 ">
+    <div className="grid grid-flow-row grid-cols-1 sm:m-2 sm:p-3 space-y-3 p-2">
       {data.map((prompt) => {
         return (
           <FeedCard currentUser={currentUser} key={prompt.id} prompt={prompt} />
@@ -60,3 +62,48 @@ const FeedView = () => {
 };
 
 export default FeedView;
+
+const FeedViewLoading = () => {
+  const nums = ["1", "2", "3", "4", "5"];
+
+  return (
+    <div className="space-y-4">
+      {nums.map((idx) => (
+        <Card className="dark:border-gray-800">
+          <CardContent>
+            <div className="flex items-start p-4">
+              <div className="w-full">
+                <div className="flex flex-col">
+                  <div className="flex items-center mb-2 space-x-1 flex-row">
+                    <div>
+                      <Skeleton className="rounded-full w-10 h-10" />
+                    </div>
+                    <div className="flex flex-col">
+                      <div className="flex flex-row items-center">
+                        <Skeleton className=" w-[30vw] h-6" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-2 ">
+                    <Skeleton className="w-full h-20" />
+                  </div>
+                </div>
+
+                <div className="flex justify-between">
+                  <div className="flex flex-row ">
+                    <Skeleton className="rounded-lg w-8 h-8 m-2" />
+                    <Skeleton className="rounded-lg w-8 h-8 m-2" />
+                  </div>
+                  <div className="flex flex-row ">
+                    <Skeleton className="rounded-lg w-8 h-8 m-2" />
+                    <Skeleton className="rounded-lg w-8 h-8 m-2" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+};

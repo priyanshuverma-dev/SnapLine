@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { BiEditAlt, BiLogOut } from "react-icons/bi";
 import useProfiles from "@/hooks/use-profile";
 import { useParams, useRouter } from "next/navigation";
+import Lottie from "lottie-react";
 import React, { useState } from "react";
 import LoadingModal from "@/components/core/LoadingView";
 import { BsFillPatchCheckFill } from "react-icons/bs";
@@ -15,7 +16,9 @@ import ProfileFeeds from "@/components/profile/ProfileFeeds";
 import { KeyedMutator } from "swr";
 import Link from "next/link";
 import { useLogoutModal } from "@/hooks/modals/use-logout-modal";
+import animation_404 from "@/utils/lotties/404.json";
 const ProfilePage = () => {
+  const logoutModal = useLogoutModal();
   const params = useParams();
 
   const {
@@ -40,17 +43,28 @@ const ProfilePage = () => {
     mutate: KeyedMutator<User>;
   } = useProfiles(params.id as string);
 
-  const logoutModal = useLogoutModal();
-
   if (isLoading || isUser) {
     return <LoadingModal />;
   }
 
-  if (error) {
+  if (profileData?.message == "No User Found") {
     console.log(error);
     return (
-      <div>
-        <span>Error in finding user. reload page</span>
+      <div className="flex justify-center items-center flex-col min-h-screen">
+        <div className="mb-8 ">
+          <Lottie
+            animationData={animation_404}
+            loop={true}
+            height={400}
+            width={400}
+          />
+        </div>
+        <div className="p-8 text-center rounded-lg shadow-lg bg-blue-500 backdrop-filter backdrop-blur-lg bg-opacity-40">
+          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            This page is as lost as your keys in the Bermuda Triangle.
+          </h3>
+          <p>Let's both hope they show up soon!</p>
+        </div>
       </div>
     );
   }
@@ -100,9 +114,19 @@ const ProfilePage = () => {
   };
 
   if (!profileData) {
+    console.log("data", profileData);
     return (
       <div className="flex items-center justify-center">
-        <span className="text-lg">User not found. try to check username</span>
+        <div className="mb-8 ">
+          <Lottie
+            className="blur-sm"
+            animationData={animation_404}
+            loop={true}
+            height={400}
+            width={400}
+          />
+        </div>
+        {/* <span className="text-lg">User not found. try to check username</span> */}
       </div>
     );
   }
@@ -128,7 +152,7 @@ const ProfilePage = () => {
                 )}
               </div>
               <span className="max-[321px]:text-xs text-sm text-gray-500 hover:underline hover:cursor-pointer">
-                @{profileData.username}
+                @{profileData?.username}
               </span>
             </div>
           </div>
@@ -152,7 +176,7 @@ const ProfilePage = () => {
                 </Button>
               </>
             )}
-            {currentUser.id !== profileData.id && (
+            {currentUser?.id !== profileData.id && (
               <Button
                 disabled={followLoading}
                 onClick={followUser}

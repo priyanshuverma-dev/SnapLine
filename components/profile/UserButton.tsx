@@ -51,8 +51,8 @@ const UserButton = ({
         >
           <div
             className={twMerge(
-              "flex items-center justify-between p-2 hover:bg-gray-100 dark:hover:bg-neutral-950 rounded-md mb-0",
-              islabel && "bg-slate-50 dark:bg-neutral-900 mb-2",
+              "flex items-center justify-between p-2 bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 rounded-md mb-0",
+              islabel && "bg-secondary mb-2",
               status === "unauthenticated" && "justify-center"
             )}
           >

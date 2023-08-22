@@ -6,6 +6,7 @@ import fetcher from "@/lib/fetcher";
 import { User } from "@/utils/user";
 import React from "react";
 import useSWR from "swr";
+import { Separator } from "../ui/separator";
 
 interface SearchDataProps {
   currentUser: User;
@@ -35,18 +36,21 @@ const SearchData: React.FC<SearchDataProps> = ({ currentUser }) => {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full p-2">
       <SearchInput onPage />
       {isLoading ? (
         <LoadingModal />
       ) : (
         <div className="flex flex-col space-y-3 sm:p-4">
           {data?.users.map((user) => (
-            <RUserCard
-              key={Math.random()}
-              user={user}
-              currentUser={currentUser}
-            />
+            <>
+              <RUserCard
+                key={Math.random()}
+                user={user}
+                currentUser={currentUser}
+              />
+              <Separator orientation="horizontal" className="mt-4" />
+            </>
           ))}
         </div>
       )}
