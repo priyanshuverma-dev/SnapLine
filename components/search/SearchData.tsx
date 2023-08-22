@@ -1,12 +1,11 @@
 "use client";
-import LoadingModal from "../core/LoadingView";
 import RUserCard from "./RUserCard";
-import SearchInput from "../core/SearchInput";
 import fetcher from "@/lib/fetcher";
 import { User } from "@/utils/user";
 import React from "react";
 import useSWR from "swr";
 import { Separator } from "../ui/separator";
+import UsersLoading from "../loading/UserLoading";
 
 interface SearchDataProps {
   currentUser: User;
@@ -37,9 +36,8 @@ const SearchData: React.FC<SearchDataProps> = ({ currentUser }) => {
 
   return (
     <div className="w-full p-2">
-      <SearchInput onPage />
       {isLoading ? (
-        <LoadingModal />
+        <UsersLoading />
       ) : (
         <div className="flex flex-col space-y-3 sm:p-4">
           {data?.users.map((user) => (

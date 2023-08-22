@@ -1,12 +1,9 @@
 "use client";
-
-import animation_404 from "@/utils/lotties/404.json";
 import Lottie from "lottie-react";
 import React from "react";
+import animationData from "../utils/lotties/404.json";
 
 const NotFound = () => {
-  const animationData = animation_404;
-
   return (
     <div className="flex justify-center items-center flex-col min-h-screen ">
       <div className="mb-8 ">

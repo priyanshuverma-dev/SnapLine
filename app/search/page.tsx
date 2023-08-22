@@ -13,6 +13,8 @@ import { SearchResults } from "@/utils/search-results";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 import useSWR from "swr";
+import UsersLoading from "@/components/loading/UserLoading";
+import FeedLoading from "@/components/loading/FeedLoading";
 
 const fetchPosts = async (url: string) => {
   const response = await fetch(url);
@@ -46,14 +48,11 @@ const SearchPage = () => {
     revalidateOnFocus: false,
   });
 
-  if (isUser) {
-    return <LoadingModal />;
-  }
-
-  if (searchQuery == null) {
+  if (searchQuery == null || searchQuery === "" || searchQuery === undefined) {
     return (
       <div className="flex items-center flex-col w-full">
-        <SearchData currentUser={currentUser} />
+        <SearchInput onPage />
+        {isUser ? <UsersLoading /> : <SearchData currentUser={currentUser} />}
       </div>
     );
   }
@@ -74,37 +73,49 @@ const SearchPage = () => {
         Showing results for:{" "}
         <span className="font-semibold dark:text-white ">{searchQuery}</span>
       </span>
-      {isLoading ? (
-        <LoadingModal />
-      ) : (
-        <Tabs defaultValue="top" className="w-full p-4">
-          <TabsList>
-            <TabsTrigger value="top">Top</TabsTrigger>
-            <TabsTrigger value="prompts">Prompts</TabsTrigger>
-            <TabsTrigger value="users">Accounts</TabsTrigger>
-          </TabsList>
-          <Separator orientation="horizontal" className="w-full mt-4" />
-          <div>
-            <TabsContent value="top">
+
+      <Tabs defaultValue="top" className="w-full p-4">
+        <TabsList>
+          <TabsTrigger value="top">Top</TabsTrigger>
+          <TabsTrigger value="prompts">Prompts</TabsTrigger>
+          <TabsTrigger value="users">Accounts</TabsTrigger>
+        </TabsList>
+        <Separator orientation="horizontal" className="w-full mt-4" />
+        <div>
+          <TabsContent value="top">
+            {isLoading || isUser ? (
+              <FeedLoading />
+            ) : (
               <CombinedListComponent data={data} currentUser={currentUser} />
-            </TabsContent>
-            <TabsContent value="prompts">
+            )}
+          </TabsContent>
+          <TabsContent value="prompts">
+            {isLoading ? (
+              <div>
+                <p>prompts loading</p>
+              </div>
+            ) : (
               <div className="flex flex-col space-y-3 sm:p-4">
                 {data?.prompts.map((prompt) => (
                   <FeedCard currentUser={currentUser} prompt={prompt} />
                 ))}
               </div>
-            </TabsContent>
-            <TabsContent value="users">
+            )}
+          </TabsContent>
+          <TabsContent value="users">
+            {isUser ? (
+              <div>loading</div>
+            ) : (
               <div className="flex flex-col space-y-3 sm:p-4">
                 {data?.users.map((user) => (
                   <RUserCard user={user} currentUser={currentUser} />
                 ))}
               </div>
-            </TabsContent>
-          </div>
-        </Tabs>
-      )}
+            )}
+          </TabsContent>
+        </div>
+      </Tabs>
+      {/* )} */}
     </div>
   );
 };

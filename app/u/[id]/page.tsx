@@ -17,6 +17,8 @@ import { KeyedMutator } from "swr";
 import Link from "next/link";
 import { useLogoutModal } from "@/hooks/modals/use-logout-modal";
 import animation_404 from "@/utils/lotties/404.json";
+import { Skeleton } from "@/components/ui/skeleton";
+import ProfileLoading from "@/components/loading/ProfileLoading";
 const ProfilePage = () => {
   const logoutModal = useLogoutModal();
   const params = useParams();
@@ -44,7 +46,7 @@ const ProfilePage = () => {
   } = useProfiles(params.id as string);
 
   if (isLoading || isUser) {
-    return <LoadingModal />;
+    return <ProfileLoading />;
   }
 
   if (profileData?.message == "No User Found") {
@@ -114,7 +116,7 @@ const ProfilePage = () => {
   };
 
   if (!profileData) {
-    console.log("data", profileData);
+    console.log("error", profileData);
     return (
       <div className="flex items-center justify-center">
         <div className="mb-8 ">
