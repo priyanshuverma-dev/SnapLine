@@ -42,7 +42,7 @@ const ShareButton = ({
           <IoShareSocialOutline className="text-xl" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent className="dark:border-gray-800">
         <div className=" flex justify-between items-center">
           <EmailShareButton url={url} subject={"New AI Prompt"} body="body">
             <EmailIcon size={32} round />
