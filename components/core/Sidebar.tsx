@@ -99,7 +99,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         {children}
       </div>
       <div className="sm:hidden block">
-        <nav className="fixed bottom-0 left-0 w-full bg-gray-200 border-t dark:bg-black dark:border-neutral-700 shadow-md flex justify-between px-1 py-2">
+        <nav className="fixed bottom-0 left-0 w-full  backdrop-filter backdrop-blur-lg bg-opacity-30 border-t  dark:border-neutral-700 shadow-md flex justify-between px-1 py-2">
           {routes.map((item) => (
             <SidebarItem islabel={false} key={item.label} {...item} />
           ))}
