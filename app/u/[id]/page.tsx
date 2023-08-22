@@ -2,7 +2,7 @@
 import { User } from "@/utils/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { BiEditAlt } from "react-icons/bi";
+import { BiEditAlt, BiLogOut } from "react-icons/bi";
 import useProfiles from "@/hooks/use-profile";
 import { useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -14,6 +14,7 @@ import { toast } from "react-hot-toast";
 import ProfileFeeds from "@/components/profile/ProfileFeeds";
 import { KeyedMutator } from "swr";
 import Link from "next/link";
+import { AiOutlineLogout } from "react-icons/ai";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -132,17 +133,25 @@ const ProfilePage = () => {
             </div>
           </div>
           <div className="p-1 flex items-center justify-center">
-            {currentUser?.id === profileData.id &&
-            currentUser.username === "guest" ? (
-              <Link href="/settings/profile">
+            {currentUser?.id === profileData.id && (
+              <>
+                <Link href="/settings/profile">
+                  <Button
+                    variant={"outline"}
+                    className="max-[321px]:text-xs text-sm"
+                  >
+                    <BiEditAlt className="mr-2" /> Edit
+                  </Button>
+                </Link>
                 <Button
-                  variant={"outline"}
-                  className="max-[321px]:text-xs text-sm"
+                  variant={"destructive"}
+                  className="ml-1 sm:hidden block "
                 >
-                  <BiEditAlt className="mr-2" /> Edit
+                  <BiLogOut className="" />
                 </Button>
-              </Link>
-            ) : (
+              </>
+            )}
+            {currentUser.id !== profileData.id && (
               <Button
                 disabled={followLoading}
                 onClick={followUser}

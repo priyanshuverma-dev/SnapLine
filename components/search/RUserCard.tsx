@@ -33,9 +33,11 @@ const RUserCard = ({
           <div className="flex flex-col">
             <div className="flex justify-between">
               <div className="flex flex-row">
-                <span className="font-bold text-gray-900 max-[321px]:text-xs text-clip dark:text-[#E7EAE9]">
-                  {user.username}
-                </span>
+                <Link href={`/u/${user.username}`}>
+                  <span className="cursor-pointer font-bold text-gray-900 max-[321px]:text-xs text-clip dark:text-[#E7EAE9]">
+                    {user.username}
+                  </span>
+                </Link>
                 {user.role === "VERIFIED" && (
                   <BsFillPatchCheckFill
                     size={12}
@@ -45,11 +47,9 @@ const RUserCard = ({
               </div>
             </div>
 
-            <Link href={`/u/${user.username}`}>
-              <span className="cursor-pointer hover:underline text-gray-600 max-[321px]:text-xs text-sm dark:text-[#71767C]">
-                {user.name}
-              </span>
-            </Link>
+            <span className=" text-gray-600 max-[321px]:text-xs text-sm dark:text-[#71767C]">
+              {user.name}
+            </span>
           </div>
           <div>
             <FollowButton userData={user} currentUser={currentUser} />

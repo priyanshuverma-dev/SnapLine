@@ -12,9 +12,11 @@ import PromptBody from "../feed/prompt-card/Body";
 const ProfilePromptCard = ({
   prompt,
   currentUser,
+  isCurrentUser,
 }: {
   prompt: Prompt;
   currentUser: User;
+  isCurrentUser: boolean;
 }) => {
   const deleteModal = useConfirmationModal();
 
@@ -35,7 +37,7 @@ const ProfilePromptCard = ({
                 <span className="text-gray-400">•</span>
                 <span className="text-gray-400">{prompt.id}</span>
               </div>
-              {!!currentUser && currentUser.username !== "guest" && (
+              {currentUser.username === prompt.user.username && (
                 <div
                   onClick={() => deleteModal.onOpen(prompt.id)}
                   className="rounded-full transition-colors hover:bg-neutral-700 p-2"

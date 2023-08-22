@@ -71,15 +71,15 @@ const PromptPage = ({
 
             <div>
               <div className="py-4 flex-col ">
+                <div className="flex justify-center items-center">
+                  <FeedMedia medias={prompt.medias} />
+                </div>
                 <span className="font-semibold text-neutral-600 text-lg">
                   Description:{" "}
                 </span>
                 <span className="text-base font-sans text-gray-50 ">
                   {prompt?.description}
                 </span>
-                <div className="flex justify-center items-center">
-                  <FeedMedia medias={prompt.medias} />
-                </div>
               </div>
             </div>
 
