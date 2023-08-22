@@ -5,9 +5,10 @@ import ProfilePromptCard from "./ProfilePromptCard";
 import useUsersPrompts from "@/hooks/use-users-prompts";
 import { Prompt } from "@/utils/prompt";
 import { useParams } from "next/navigation";
-import LoadingModal from "../core/LoadingView";
 import useProfiles from "@/hooks/use-profile";
 import { User } from "@/utils/user";
+import ProfileLoading from "../loading/ProfileLoading";
+import FeedLoading from "../loading/FeedLoading";
 
 const ProfileFeeds = ({
   isCurrentUser,
@@ -29,7 +30,7 @@ const ProfileFeeds = ({
   } = useProfiles(params.id as string);
 
   if (isProfile) {
-    return <LoadingModal />;
+    return <ProfileLoading />;
   }
 
   const {
@@ -43,7 +44,7 @@ const ProfileFeeds = ({
   } = useUsersPrompts(profileData.id);
 
   if (isLoading) {
-    return <LoadingModal />;
+    return <FeedLoading />;
   }
 
   if (error) {
@@ -56,7 +57,7 @@ const ProfileFeeds = ({
   }
 
   return (
-    <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 ">
+    <div className="grid grid-flow-row grid-cols-1 m-2 space-y-3 ">
       {data.map((prompt) => {
         return (
           <ProfilePromptCard

@@ -28,7 +28,7 @@ const CombinedListComponent: React.FC<CombinedListComponentProps> = ({
   const shuffledList = shuffleArray(combinedList); // Shuffle the combined list
 
   return (
-    <div className="flex flex-col space-y-3 p-4">
+    <div className="flex flex-col space-y-3 sm:p-4">
       {shuffledList.map((item, index) =>
         "username" in item ? (
           <RUserCard key={index} user={item} currentUser={currentUser} />

@@ -1,4 +1,4 @@
-import { Borel, Caveat, Inter } from "next/font/google";
+import { Caveat, Inter } from "next/font/google";
 
 export function nFormatter({ num, digits }: { num: number; digits: number }) {
   const lookup = [
@@ -24,3 +24,5 @@ export function nFormatter({ num, digits }: { num: number; digits: number }) {
 
 export const borel = Caveat({ subsets: ["latin"], weight: "700" });
 export const inter = Inter({ subsets: ["greek"] });
+
+export const animation_404 = "@/utils/lotties/404.json";

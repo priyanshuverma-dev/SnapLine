@@ -31,7 +31,7 @@ const copyToClipboard = async ({ text, id }: { text: string; id: string }) => {
 
 const PromptBody: FC<PromptBodyProps> = ({ prompt, service, id, clicks }) => {
   return (
-    <div className="bg-gray-100 rounded-sm p-2 dark:bg-neutral-800 ">
+    <div className="bg-muted rounded-sm p-2">
       <div className="flex flex-1 justify-between">
         <div className="flex flex-row items-center justify-center font-semibold">
           {service}

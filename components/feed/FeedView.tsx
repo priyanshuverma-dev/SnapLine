@@ -7,7 +7,7 @@ import usePrompts from "@/hooks/use-prompt-list";
 import Link from "next/link";
 import { User } from "@/utils/user";
 import useCurrentUser from "@/hooks/useCurrentUser";
-import Loading from "@/app/(site)/loading";
+import FeedLoading from "../loading/FeedLoading";
 
 const FeedView = () => {
   const {
@@ -30,7 +30,7 @@ const FeedView = () => {
   } = useCurrentUser();
 
   if (isLoading || isUserLoading) {
-    return <Loading />;
+    return <FeedLoading />;
   }
 
   if (error) {
@@ -49,7 +49,7 @@ const FeedView = () => {
   }
 
   return (
-    <div className="grid grid-flow-row grid-cols-1 sm:m-2 sm:p-3 space-y-3 ">
+    <div className="grid grid-flow-row grid-cols-1 sm:m-2 sm:p-3 space-y-3 p-2">
       {data.map((prompt) => {
         return (
           <FeedCard currentUser={currentUser} key={prompt.id} prompt={prompt} />

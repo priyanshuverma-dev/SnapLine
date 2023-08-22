@@ -27,4 +27,5 @@ export type User = {
   updatedAt: Date;
   prompt: Prompt[];
   aiService: AIService[];
+  message?: string;
 };

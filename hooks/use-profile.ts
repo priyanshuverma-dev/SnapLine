@@ -13,14 +13,8 @@ const url = API_URL;
 const useProfiles = (userId: string) => {
   const { data, error, isLoading, mutate } = useSWR(
     `${url}/api/profiles/${userId}`,
-    noCacheFetcher,
-    {
-      // refreshInterval: 1000,
-      // revalidateOnReconnect: true,
-      // revalidateIfStale: true,
-    }
+    noCacheFetcher
   );
-
   return {
     data,
     error,

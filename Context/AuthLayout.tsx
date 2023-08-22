@@ -20,7 +20,7 @@ export default function AuthLayout({ children }: AuthContextProps) {
 
   return (
     <Sidebar>
-      <div className="p-4">{children}</div>
+      <div className="sm:p-4">{children}</div>
     </Sidebar>
   );
 }
