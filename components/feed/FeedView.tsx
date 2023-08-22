@@ -49,7 +49,7 @@ const FeedView = () => {
   }
 
   return (
-    <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 ">
+    <div className="grid grid-flow-row grid-cols-1 sm:m-2 sm:p-3 space-y-3 ">
       {data.map((prompt) => {
         return (
           <FeedCard currentUser={currentUser} key={prompt.id} prompt={prompt} />
