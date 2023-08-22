@@ -63,6 +63,7 @@ const ProfileFeeds = ({
             key={prompt.id}
             prompt={prompt}
             currentUser={currentUser}
+            isCurrentUser={isCurrentUser}
           />
         );
       })}
