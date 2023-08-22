@@ -108,7 +108,7 @@ const ProfilePage = () => {
   }
 
   return (
-    <section>
+    <section className="p-4">
       <div>
         <div className="flex flex-row">
           <div className="flex flex-1">
@@ -173,7 +173,7 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <div className="pt-4 pb-4 ">
+      <div className="pt-4 pb-4">
         <span className="text-center max-[321px]:text-xs dark:text-gray-200 text-gray-900">
           {profileData.bio}
         </span>

@@ -40,7 +40,7 @@ const SearchData: React.FC<SearchDataProps> = ({ currentUser }) => {
       {isLoading ? (
         <LoadingModal />
       ) : (
-        <div className="flex flex-col space-y-3 p-4">
+        <div className="flex flex-col space-y-3 sm:p-4">
           {data?.users.map((user) => (
             <RUserCard
               key={Math.random()}

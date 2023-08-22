@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
-import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import AuthContext from "@/Context/AuthContext";

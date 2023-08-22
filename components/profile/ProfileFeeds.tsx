@@ -56,7 +56,7 @@ const ProfileFeeds = ({
   }
 
   return (
-    <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 ">
+    <div className="grid grid-flow-row grid-cols-1 m-2 space-y-3 ">
       {data.map((prompt) => {
         return (
           <ProfilePromptCard

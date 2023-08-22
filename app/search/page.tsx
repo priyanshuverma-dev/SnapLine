@@ -59,16 +59,6 @@ const SearchPage = () => {
   }
 
   if (error) {
-    // if (error.message == "No Query Provided") {
-    //   return (
-    //     <div className="flex items-center flex-col">
-    //       <SearchInput onPage />
-    //       <span className="text-xl dark:text-white text-black text-center">
-    //         Please enter a search query
-    //       </span>
-    //     </div>
-    //   );
-    // }
     console.log(error);
     return <p>error</p>;
   }
@@ -99,14 +89,14 @@ const SearchPage = () => {
               <CombinedListComponent data={data} currentUser={currentUser} />
             </TabsContent>
             <TabsContent value="prompts">
-              <div className="flex flex-col space-y-3 p-4">
+              <div className="flex flex-col space-y-3 sm:p-4">
                 {data?.prompts.map((prompt) => (
                   <FeedCard currentUser={currentUser} prompt={prompt} />
                 ))}
               </div>
             </TabsContent>
             <TabsContent value="users">
-              <div className="flex flex-col space-y-3 p-4">
+              <div className="flex flex-col space-y-3 sm:p-4">
                 {data?.users.map((user) => (
                   <RUserCard user={user} currentUser={currentUser} />
                 ))}

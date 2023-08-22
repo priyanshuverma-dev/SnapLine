@@ -101,7 +101,7 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         {children}
       </div>
       <div className="sm:hidden block">
-        <nav className="flex justify-between fixed bottom-0 left-0 right-0 m-4 w-[94vw] rounded-2xl px-1 py-1 backdrop-filter backdrop-blur-lg bg-opacity-40 border dark:border-neutral-700 shadow-md">
+        <nav className="flex justify-between fixed bottom-0 left-0 right-0 m-4  rounded-2xl px-1 py-1 backdrop-filter backdrop-blur-lg bg-opacity-40 border dark:border-neutral-700 shadow-md">
           {routes.map((item) => (
             <SidebarItem islabel={false} key={item.label} {...item} />
           ))}
