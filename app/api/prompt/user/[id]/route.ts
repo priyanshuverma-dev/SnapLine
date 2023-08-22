@@ -38,6 +38,7 @@ export async function GET(
           select: {
             id: true,
             name: true,
+            website: true,
           },
         },
         user: {
