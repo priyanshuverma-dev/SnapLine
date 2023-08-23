@@ -96,7 +96,7 @@ const SearchPage = () => {
               </div>
             ) : (
               <div className="flex flex-col space-y-3 sm:p-4">
-                {data?.prompts.map((prompt) => (
+                {data?.prompts.flatMap((prompt) => (
                   <FeedCard currentUser={currentUser} prompt={prompt} />
                 ))}
               </div>
@@ -107,7 +107,7 @@ const SearchPage = () => {
               <div>loading</div>
             ) : (
               <div className="flex flex-col space-y-3 sm:p-4">
-                {data?.users.map((user) => (
+                {data?.users.flatMap((user) => (
                   <RUserCard user={user} currentUser={currentUser} />
                 ))}
               </div>

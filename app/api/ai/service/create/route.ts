@@ -19,9 +19,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    const { name, description, price, website, aiType } = body;
+    const { name, description, price, website, aiType, image } = body;
 
-    if (!name || !description || !website || !aiType) {
+    if (!name || !description || !website || !aiType || !image) {
       return NextResponse.json(
         {
           message: "Missing fields",
@@ -48,11 +48,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const service = await prisma.aIService.create({
       data: {
         name,
+        image,
         description,
         price,
         website,
         aiType,
-        status: "PENDING",
+        status: "APPROVED",
         registeredBy: currentUser.id,
       },
     });

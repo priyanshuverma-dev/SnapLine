@@ -21,6 +21,7 @@ enum Status {
 export type AIService = {
   id: string;
   name: string;
+  image: string;
   description: string;
   website: string;
   price?: number;

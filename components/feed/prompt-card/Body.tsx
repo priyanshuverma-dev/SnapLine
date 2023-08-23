@@ -9,12 +9,15 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { BsFillPatchCheckFill } from "react-icons/bs";
 
 interface PromptBodyProps {
   service: string;
   prompt: string;
   id: string;
   clicks: number;
+  serviceName?: string;
 }
 const copyToClipboard = async ({ text, id }: { text: string; id: string }) => {
   navigator.clipboard.writeText(text);
@@ -29,22 +32,22 @@ const copyToClipboard = async ({ text, id }: { text: string; id: string }) => {
   }
 };
 
-const PromptBody: FC<PromptBodyProps> = ({ prompt, service, id, clicks }) => {
+const PromptBody: FC<PromptBodyProps> = ({
+  serviceName,
+  prompt,
+  service,
+  id,
+  clicks,
+}) => {
   return (
     <div className="bg-muted rounded-sm p-2">
       <div className="flex flex-1 justify-between">
         <div className="flex flex-row items-center justify-center font-semibold">
-          {service}
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <HiCheckCircle className="ml-1 text-green-500" />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Verified</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Avatar className="w-8 h-8">
+            <AvatarImage alt={serviceName} src={service} />
+            <AvatarFallback>{service.at(0)}</AvatarFallback>
+          </Avatar>
+          <BsFillPatchCheckFill className="rounded-full relative -left-3 -bottom-3 text-green-500" />
         </div>
         <button
           className="p-2 rounded-full transition-colors hover:bg-secondary-foreground/10 flex flex-row justify-center items-center"
@@ -59,7 +62,7 @@ const PromptBody: FC<PromptBodyProps> = ({ prompt, service, id, clicks }) => {
           <span className="pl-1">{nFormatter({ num: clicks, digits: 1 })}</span>
         </button>
       </div>
-      <p className="text-gray-800 md:text-md sm:text-sm font-mono dark:text-[#E7EAE9] ">
+      <p className="text-gray-800 pt-2 md:text-md sm:text-sm font-mono dark:text-[#E7EAE9] ">
         {prompt}
       </p>
     </div>

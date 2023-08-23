@@ -32,7 +32,8 @@ const FeedCard = ({
             </CardHeader>
             <CardContent>
               <PromptBody
-                service={prompt.aiService.name}
+                serviceName={prompt.aiService.name}
+                service={prompt.aiService.image}
                 prompt={prompt.prompt}
                 id={prompt.id}
                 clicks={prompt.clicks}

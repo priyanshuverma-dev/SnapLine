@@ -51,9 +51,10 @@ const ProfilePromptCard = ({
           <div className="flex items-start">
             <div className="w-full">
               <PromptBody
+                serviceName={prompt.aiService.name}
                 clicks={prompt.clicks}
                 prompt={prompt.prompt}
-                service={prompt.aiService.name}
+                service={prompt.aiService.image}
                 id={prompt.id}
               />
             </div>
