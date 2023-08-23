@@ -3,7 +3,7 @@ import React from "react";
 
 const ProfileSettings = () => {
   return (
-    <div className="">
+    <div className="p-4">
       <ProfileForm />
     </div>
   );

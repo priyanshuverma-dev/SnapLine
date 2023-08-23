@@ -47,7 +47,7 @@ const PromptBody: FC<PromptBodyProps> = ({ prompt, service, id, clicks }) => {
           </TooltipProvider>
         </div>
         <button
-          className="p-2 rounded-full transition-colors dark:hover:bg-neutral-700 hover:bg-gray-200 flex flex-row justify-center items-center"
+          className="p-2 rounded-full transition-colors hover:bg-secondary-foreground/10 flex flex-row justify-center items-center"
           onClick={() =>
             copyToClipboard({
               id: id,

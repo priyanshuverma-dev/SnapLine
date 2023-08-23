@@ -4,9 +4,9 @@ import { Skeleton } from "../ui/skeleton";
 const UsersLoading = () => {
   const nums = ["1", "2", "3", "4", "5"];
   return (
-    <>
-      {nums.map((idx) => {
-        <div className="p-4">
+    <div>
+      {nums.map((idx) => (
+        <div className="p-4" key={idx}>
           <div className="flex justify-between">
             <div className="flex items-center space-x-4">
               <Skeleton className="h-12 w-12 rounded-full" />
@@ -22,9 +22,9 @@ const UsersLoading = () => {
           <div className="pt-4">
             <Skeleton className="h-4 w-[250px]" />
           </div>
-        </div>;
-      })}
-    </>
+        </div>
+      ))}
+    </div>
   );
 };
 

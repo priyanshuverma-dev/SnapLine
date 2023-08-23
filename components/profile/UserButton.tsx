@@ -51,7 +51,7 @@ const UserButton = ({
         >
           <div
             className={twMerge(
-              "flex items-center justify-between p-2 bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 rounded-md mb-0",
+              "flex items-center justify-between p-2 bg-secondary text-secondary-foreground shadow-sm transition-colors hover:bg-secondary/80 rounded-md mb-0",
               islabel && "bg-secondary mb-2",
               status === "unauthenticated" && "justify-center"
             )}
@@ -63,7 +63,7 @@ const UserButton = ({
             )}
 
             {status === "authenticated" && (
-              <div className="flex flex-row items-center  justify-between space-x-3">
+              <div className="flex flex-row items-center justify-between space-x-3">
                 <Avatar>
                   <AvatarImage src={currentUser?.image as string} />
                   <AvatarFallback>{currentUser?.name.at(0)}</AvatarFallback>

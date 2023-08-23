@@ -23,7 +23,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       className={twMerge(
         `
         flex items-center p-2 text-neutral-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-accent group`,
-        active && islabel && "text-neutral-950 bg-secondary scale-105",
+        active && islabel && "text-neutral-950 bg-secondary ",
         !islabel &&
           "justify-center hover:bg-transparent dark:hover:bg-transparent p-0 mx-3"
       )}

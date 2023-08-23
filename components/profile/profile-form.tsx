@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import { IoIosRemove } from "react-icons/io";
 
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
@@ -24,18 +25,10 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import { User } from "@/utils/user";
 import axios from "axios";
 import { useState } from "react";
-import { redirect, useRouter } from "next/navigation";
-import { useCurrentUserStore } from "@/hooks/use-current-use-store";
+import { useRouter } from "next/navigation";
+import { useCurrentUserStore } from "../../hooks/use-current-use-store";
 import { Icons } from "../core/icons";
 import { CldUploadButton } from "next-cloudinary";
-
-const MAX_FILE_SIZE = 500000;
-const ACCEPTED_IMAGE_TYPES = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-];
 
 const profileFormSchema = z.object({
   name: z
@@ -64,7 +57,10 @@ const profileFormSchema = z.object({
   social: z
     .array(
       z.object({
-        value: z.string().url({ message: "Please enter a valid URL." }),
+        value: z
+          .string()
+          .url({ message: "Please enter a valid URL." })
+          .optional(),
       })
     )
     .optional(),
@@ -96,7 +92,7 @@ export function ProfileForm() {
 
   const router = useRouter();
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "social",
   });
@@ -113,7 +109,7 @@ export function ProfileForm() {
 
       toast.success("Profile updated!");
 
-      userStore.setUser(res.data.user);
+      userStore.removeUser();
       router.push(`/u/${data.username}`);
     } catch (error) {
       console.log(error);
@@ -292,7 +288,17 @@ export function ProfileForm() {
                     Add links to your website, blog, or social media profiles.
                   </FormDescription>
                   <FormControl>
-                    <Input disabled={isLoading} {...field} />
+                    <div className="flex flex-row">
+                      <Input disabled={isLoading} {...field} />
+                      <Button
+                        className="rounded-full"
+                        variant={"ghost"}
+                        size={"icon"}
+                        onClick={() => remove(index)}
+                      >
+                        <IoIosRemove />
+                      </Button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

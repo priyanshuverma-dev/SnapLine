@@ -12,7 +12,7 @@ const url = API_URL;
 
 const useProfiles = (userId: string) => {
   const { data, error, isLoading, mutate } = useSWR(
-    `${url}/api/profiles/${userId}`,
+    `/api/profiles/${userId}`,
     noCacheFetcher
   );
   return {

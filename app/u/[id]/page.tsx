@@ -2,7 +2,7 @@
 import { User } from "@/utils/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { BiEditAlt, BiLogOut } from "react-icons/bi";
+import { BiEditAlt, BiLinkAlt, BiLogOut } from "react-icons/bi";
 import useProfiles from "@/hooks/use-profile";
 import { useParams, useRouter } from "next/navigation";
 import Lottie from "lottie-react";
@@ -19,6 +19,15 @@ import { useLogoutModal } from "@/hooks/modals/use-logout-modal";
 import animation_404 from "@/utils/lotties/404.json";
 import { Skeleton } from "@/components/ui/skeleton";
 import ProfileLoading from "@/components/loading/ProfileLoading";
+import SocialButton from "@/components/profile/SocialButton";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 const ProfilePage = () => {
   const logoutModal = useLogoutModal();
   const params = useParams();
@@ -199,11 +208,34 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <div className="pt-4 pb-4">
+      <div className="pt-4 pb-2">
         <span className="text-center max-[321px]:text-xs dark:text-gray-200 text-gray-900">
           {profileData.bio}
         </span>
       </div>
+      <Sheet>
+        <SheetTrigger>
+          <div className="pb-2 p-1 flex flex-col">
+            <div className="flex flex-row">
+              <BiLinkAlt size={15} className="" />
+              <p className="text-xs font-bold hover:underline hover:cursor-pointer">
+                {" "}
+                other links
+              </p>
+            </div>
+          </div>
+        </SheetTrigger>
+        <SheetContent side={"bottom"} className="dark:border-gray-800">
+          <SheetHeader>
+            <SheetTitle>Other social links</SheetTitle>
+            <SheetDescription>
+              {profileData.social.map((link) => (
+                <SocialButton link={link} />
+              ))}
+            </SheetDescription>
+          </SheetHeader>
+        </SheetContent>
+      </Sheet>
 
       <Separator />
 
@@ -225,7 +257,7 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      <div>
+      <div className="pt-2">
         <ProfileFeeds
           currentUser={currentUser}
           isCurrentUser={currentUser?.id === profileData.id}

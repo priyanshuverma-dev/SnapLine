@@ -7,7 +7,7 @@ import PromptHeader from "./prompt-card/Header";
 import PromptBody from "./prompt-card/Body";
 import { User } from "@/utils/user";
 import PromptInteraction from "./prompt-card/Interaction";
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 
 const FeedCard = ({
   prompt,
@@ -18,10 +18,10 @@ const FeedCard = ({
 }) => {
   return (
     <Card className="dark:border-gray-800">
-      <CardContent>
-        <div key={prompt.id} className="pt-6">
-          <div className="flex items-start">
-            <div className="w-full">
+      <div key={prompt.id}>
+        <div className="flex items-start">
+          <div className="w-full">
+            <CardHeader>
               <PromptHeader
                 image={prompt.user.image}
                 name={prompt.user.name}
@@ -29,21 +29,23 @@ const FeedCard = ({
                 role={prompt.user.role}
                 title={prompt.title}
               />
-
+            </CardHeader>
+            <CardContent>
               <PromptBody
                 service={prompt.aiService.name}
                 prompt={prompt.prompt}
                 id={prompt.id}
                 clicks={prompt.clicks}
               />
-
+            </CardContent>
+            <CardFooter>
               <div>
                 <PromptInteraction prompt={prompt} currentUser={currentUser} />
               </div>
-            </div>
+            </CardFooter>
           </div>
         </div>
-      </CardContent>
+      </div>
     </Card>
   );
 };
