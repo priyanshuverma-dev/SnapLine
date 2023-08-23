@@ -256,7 +256,7 @@ const AiServiceCreatePage = () => {
         />
         <Button disabled={isLoading} type="submit">
           {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
-          Submit
+          Register
         </Button>
       </form>
     </Form>

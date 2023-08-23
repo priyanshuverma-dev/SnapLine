@@ -15,6 +15,12 @@ const CreatePage = () => {
             </Button>
           </div>
           <div className="flex flex-col p-2">
+            <span className="p-2">Create A Trends Page (Beta)</span>
+            <Button variant={"outline"}>
+              <Link href={"/create-one/trends"}>Create Trends</Link>
+            </Button>
+          </div>
+          <div className="flex flex-col p-2">
             <span className="p-2">Create Prompt</span>
             <Button variant={"secondary"}>
               <Link href={"/create-one/prompt"}>Create Prompt</Link>

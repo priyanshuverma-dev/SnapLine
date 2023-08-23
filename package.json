@@ -47,6 +47,7 @@
     "class-variance-authority": "^0.7.0",
     "cloudinary": "^1.40.0",
     "clsx": "^2.0.0",
+    "cmdk": "^0.2.0",
     "keen-slider": "^6.8.6",
     "lottie-react": "^2.4.0",
     "moment": "^2.29.4",
