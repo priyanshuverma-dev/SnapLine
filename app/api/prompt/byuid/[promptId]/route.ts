@@ -47,6 +47,8 @@ export async function GET(
             id: true,
             name: true,
             status: true,
+            image: true,
+
             website: true,
           },
         },

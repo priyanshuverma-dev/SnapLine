@@ -23,7 +23,7 @@ const SearchData: React.FC<SearchDataProps> = ({ currentUser }) => {
     isLoading: boolean;
     error: any;
   } = useSWR(`/api/profiles/get`, fetcher, {
-    revalidateOnFocus: false,
+    revalidateOnFocus: true,
   });
 
   if (error) {

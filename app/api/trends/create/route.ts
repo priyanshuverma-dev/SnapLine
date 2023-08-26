@@ -8,6 +8,15 @@ export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const { currentUser } = await serverAuth();
 
+    if (!currentUser) {
+      return NextResponse.json(
+        {
+          message: "User not found",
+        },
+        { status: 400 }
+      );
+    }
+
     const body = await req.json();
 
     if (!body) {
@@ -19,9 +28,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    const { name, description, price, website, aiType, image } = body;
+    const { title, description, prompts, image, slug } = body;
 
-    if (!name || !description || !website || !aiType || !image) {
+    if (!title || !prompts || !image || !slug) {
       return NextResponse.json(
         {
           message: "Missing fields",
@@ -30,38 +39,40 @@ export async function POST(req: NextRequest, res: NextResponse) {
       );
     }
 
-    const serviceExists = await prisma.aIService.findUnique({
+    const slugExists = await prisma.trends.findUnique({
       where: {
-        name,
+        slug,
       },
     });
 
-    if (serviceExists) {
+    if (slugExists) {
       return NextResponse.json(
         {
-          message: "Service already exists",
+          message: "Slug already exists",
         },
         { status: 400 }
       );
     }
 
-    const service = await prisma.aIService.create({
+    const trend = await prisma.trends.create({
       data: {
-        name,
-        image,
+        title,
         description,
-        price,
-        website,
-        aiType,
-        status: "APPROVED",
-        registeredBy: currentUser.id,
+        promptsId: prompts,
+        image,
+        slug,
+        user: {
+          connect: {
+            id: currentUser.id,
+          },
+        },
       },
     });
 
     return NextResponse.json(
       {
-        message: "Service created",
-        service,
+        message: "Trend created",
+        trend,
       },
       { status: 201 }
     );

@@ -9,6 +9,11 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+// ------------------------------------------------------
+// Model Definition
+// ------------------------------------------------------
+
 model User {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
   name            String    @default("Snapline User")
@@ -29,8 +34,9 @@ model User {
   following       String[]  @db.ObjectId
   prompts          Prompt[]
   accounts        Account[]
+  trends          Trends[]
   aiServices      AIService[]
-  comments      Comment[]
+
   @@unique([username, email])
   
 }
@@ -70,16 +76,37 @@ model Prompt {
   updatedAt     DateTime  @updatedAt
   status        PromptStatus @default(PUBLISHED)
   clicks        Int
-  comments      Comment[]
   aiService     AIService @relation(fields: [service], references: [id], onDelete: Cascade)
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   
+
+  trends        Trends?   @relation(fields: [trendsId], references: [id], onDelete: Cascade)
+  trendsId      String?   @db.ObjectId
 }
+
+model Trends {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String    @db.ObjectId
+  description   String
+  image         String
+  title         String
+
+  slug          String    @unique
+  promptsId     String[]  @db.ObjectId
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  prompts       Prompt[]
+  status        PromptStatus    @default(PUBLISHED)
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+
 
 
 model AIService {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String    @unique
+  image         String
   website       String
   owner         String?
   price         Int?
@@ -91,18 +118,6 @@ model AIService {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   user          User      @relation(fields: [registeredBy], references: [id], onDelete: Cascade)
-}
-
-model Comment {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId      String    @db.ObjectId
-  promptId    String    @db.ObjectId
-  comment     String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  prompt      Prompt    @relation(fields: [promptId], references: [id], onDelete: Cascade)
-
 }
 
 

@@ -33,12 +33,12 @@ export async function GET(
         medias: true,
         status: true,
         clicks: true,
-        comments: true,
         aiService: {
           select: {
             id: true,
             name: true,
             website: true,
+            image: true,
           },
         },
         user: {

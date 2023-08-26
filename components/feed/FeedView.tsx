@@ -50,7 +50,7 @@ const FeedView = () => {
 
   return (
     <div className="grid grid-flow-row grid-cols-1 sm:m-2 sm:p-3 space-y-3 p-2">
-      {data.map((prompt) => {
+      {data.flatMap((prompt) => {
         return (
           <FeedCard currentUser={currentUser} key={prompt.id} prompt={prompt} />
         );

@@ -29,7 +29,7 @@ const CombinedListComponent: React.FC<CombinedListComponentProps> = ({
 
   return (
     <div className="flex flex-col space-y-3 sm:p-4">
-      {shuffledList.map((item, index) =>
+      {shuffledList.flatMap((item, index) =>
         "username" in item ? (
           <RUserCard key={index} user={item} currentUser={currentUser} />
         ) : (
