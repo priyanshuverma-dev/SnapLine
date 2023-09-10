@@ -92,7 +92,7 @@ Contributions are welcome! To contribute to Pharasify:
 
 For any questions or inquiries, feel free to reach out to Priyanshu Verma:
 
-- GitHub: [@codebyps](https://github.com/codebyps)
+- GitHub: [@p7uverma](https://github.com/p7uverma)
 - Email: hello@antrikshdev.tech
 
 ## License
