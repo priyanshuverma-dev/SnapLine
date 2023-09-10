@@ -1,14 +1,8 @@
 import { nFormatter } from "@/utils/utils";
 import React, { FC } from "react";
 import { toast } from "react-hot-toast";
-import { HiCheckCircle } from "react-icons/hi";
 import { FiCopy } from "react-icons/fi";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 
@@ -45,7 +39,7 @@ const PromptBody: FC<PromptBodyProps> = ({
         <div className="flex flex-row items-center justify-center font-semibold">
           <Avatar className="w-8 h-8">
             <AvatarImage alt={serviceName} src={service} />
-            <AvatarFallback>{service.at(0)}</AvatarFallback>
+            <AvatarFallback>{serviceName?.at(0)}</AvatarFallback>
           </Avatar>
           <BsFillPatchCheckFill className="rounded-full relative -left-3 -bottom-3 text-green-500" />
         </div>
