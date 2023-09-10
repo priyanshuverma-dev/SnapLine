@@ -2,7 +2,6 @@
 
 import CombinedListComponent from "@/components/feed/CombinedListComponent";
 import FeedCard from "@/components/feed/FeedCard";
-import LoadingModal from "@/components/core/LoadingView";
 import RUserCard from "@/components/search/RUserCard";
 import SearchData from "@/components/search/SearchData";
 import SearchInput from "@/components/core/SearchInput";
@@ -59,7 +58,7 @@ const SearchPage = () => {
 
   if (error) {
     console.log(error);
-    return <p>error</p>;
+    return <p>error: {error}</p>;
   }
 
   if (!encodedSearchQuery) {

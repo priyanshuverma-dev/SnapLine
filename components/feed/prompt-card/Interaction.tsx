@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import ShareButton from "../ShareButton";
 import { FaRegCommentDots } from "react-icons/fa";
 import { SiClickup } from "react-icons/si";
-import { Button } from "../../ui/button";
+import { Button, buttonVariants } from "../../ui/button";
 import { AiTwotoneHeart } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { nFormatter } from "@/utils/utils";
@@ -19,6 +19,7 @@ import {
 import { FiExternalLink } from "react-icons/fi";
 import { useExternalLinkModal } from "@/hooks/modals/use-external-modal";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface PromptInteractionProps {
   prompt: Prompt;
@@ -128,16 +129,22 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <Link href={`/prompt/${prompt.id}`}>
-                    <Button
+                  <Link
+                    href={`/prompt/${prompt.id}`}
+                    className={cn(
+                      buttonVariants({ variant: "outline" }),
+                      "w-full mt-2"
+                    )}
+                  >
+                    {/* <Button
                       disabled={likeLoading}
                       variant={"outline"}
                       className="w-full mt-2"
                       size={"default"}
                       key={prompt.id}
-                    >
-                      <SiClickup />
-                    </Button>
+                    > */}
+                    <SiClickup />
+                    {/* </Button> */}
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent>
