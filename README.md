@@ -1,6 +1,6 @@
 # SnapLine - AI-Powered Creativity and Prompts Platform
 
-![SnapLine Logo](/screenshots/2.png)
+![SnapLine Logo](/screenshorts/2.png)
 
 Welcome to **SnapLine**, an innovative platform that leverages AI to ignite creativity through thought-provoking prompts. Whether you're a writer, artist, or enthusiast looking for inspiration, SnapLine is designed to spark your imagination and fuel your creative journey.
 
