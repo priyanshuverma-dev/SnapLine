@@ -1,3 +1,4 @@
+
 # SnapLine - AI-Powered Creativity and Prompts Platform
 
 ![SnapLine Logo](/screenshorts/2.png)
@@ -16,6 +17,7 @@ Welcome to **SnapLine**, an innovative platform that leverages AI to ignite crea
 - [Contact](#contact)
 - [License](#license)
 - [Environment Variables](#environment-variables)
+- [Learning Resources](LEARN.md)
 
 ## Features
 
@@ -119,26 +121,6 @@ We welcome and appreciate contributions from the community! Here's how you can c
 
    If you encounter bugs or have suggestions, please open an issue on our GitHub repository.
 
-## Environment Variables
-
-To configure SnapLine, you need to set up the following environment variables. You can create a `.env` file in the project root and add these variables with your values:
-
-```env
-DATABASE_URL=""
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=""
-NEXT_PUBLIC_CLOUDINARY_API_SECRET=""
-NEXT_PUBLIC_CLOUDINARY_API_KEY=""
-NEXT_PUBLIC_URL="http://localhost:3000"
-NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET=""
-GOOGLE_CLIENT_ID=""
-GOOGLE_CLIENT_SECRET=""
-GITHUB_ID=""
-GITHUB_SECRET=""
-```
-
-Please make sure to replace the values with your actual configuration.
-
 ## Contact
 
 Have questions or feedback? Reach out to us:
@@ -149,3 +131,12 @@ Have questions or feedback? Reach out to us:
 ## License
 
 This project is now open-source and is released under the [MIT License](LICENSE).
+
+## Environment Variables
+
+To configure SnapLine, you need to set up the following environment variables. You can create a `.env` file in the project root and add these variables with your values. Refer to the [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions and comments for each variable.
+
+## Learning Resources
+
+Explore the [LEARN.md](LEARN.md) file for a comprehensive list of learning resources, documentation, and guides to help you understand and contribute effectively to SnapLine.
+
