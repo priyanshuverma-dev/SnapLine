@@ -43,7 +43,7 @@ Before you begin, ensure you have met the following requirements:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/codebyps/SnapLine.git
+   git clone https://github.com/p7uverma/SnapLine.git
    ```
 
 2. **Navigate to the project directory:**
