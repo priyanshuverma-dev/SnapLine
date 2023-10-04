@@ -58,6 +58,18 @@ Before you begin, ensure you have met the following requirements:
    npm install
    ```
 
+4. **Edit .env:**
+
+   ```
+   cp .env.example > .env
+   ```
+
+5. **Init Prisma:**
+
+   ```bash
+   npx prisma db push
+   ```
+
 ### Usage
 
 1. **Start the development server:**
