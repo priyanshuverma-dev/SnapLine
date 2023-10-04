@@ -43,7 +43,7 @@ Before you begin, ensure you have met the following requirements:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/codebyps/SnapLine.git
+   git clone https://github.com/p7uverma/SnapLine.git
    ```
 
 2. **Navigate to the project directory:**
@@ -56,6 +56,18 @@ Before you begin, ensure you have met the following requirements:
 
    ```bash
    npm install
+   ```
+
+4. **Edit .env:**
+
+   ```
+   cp .env.example > .env
+   ```
+
+5. **Init Prisma:**
+
+   ```bash
+   npx prisma db push
    ```
 
 ### Usage
