@@ -4,7 +4,6 @@ import React from "react";
 
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -13,8 +12,6 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useEntryModal } from "@/hooks/modals/use-entry-modal";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "../ui/button";
 import Link from "next/link";
 
 const EntryModal = () => {
