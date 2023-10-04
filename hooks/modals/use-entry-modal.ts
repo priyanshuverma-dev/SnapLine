@@ -6,9 +6,17 @@ interface useEntryModalState {
   onClose: () => void;
 }
 
-export const useEntryModal = create<useEntryModalState>((set) => ({
-  isOpen: true,
+let isNewUser: string;
 
+if (typeof window !== "undefined") {
+  isNewUser = localStorage.getItem("DevInviteModel") || "";
+}
+
+export const useEntryModal = create<useEntryModalState>((set) => ({
+  isOpen: isNewUser == "false" || "" ? false : true,
   onOpen: () => set({ isOpen: true }),
-  onClose: () => set({ isOpen: false }),
+  onClose: () => {
+    localStorage.setItem("DevInviteModel", "false");
+    set({ isOpen: false });
+  },
 }));
