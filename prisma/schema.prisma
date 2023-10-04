@@ -87,10 +87,9 @@ model Prompt {
 model Trends {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
   userId        String    @db.ObjectId
+  title         String
   description   String
   image         String
-  title         String
-
   slug          String    @unique
   promptsId     String[]  @db.ObjectId
   createdAt     DateTime  @default(now())

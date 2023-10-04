@@ -12,14 +12,9 @@ export async function GET(request: Request) {
       },
     });
 
-    return NextResponse.json(
-      {
-        trends: trends,
-      },
-      {
-        status: 200,
-      }
-    );
+    return NextResponse.json(trends, {
+      status: 200,
+    });
   } catch (error) {
     console.log(error);
     return NextResponse.json(
