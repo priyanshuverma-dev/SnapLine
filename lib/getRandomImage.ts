@@ -2,10 +2,10 @@ import axios from "axios";
 
 const getRandomImage = () =>
   axios
-    .get("https://api.api-ninjas.com/v1/randomimage?category=technology", {
+    .get(process.env.RANDOM_API_URL as string, {
       responseType: "blob",
       headers: {
-        "X-Api-Key": "/DwSiAao0fcHw+IqKJT0cg==8SshQlV5eeiYXUNg",
+        "X-Api-Key": process.env.RANDOM_API_KEY,
         Accept: "image/jpg",
       },
     })

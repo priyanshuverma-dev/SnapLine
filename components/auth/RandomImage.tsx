@@ -11,16 +11,15 @@ const RandomImage = () => {
       .then((image) => {
         setImageUrl(image);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log(error.message);
+      });
   }, []);
   return (
-    <Image
-      width={100}
-      height={100}
+    <img
       alt=""
-      src={imageUrl}
-      quality={80}
-      priority
+      src={imageUrl ?? ""}
+      loading="eager"
       className="h-screen opacity-60 w-full object-cover"
     />
   );
