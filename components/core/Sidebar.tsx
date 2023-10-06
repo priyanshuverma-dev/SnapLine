@@ -33,9 +33,9 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
       },
       {
         icon: BiTrendingUp,
-        label: "Trend",
-        href: "/trend",
-        active: pathname === "/trend",
+        label: "Trends",
+        href: "/trends",
+        active: pathname === "/trends",
       },
       {
         icon: AiOutlineSearch,
