@@ -61,7 +61,7 @@ Before you begin, ensure you have met the following requirements:
 4. **Edit .env:**
 
    ```
-   cp .env.example > .env
+   cp .env.example .env
    ```
 
 5. **Init Prisma:**
