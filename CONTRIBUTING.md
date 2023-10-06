@@ -84,15 +84,6 @@ GITHUB_SECRET="your-github-client-secret"
 
 ```
 
-## Environment Variables
-
-- **RANDOM_API_URL**:
-  - **Purpose**: This environment variable is used to store the API URL required for accessing random image from https://api-ninjas.com/api/randomimage.
-  - **Configuration Details**: Make sure to set this variable to your API key obtained from the service provider.
-- **RANDOM_API_KEY**:
-  - **Purpose**: This environment variable is used to store the API key required for accessing random image from https://api-ninjas.com/api/randomimage.
-  - **Configuration Details**: Make sure to set this variable to your API key obtained from the service provider. You'll need to be logged in to access api-key.
-
 ## Development Guidelines
 
 ### Code Structure
