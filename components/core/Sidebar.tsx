@@ -2,6 +2,7 @@
 
 import React, { useMemo } from "react";
 import { AiOutlineHome, AiOutlineSearch, AiOutlinePlus } from "react-icons/ai";
+import { BiTrendingUp } from "react-icons/bi";
 import { Button } from "@/components/ui/button";
 
 import { usePathname } from "next/navigation";
@@ -29,6 +30,12 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
         label: "Home",
         active: pathname === "/",
         href: "/",
+      },
+      {
+        icon: BiTrendingUp,
+        label: "Trends",
+        href: "/trends",
+        active: pathname === "/trends",
       },
       {
         icon: AiOutlineSearch,
