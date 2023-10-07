@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/core/Navbar";
 import Sidebar from "@/components/core/Sidebar";
 import { usePathname } from "next/navigation";
 
@@ -19,8 +20,15 @@ export default function AuthLayout({ children }: AuthContextProps) {
   }
 
   return (
-    <Sidebar>
-      <div className="sm:p-4">{children}</div>
-    </Sidebar>
+    // <Sidebar>
+    <Navbar>
+      <div
+        className="flex justify-center items-center flex-col 
+      max-w-[60rem] w-full h-full mx-auto px-4"
+      >
+        {children}
+      </div>
+    </Navbar>
+    // </Sidebar>
   );
 }

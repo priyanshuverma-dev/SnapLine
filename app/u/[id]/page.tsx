@@ -217,10 +217,13 @@ const ProfilePage = () => {
         <SheetTrigger>
           <div className="pb-2 p-1 flex flex-col">
             <div className="flex flex-row">
-              <BiLinkAlt size={15} className="" />
-              <p className="text-xs font-bold hover:underline hover:cursor-pointer">
-                {" "}
-                other links
+              <BiLinkAlt
+                size={15}
+                className="hover:underline hover:cursor-pointer"
+              />
+              {"  "}
+              <p className="text-sm font-bold hover:underline hover:cursor-pointer">
+                Other links
               </p>
             </div>
           </div>

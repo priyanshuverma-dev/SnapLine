@@ -29,9 +29,8 @@ const SearchInput = ({ onPage }: { onPage?: boolean }) => {
     >
       {" "}
       <Input
-        //   disabled={isLoading}
         type="search"
-        className="h-10 w-full shadow hover:shadow-xl focus:shadow-xl rounded border p-2 text-base outline-none placeholder:text-sm"
+        className="h-10 w-full focus-visible:ring-0 bg-primary-foreground shadow hover:shadow-xl focus:shadow-xl border-none rounded border p-2 text-base outline-none placeholder:text-sm"
         placeholder="What are you looking for?"
         value={searchQuery || ""}
         onChange={(event) => setSearchQuery(event.target.value)}

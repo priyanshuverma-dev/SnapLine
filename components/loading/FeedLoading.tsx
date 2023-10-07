@@ -7,7 +7,7 @@ const FeedLoading = () => {
   return (
     <div className="space-y-4">
       {nums.map((idx) => (
-        <Card key={idx} className="dark:border-gray-800">
+        <Card key={idx} className="border-none">
           <CardContent>
             <div key={idx} className="flex items-start p-4">
               <div className="w-full">

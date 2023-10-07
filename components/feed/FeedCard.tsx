@@ -17,7 +17,7 @@ const FeedCard = ({
   currentUser: User;
 }) => {
   return (
-    <Card className="dark:border-gray-800">
+    <Card className="border-none">
       <div key={prompt.id}>
         <div className="flex items-start">
           <div className="w-full">
