@@ -3,7 +3,10 @@ import SearchInput from "@/components/core/SearchInput";
 
 export default function Home() {
   return (
-    <div>
+    <div
+      className="
+    "
+    >
       <SearchInput />
       <FeedView />
     </div>

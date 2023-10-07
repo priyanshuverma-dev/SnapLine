@@ -22,7 +22,7 @@ const ProfilePromptCard = ({
   const deleteModal = useConfirmationModal();
 
   return (
-    <Card className="dark:border-gray-800">
+    <Card className="border-none">
       <CardHeader>
         <div className="flex justify-between items-center mb-2  flex-row">
           <div className="space-x-1">
