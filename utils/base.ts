@@ -5,7 +5,4 @@ const productionUrls = {
 };
 
 export const API_URL =
-  process.env.NEXT_PUBLIC_URL ||
-  productionUrls.productionUrl1 ||
-  productionUrls.productionUrl2 ||
-  productionUrls.productionUrl3;
+  process.env.NEXT_PUBLIC_URL || "https://snapline.p7u.tech";
