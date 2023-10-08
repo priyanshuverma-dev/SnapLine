@@ -44,7 +44,11 @@ const ProfileFeeds = ({
   } = useUsersPrompts(profileData.id);
 
   if (isLoading) {
-    return <FeedLoading />;
+    return (
+      <div className="grid grid-flow-row grid-cols-1 space-y-3">
+        <FeedLoading />
+      </div>
+    );
   }
 
   if (error) {
@@ -57,7 +61,7 @@ const ProfileFeeds = ({
   }
 
   return (
-    <div className="grid grid-flow-row grid-cols-1 m-2 space-y-3 ">
+    <div className="grid grid-flow-row grid-cols-1 space-y-3 ">
       {data.map((prompt) => {
         return (
           <ProfilePromptCard

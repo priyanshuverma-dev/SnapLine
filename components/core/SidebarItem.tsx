@@ -22,7 +22,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       href={href}
       className={twMerge(
         `
-        flex items-center p-2 text-neutral-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-accent group`,
+        flex items-center p-2 decoration-transparent hover:cursor-pointer text-neutral-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-accent group`,
         active && islabel && "text-neutral-950 bg-secondary ",
         !islabel &&
           "justify-center hover:bg-transparent dark:hover:bg-transparent p-0 mx-3"

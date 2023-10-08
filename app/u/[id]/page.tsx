@@ -1,7 +1,7 @@
 "use client";
 import { User } from "@/utils/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { BiEditAlt, BiLinkAlt, BiLogOut } from "react-icons/bi";
 import useProfiles from "@/hooks/use-profile";
 import { useParams, useRouter } from "next/navigation";
@@ -28,6 +28,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 const ProfilePage = () => {
   const logoutModal = useLogoutModal();
   const params = useParams();
@@ -143,26 +144,26 @@ const ProfilePage = () => {
   }
 
   return (
-    <section className="p-4">
-      <div>
-        <div className="flex flex-row">
-          <div className="flex flex-1">
-            <div className="flex flex-col">
-              <Avatar className="w-14 h-14 rounded-full mr-3 max-[321px]:w-8 max-[321px]:h-8 shadow">
+    <section className="p-4 w-full">
+      <div className="w-full">
+        <div className="flex flex-row max-[400px]:flex-col ">
+          <div className="flex min-[400px]:flex-1 max-[400px]:flex-col max-[400px]:justify-center max-[400px]:items-center">
+            <div>
+              <Avatar className="w-14 h-14 max-[400px]:w-28 max-[400px]:h-28 rounded-full mr-3 shadow">
                 <AvatarImage src={profileData.image} />
                 <AvatarFallback>{profileData?.name?.at(0)}</AvatarFallback>
               </Avatar>
             </div>
-            <div className="pt-2 flex flex-col">
+            <div className="pt-2 flex flex-col items-center">
               <div className="flex flex-row">
-                <span className="max-[321px]:text-xs text-center  font-semibold dark:text-white text-neutral-950">
+                <span className="max-[321px]:text-lg text-center  font-semibold dark:text-white text-neutral-950">
                   {profileData.name}
                 </span>
                 {profileData.role === "VERIFIED" && (
-                  <BsFillPatchCheckFill className="ml-2 mt-2 max-[321px]:mt-0 max-[321px]:text-[10px] text-xs text-blue-500" />
+                  <BsFillPatchCheckFill className="ml-2 mt-2 max-[321px]:text-sm text-xs text-blue-500" />
                 )}
               </div>
-              <span className="max-[321px]:text-xs text-sm text-gray-500 hover:underline hover:cursor-pointer">
+              <span className="text-sm text-gray-500 hover:underline hover:cursor-pointer">
                 @{profileData?.username}
               </span>
             </div>
@@ -170,17 +171,18 @@ const ProfilePage = () => {
           <div className="p-1 flex items-center justify-center">
             {currentUser?.id === profileData.id && (
               <>
-                <Link href="/settings/profile">
-                  <Button
-                    variant={"outline"}
-                    className="max-[321px]:text-xs text-sm"
-                  >
-                    <BiEditAlt className="mr-2" /> Edit
-                  </Button>
+                <Link
+                  href="/settings/profile"
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "text-sm"
+                  )}
+                >
+                  <BiEditAlt className="mr-2" /> Edit
                 </Link>
                 <Button
                   variant={"destructive"}
-                  className="ml-1 sm:hidden block "
+                  className="ml-1"
                   onClick={() => logoutModal.onOpen()}
                 >
                   <BiLogOut />
@@ -192,7 +194,7 @@ const ProfilePage = () => {
                 disabled={followLoading}
                 onClick={followUser}
                 size={"sm"}
-                className="max-[321px]:text-xs text-sm "
+                className="max-[321px]:text-xs text-sm"
                 variant={
                   profileData.followers.includes(currentUser?.id)
                     ? "destructive"

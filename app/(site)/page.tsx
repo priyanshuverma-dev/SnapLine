@@ -5,6 +5,8 @@ export default function Home() {
   return (
     <div
       className="
+      flex justify-center items-center flex-col 
+      max-w-[60rem] w-full h-full mx-auto px-4
     "
     >
       <SearchInput />
