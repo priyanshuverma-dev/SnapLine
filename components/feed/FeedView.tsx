@@ -30,7 +30,11 @@ const FeedView = () => {
   } = useCurrentUser();
 
   if (isLoading || isUserLoading) {
-    return <FeedLoading />;
+    return (
+      <div className="grid grid-flow-row grid-cols-1 space-y-3">
+        <FeedLoading />
+      </div>
+    );
   }
 
   if (error) {
@@ -50,7 +54,7 @@ const FeedView = () => {
 
   return (
     <div className="grid grid-flow-row grid-cols-1 space-y-3">
-      {data.flatMap((prompt) => {
+      {data.map((prompt) => {
         return (
           <FeedCard currentUser={currentUser} key={prompt.id} prompt={prompt} />
         );

@@ -34,7 +34,9 @@ const ProfilePromptCard = ({
                 .fromNow()}
             </span>
             <span className="text-gray-400">•</span>
-            <span className="text-gray-400">{prompt.id}</span>
+            <span className="text-gray-400">
+              {prompt.id.substring(0, 5)}...
+            </span>
           </div>
           {currentUser.username === prompt.user.username && (
             <div
@@ -48,16 +50,14 @@ const ProfilePromptCard = ({
       </CardHeader>
       <CardContent>
         <div key={prompt.id}>
-          <div className="flex items-start">
-            <div className="w-full">
-              <PromptBody
-                serviceName={prompt.aiService.name}
-                clicks={prompt.clicks}
-                prompt={prompt.prompt}
-                service={prompt.aiService.image}
-                id={prompt.id}
-              />
-            </div>
+          <div className="">
+            <PromptBody
+              serviceName={prompt.aiService.name}
+              clicks={prompt.clicks}
+              prompt={prompt.prompt}
+              service={prompt.aiService.image}
+              id={prompt.id}
+            />
           </div>
         </div>
       </CardContent>
