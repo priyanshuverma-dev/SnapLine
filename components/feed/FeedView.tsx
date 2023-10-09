@@ -40,7 +40,7 @@ const FeedView = () => {
   if (error) {
     console.log(error?.response);
     return (
-      <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 bg-gray-50 dark:bg-black">
+      <div className="grid grid-flow-row grid-cols-1 m-2 p-3 space-y-3 bg-gray-50 dark:bg-black w-full">
         <p>No Post Yet</p>
         <Link
           className="text-black dark:text-white underline"
@@ -53,7 +53,7 @@ const FeedView = () => {
   }
 
   return (
-    <div className="grid grid-flow-row grid-cols-1 space-y-3">
+    <div className="grid grid-flow-row grid-cols-1 space-y-3 w-full">
       {data.map((prompt) => {
         return (
           <FeedCard currentUser={currentUser} key={prompt.id} prompt={prompt} />
