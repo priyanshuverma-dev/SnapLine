@@ -97,9 +97,12 @@ export async function GET(request: Request) {
       },
     });
 
-    const ai = await prisma.aiService.findMany({
+    const ai = await prisma.aIService.findMany({
       where: {
         OR: [
+          {
+            status: "APPROVED",
+          },
           {
             name: {
               contains: query,
@@ -112,6 +115,18 @@ export async function GET(request: Request) {
               mode: "insensitive",
             },
           },
+          {
+            category: {
+              contains: query,
+              mode: "insensitive",
+            },
+          },
+          {
+            website: {
+              contains: query,
+              mode: "insensitive",
+            },
+          },
         ],
       },
       select: {
@@ -120,6 +135,8 @@ export async function GET(request: Request) {
         status: true,
         image: true,
         website: true,
+        description: true,
+        price: true,
       },
     });
 

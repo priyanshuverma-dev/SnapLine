@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { name: string } }
 ) {
   try {
-    const id = params.id;
-    if (!id) {
+    const name = params.name;
+    if (!name) {
       return NextResponse.json(
         {
           message: "id not found",
@@ -18,7 +18,7 @@ export async function GET(
 
     const artificalIntelligences = await prisma.aIService.findUnique({
       where: {
-        id: id,
+        slug: name,
       },
     });
 

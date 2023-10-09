@@ -104,8 +104,9 @@ model Trends {
 
 model AIService {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  name          String    @unique
+  name          String    
   image         String
+  slug          String    @unique
   website       String
   owner         String?
   price         Int?

@@ -31,6 +31,7 @@ import { Icons } from "@/components/core/icons";
 import { CldUploadButton } from "next-cloudinary";
 import { imageUrlCloudinary, saveMediaToDB } from "@/lib/functions";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
 
 const formSchema = z.object({
   name: z.string().min(3, {
@@ -40,8 +41,9 @@ const formSchema = z.object({
   description: z.string().min(10, {
     message: "description must be at least 10 characters.",
   }),
+  category: z.string().min(3).optional(),
   website: z.string().url(),
-  price: z.number().min(0).optional(),
+  price: z.string().min(0).optional(),
   image: z.string().url({
     message: "Select a valid image",
   }),
@@ -92,7 +94,10 @@ const AiServiceCreatePage = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full space-y-8 p-4"
+      >
         <FormField
           control={form.control}
           name="name"
@@ -244,6 +249,7 @@ const AiServiceCreatePage = () => {
               <FormLabel>Price</FormLabel>
               <FormControl>
                 <Input
+                  type="number"
                   disabled={isLoading}
                   placeholder="Price of AI Service"
                   {...field}

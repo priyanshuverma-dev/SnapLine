@@ -7,6 +7,7 @@ import UserButton from "../profile/UserButton";
 import { BiTrendingUp } from "react-icons/bi";
 import { ModeToggle } from "./ThemeSwitch";
 import { borel } from "@/utils/utils";
+import { Bs1Circle, BsAlt } from "react-icons/bs";
 
 const Navbar = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -27,6 +28,12 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
         label: "Trends",
         href: "/trends",
         active: pathname === "/trends",
+      },
+      {
+        icon: BsAlt,
+        label: "AI Explore",
+        href: "/ai-explore",
+        active: pathname === "/ai-explore",
       },
       {
         icon: AiOutlineSearch,

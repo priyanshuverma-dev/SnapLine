@@ -32,7 +32,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const serviceExists = await prisma.aIService.findUnique({
       where: {
-        name,
+        slug: name.replaceAll(" ", "-").toLowerCase(),
       },
     });
 
@@ -48,9 +48,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const service = await prisma.aIService.create({
       data: {
         name,
+        slug: name.replaceAll(" ", "-").toLowerCase(),
         image,
         description,
-        price,
+        price: Number(price),
         website,
         aiType,
         status: "APPROVED",
