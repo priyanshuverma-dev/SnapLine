@@ -111,6 +111,7 @@ model AIService {
   price         Int?
   aiType        AIType
   status        Status
+  category      String?
   description   String
   registeredBy  String    @db.ObjectId
   prompts       Prompt[]

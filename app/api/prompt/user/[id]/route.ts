@@ -51,6 +51,8 @@ export async function GET(
       },
     });
 
+    console.log(prompts);
+
     if (!prompts) {
       return NextResponse.json(
         {
