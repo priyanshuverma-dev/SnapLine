@@ -1,7 +1,6 @@
-
 # SnapLine - AI-Powered Creativity and Prompts Platform
 
-![SnapLine Logo](/screenshorts/2.png)
+![SnapLine Logo](/screenshots/3.png)
 
 Welcome to **SnapLine**, an innovative platform that leverages AI to ignite creativity through thought-provoking prompts. Whether you're a writer, artist, or enthusiast looking for inspiration, SnapLine is designed to spark your imagination and fuel your creative journey.
 
@@ -55,7 +54,7 @@ Before you begin, ensure you have met the following requirements:
 3. **Install dependencies:**
 
    ```bash
-   npm install
+   yarn
    ```
 
 4. **Edit .env:**
@@ -67,7 +66,7 @@ Before you begin, ensure you have met the following requirements:
 5. **Init Prisma:**
 
    ```bash
-   npx prisma db push
+   yarn prisma db push
    ```
 
 ### Usage
@@ -75,7 +74,7 @@ Before you begin, ensure you have met the following requirements:
 1. **Start the development server:**
 
    ```bash
-   npm run dev
+   yarn dev
    ```
 
 2. **Access the application in your web browser:**
@@ -138,7 +137,7 @@ We welcome and appreciate contributions from the community! Here's how you can c
 Have questions or feedback? Reach out to us:
 
 - GitHub: [@p7uverma](https://github.com/p7uverma)
-- Email: hello@antrikshdev.tech
+- Email: hello@p7u.tech
 
 ## License
 
@@ -151,4 +150,3 @@ To configure SnapLine, you need to set up the following environment variables. Y
 ## Learning Resources
 
 Explore the [LEARN.md](LEARN.md) file for a comprehensive list of learning resources, documentation, and guides to help you understand and contribute effectively to SnapLine.
-

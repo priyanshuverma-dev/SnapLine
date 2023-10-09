@@ -43,7 +43,7 @@ Before you start contributing to SnapLine, make sure you have the necessary tool
 4. **Install dependencies:**
 
    ```bash
-   npm install
+   yarn
    ```
 
 ### Setting Up Environment Variables

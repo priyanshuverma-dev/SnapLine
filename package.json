@@ -11,10 +11,10 @@
   },
   "author": {
     "name": "Priyanshu Verma",
-    "url": "https://antrikshdev.tech",
-    "email": "hello@antrikshdev.tech"
+    "url": "https://p7u.tech",
+    "email": "hello@p7u.tech"
   },
-  "homepage": "https://snapline.antrikshdev.tech",
+  "homepage": "https://snapline.p7u.tech",
   "repository": {
     "directory": "/",
     "type": "git",
@@ -52,7 +52,7 @@
     "lottie-react": "^2.4.0",
     "moment": "^2.29.4",
     "nanoid": "^4.0.2",
-    "next": "^13.4.19",
+    "next": "^13.5.4",
     "next-auth": "^4.22.3",
     "next-cloudinary": "^4.18.0",
     "next-pwa": "^5.6.0",
@@ -61,8 +61,8 @@
     "nextjs-toploader": "^1.4.2",
     "nodemailer": "^6.9.4",
     "postcss": "8.4.31",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-fontawesome": "^1.7.1",
     "react-hook-form": "^7.45.4",
     "react-hot-toast": "^2.4.1",
@@ -80,7 +80,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "eslint": "8.46.0",
-    "eslint-config-next": "13.4.13",
+    "eslint-config-next": "^13.5.4",
     "prisma": "^5.2.0"
   }
 }
