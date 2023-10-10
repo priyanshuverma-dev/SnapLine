@@ -97,10 +97,54 @@ export async function GET(request: Request) {
       },
     });
 
+    const ai = await prisma.aIService.findMany({
+      where: {
+        OR: [
+          {
+            status: "APPROVED",
+          },
+          {
+            name: {
+              contains: query,
+              mode: "insensitive",
+            },
+          },
+          {
+            description: {
+              contains: query,
+              mode: "insensitive",
+            },
+          },
+          {
+            category: {
+              contains: query,
+              mode: "insensitive",
+            },
+          },
+          {
+            website: {
+              contains: query,
+              mode: "insensitive",
+            },
+          },
+        ],
+      },
+      select: {
+        id: true,
+        name: true,
+        status: true,
+        image: true,
+        website: true,
+        description: true,
+        price: true,
+      },
+    });
+
     return NextResponse.json(
       {
         prompts: prompts,
         users: users,
+        ai: ai,
       },
       {
         status: 200,

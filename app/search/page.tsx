@@ -14,6 +14,7 @@ import React from "react";
 import useSWR from "swr";
 import UsersLoading from "@/components/loading/UserLoading";
 import FeedLoading from "@/components/loading/FeedLoading";
+import AiModelCard from "@/components/search/AiModelCard";
 
 const fetchPosts = async (url: string) => {
   const response = await fetch(url);
@@ -73,6 +74,14 @@ const SearchPage = () => {
         <span className="font-semibold dark:text-white ">{searchQuery}</span>
       </span>
 
+      <div className="flex flex-row flex-wrap">
+        {isLoading
+          ? null
+          : data.ai.map((ai) => {
+              return <AiModelCard ai={ai} />;
+            })}
+      </div>
+
       <Tabs defaultValue="top" className="w-full p-4">
         <TabsList>
           <TabsTrigger value="top">Top</TabsTrigger>
@@ -87,6 +96,13 @@ const SearchPage = () => {
             ) : (
               <CombinedListComponent data={data} currentUser={currentUser} />
             )}
+            <Separator />
+            <span className="text-muted-foreground text-center font-mono">
+              SnapLine, an innovative platform that leverages AI to ignite
+              creativity through thought-provoking prompts. Whether you're a
+              writer, artist, or enthusiast looking for inspiration, SnapLine is
+              designed to spark your imagination and fuel your creative journey.
+            </span>
           </TabsContent>
           <TabsContent value="prompts">
             {isLoading ? (
@@ -98,6 +114,14 @@ const SearchPage = () => {
                 {data?.prompts.flatMap((prompt) => (
                   <FeedCard currentUser={currentUser} prompt={prompt} />
                 ))}
+                <Separator />
+                <span className="text-muted-foreground text-center font-mono">
+                  SnapLine, an innovative platform that leverages AI to ignite
+                  creativity through thought-provoking prompts. Whether you're a
+                  writer, artist, or enthusiast looking for inspiration,
+                  SnapLine is designed to spark your imagination and fuel your
+                  creative journey.
+                </span>
               </div>
             )}
           </TabsContent>
@@ -105,16 +129,23 @@ const SearchPage = () => {
             {isUser ? (
               <div>loading</div>
             ) : (
-              <div className="flex flex-col space-y-3 sm:p-4">
-                {data?.users.flatMap((user) => (
+              <div className="flex flex-col space-y-3 sm:p-4 max-w-[60rem] w-full mx-auto px-4">
+                {data?.users.map((user) => (
                   <RUserCard user={user} currentUser={currentUser} />
                 ))}
+                <Separator />
+                <span className="text-muted-foreground text-center font-mono">
+                  SnapLine, an innovative platform that leverages AI to ignite
+                  creativity through thought-provoking prompts. Whether you're a
+                  writer, artist, or enthusiast looking for inspiration,
+                  SnapLine is designed to spark your imagination and fuel your
+                  creative journey.
+                </span>
               </div>
             )}
           </TabsContent>
         </div>
       </Tabs>
-      {/* )} */}
     </div>
   );
 };

@@ -2,13 +2,11 @@ import useSWR from "swr";
 
 import fetcher from "@/lib/fetcher";
 
-const useUsersPrompts = (userId: string) => {
+const useAI = (name: string) => {
   const { data, error, isLoading, mutate } = useSWR(
-    `/api/prompt/user/${userId}`,
+    `/api/ai/byname/${name}`,
     fetcher
   );
-
-  console.log(userId);
 
   return {
     data,
@@ -18,4 +16,4 @@ const useUsersPrompts = (userId: string) => {
   };
 };
 
-export default useUsersPrompts;
+export default useAI;

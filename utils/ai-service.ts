@@ -27,6 +27,7 @@ export type AIService = {
   price?: number;
   owner?: string;
   aiType: AIType;
+  category?: string;
   status: Status;
   createdAt: Date;
   updatedAt: Date;

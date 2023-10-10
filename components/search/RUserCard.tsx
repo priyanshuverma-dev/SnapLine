@@ -29,10 +29,10 @@ const RUserCard = ({
             <AvatarFallback>{user.name[0]}</AvatarFallback>
           </Avatar>
         </div>
-        <div className="flex justify-between w-full">
+        <div className="flex flex-1 justify-between">
           <div className="flex flex-col">
             <div className="flex justify-between">
-              <div className="flex flex-row">
+              <div className="flex flex-row w-full">
                 <Link href={`/u/${user.username}`}>
                   <span className="cursor-pointer font-bold text-gray-900 max-[321px]:text-xs text-clip dark:text-[#E7EAE9]">
                     {user.username}
@@ -47,11 +47,11 @@ const RUserCard = ({
               </div>
             </div>
 
-            <span className=" text-gray-600 max-[321px]:text-xs text-sm dark:text-[#71767C]">
+            <span className="w-full text-gray-600 max-[321px]:text-xs text-sm dark:text-[#71767C]">
               {user.name}
             </span>
           </div>
-          <div>
+          <div className="pl-2">
             <FollowButton userData={user} currentUser={currentUser} />
           </div>
         </div>

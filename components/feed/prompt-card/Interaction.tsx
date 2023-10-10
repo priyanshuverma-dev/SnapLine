@@ -136,13 +136,6 @@ const PromptInteraction: FC<PromptInteractionProps> = ({
                       "w-full mt-2"
                     )}
                   >
-                    {/* <Button
-                      disabled={likeLoading}
-                      variant={"outline"}
-                      className="w-full mt-2"
-                      size={"default"}
-                      key={prompt.id}
-                    > */}
                     <SiClickup />
                     {/* </Button> */}
                   </Link>
