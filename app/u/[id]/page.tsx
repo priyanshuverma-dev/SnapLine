@@ -144,7 +144,7 @@ const ProfilePage = () => {
                 <AvatarFallback>{profileData?.name?.at(0)}</AvatarFallback>
               </Avatar>
             </div>
-            <div className="pt-2 flex flex-col">
+            <div className="pt-2 flex flex-col items-center sm:items-start">
               <div className="flex flex-row">
                 <span className="max-[321px]:text-lg text-center  font-semibold dark:text-white text-neutral-950">
                   {profileData.name}
