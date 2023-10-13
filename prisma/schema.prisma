@@ -32,14 +32,30 @@ model User {
   lastUsernameUpdate DateTime?
   followers       String[]  @db.ObjectId
   following       String[]  @db.ObjectId
-  prompts          Prompt[]
+  prompts         Prompt[]
   accounts        Account[]
   trends          Trends[]
   aiServices      AIService[]
+  achivements     Achievement[] 
 
   @@unique([username, email])
   
 }
+
+
+
+model Achievement {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  userId          String    @db.ObjectId
+  image           String    
+  type            String    
+  priority        Int
+  description     String
+  emailSent       Boolean
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 
 model Account {
   id String @id @default(auto()) @map("_id") @db.ObjectId

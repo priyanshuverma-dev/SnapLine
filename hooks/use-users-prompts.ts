@@ -8,8 +8,6 @@ const useUsersPrompts = (userId: string) => {
     fetcher
   );
 
-  console.log(userId);
-
   return {
     data,
     error,
