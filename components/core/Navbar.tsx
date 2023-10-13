@@ -23,12 +23,12 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
         active: pathname === "/",
         href: "/",
       },
-      {
-        icon: BiTrendingUp,
-        label: "Trends",
-        href: "/trends",
-        active: pathname === "/trends",
-      },
+      // {
+      //   icon: BiTrendingUp,
+      //   label: "Trends",
+      //   href: "/trends",
+      //   active: pathname === "/trends",
+      // },
       {
         icon: BsAlt,
         label: "AI Explore",

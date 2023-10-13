@@ -19,7 +19,7 @@ const TrendsPage = () => {
     return <LoadingModal />;
   }
 
-  if (!isLoading && error) {
+  if (error) {
     return <div>Error: {error}</div>;
   }
 
