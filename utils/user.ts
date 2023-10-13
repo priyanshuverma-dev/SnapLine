@@ -22,6 +22,7 @@ export type User = {
   likedPrompts: string[];
   social: string[];
   preferences: [];
+  achievements: [];
   lastUsernameUpdate: Date;
   createdAt: Date;
   updatedAt: Date;
