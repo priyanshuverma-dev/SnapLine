@@ -51,13 +51,13 @@ const EntryModal = () => {
               <Link
                 className={"hover:underline text-blue-500 pt-2"}
                 target="_blank"
-                href="https://github.com/p7uverma/SnapLine"
+                href="https://github.com/priyanshuverma-dev/SnapLine"
               >
                 Github Repository 😄
               </Link>
               <Link
                 className={"hover:underline text-blue-500 "}
-                href="https://github.com/p7uverma/SnapLine/issues"
+                href="https://github.com/priyanshuverma-dev/SnapLine/issues"
                 target="_blank"
               >
                 Github Issues 😮‍💨
